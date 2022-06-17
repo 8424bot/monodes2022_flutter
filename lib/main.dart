@@ -27,27 +27,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('おいこら、はよ開けんかいｺﾞﾗｧ!!!'),
-        actions: [
+        title: const Text('おいこら、はよ開けんかいｺﾞﾗｧ!!!'),
+        actions: const [
           Icon(Icons.add),
           Icon(Icons.share),
         ],
       ),
-      body: Center(
-          //child:ElevatedButton(),
-          ),
+      body: const Center(
+        child: Text("カニ食べてる時だけは静か",
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        //child:ElevatedButton(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
