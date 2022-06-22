@@ -5,6 +5,15 @@ import 'webpage.dart';
 import 'textinput_page.dart';
 import 'urlinput_page.dart';
 
+List todoList = [
+  [
+    "期限切れの課題",
+    DateTime.now().subtract(const Duration(days: 1)),
+    const TimeOfDay(hour: 23, minute: 59).hour,
+    const TimeOfDay(hour: 23, minute: 59).minute
+  ]
+];
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -40,7 +49,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       style: optionStyle,
     ),
     MyTodoApp(),
-    Timateble(),
+    Timetable(),
     //Text(
     //'Index 3: Settings',
     //style: optionStyle,
@@ -52,30 +61,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       _selectedIndex = index;
 
-      switch (index) {
-        case 0:
-          _title = 'Home';
-          break;
-        case 1:
-          _title = '課題一覧';
-          break;
-        case 2:
-          _title = '時間割';
-          break;
-        case 3:
-          _title = 'setting';
-          break;
-      }
+      //     switch (index) {
+      //       case 0:
+      //         _title = 'Home';
+      //         break;
+      //       case 1:
+      //         _title = '課題一覧';
+      //         break;
+      //       case 2:
+      //         _title = '時間割';
+      //         break;
+      //       case 3:
+      //         _title = 'setting';
+      //         break;
+      //     }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(_title),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text(_title),
+      // ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -87,8 +96,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.task_sharp),
+            label: 'Todo',
             backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
@@ -97,8 +106,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.launch),
+            label: 'Links',
             backgroundColor: Colors.pink,
           ),
         ],
@@ -112,11 +121,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //timetable_page
-class Timateble extends StatefulWidget {
-  const Timateble({Key? key}) : super(key: key);
+class Timetable extends StatefulWidget {
+  const Timetable({Key? key}) : super(key: key);
   @override
   // ignore: library_private_types_in_public_api
-  _TimatebleState createState() => _TimatebleState();
+  _TimetableState createState() => _TimetableState();
 }
 
 var _result = [
@@ -149,7 +158,7 @@ var _entry = [
   ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録']
 ];
 
-class _TimatebleState extends State<Timateble> {
+class _TimetableState extends State<Timetable> {
   final double _saturdayWidth = 10;
   final double _sixthRowHeight = 8;
   final double _seventhRowHeight = 8;
@@ -158,6 +167,10 @@ class _TimatebleState extends State<Timateble> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("時間割"),
+      ),
       body: InteractiveViewer(
         constrained: false,
         child: Container(
@@ -432,6 +445,10 @@ class _oitwebpagestate extends State<oitwebpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("リンク"),
+      ),
       body: Column(
         children: <Widget>[
           pageselect(
