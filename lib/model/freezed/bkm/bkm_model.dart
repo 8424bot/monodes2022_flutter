@@ -9,7 +9,7 @@ part 'bkm_model.freezed.dart';
 abstract class BkmStateData with _$BkmStateData {
   //このクラスは、DBの状態を保持するクラスです。
   factory BkmStateData({
-    @Default(false) bool isLoading,
+    @Default(false) bool isLoading, 
     @Default(false) bool isReadyData,
     @Default([]) List<BkmItemData> bkmItems,
   }) = _BkmStateData;

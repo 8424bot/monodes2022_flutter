@@ -2,6 +2,7 @@ import 'package:app_home_demo/model/freezed/bkm/bkm_model.dart';
 import 'package:app_home_demo/model/db/bkm_db.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:drift/drift.dart';
+// ignore: unused_import
 import 'package:path/path.dart';
 
 class BkmDatabaseNotifier extends StateNotifier<BkmStateData> {

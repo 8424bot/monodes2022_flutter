@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:app_home_demo/view/bookmark/oitweb_page.dart';
 import 'package:app_home_demo/view/timetable/Timetable_page.dart';
 import 'package:app_home_demo/view/todo/Todo.dart';
-import 'package:app_home_demo/view/test/test_view.dart';
-import 'package:app_home_demo/view/bookmark/oitweb_page copy.dart';
+import 'package:app_home_demo/view/bookmark/bkm_view.dart';
 
 class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
@@ -34,19 +33,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   // ignore: unused_field
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    //Text(
-      //'Index 0: Home',
-    //  style: optionStyle,
-    //),
-    Todo(), 
-    MyTodoApp(),
-    Timateble(),
-    //Text(
-    //'Index 3: Settings',
-    //style: optionStyle,
-    //),
-    oitwebpage(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Text(
+      'Index 0: Home',
+      style: optionStyle,
+    ),
+    const MyTodoApp(),
+    const Timateble(),
+    BookMark(),
   ];
 
   void _onItemTapped(int index) {
@@ -64,7 +58,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           _title = '時間割';
           break;
         case 3:
-          _title = 'setting';
+          _title = 'ページ登録';
           break;
       }
     });
