@@ -4,6 +4,7 @@ import 'Todo.dart';
 import 'webpage.dart';
 import 'textinput_page.dart';
 import 'urlinput_page.dart';
+import 'home.dart';
 
 List todoList = [
   [
@@ -39,15 +40,11 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  var _title = 'Home';
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    home(),
     MyTodoApp(),
     Timetable(),
     //Text(
@@ -93,25 +90,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.red,
+            //backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.task_sharp),
             label: 'Todo',
-            backgroundColor: Colors.green,
+            //backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'School',
-            backgroundColor: Colors.purple,
+            //backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.launch),
             label: 'Links',
-            backgroundColor: Colors.pink,
+            //backgroundColor: Colors.pink,
           ),
         ],
         currentIndex: _selectedIndex,
+        unselectedItemColor: Colors.black45,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
