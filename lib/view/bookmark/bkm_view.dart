@@ -96,7 +96,7 @@ class BookMark extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ElevatedButton(
-                                child: const Text('Junp to Page'),
+                                child: const Text('Jump to Page'),
                                 onPressed: () async {
                                   if (await canLaunchUrl(url)) {
                                     await launchUrl(url);

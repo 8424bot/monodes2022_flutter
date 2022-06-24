@@ -1,58 +1,92 @@
-// ignore_for_file: file_names
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'textinput_page.dart';
-import 'webpage.dart';
 
-class Timateble extends StatefulWidget {
-  const Timateble({Key? key}) : super(key: key);
+class TimeTable extends StatefulWidget {
+  const TimeTable({Key? key}) : super(key: key);
+
   @override
-  // ignore: library_private_types_in_public_api
-  _TimatebleState createState() => _TimatebleState();
+  State<TimeTable> createState() => _TimeTableState();
 }
 
-var _result = [
-  [' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' ']
+List result = [
+  [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', '']
+  ],
+  [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', '']
+  ],
+  [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', '']
+  ],
+  [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', '']
+  ],
+  [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', '']
+  ],
+  [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', '']
+  ],
+  [
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', ''],
+    ['', '']
+  ],
 ];
 
-var _subject = [
+List subject = [
   ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
   ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
   ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
   ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
   ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
   ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録']
+  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
 ];
 
-var _entry = [
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録']
-];
-
-class _TimatebleState extends State<Timateble> {
-  final double _saturdayWidth = 10;
-  final double _sixthRowHeight = 8;
-  final double _seventhRowHeight = 8;
-  String url = 'https://picsum.photos/200';
-
+class _TimeTableState extends State<TimeTable> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("時間割"),
+        title: const Text('時間割'),
       ),
       body: InteractiveViewer(
         constrained: false,
@@ -69,8 +103,8 @@ class _TimatebleState extends State<Timateble> {
               subjectTableRow(period: '3', raw: 2),
               subjectTableRow(period: '4', raw: 3),
               subjectTableRow(period: '5', raw: 4),
-              subjectTableRow(period: '6', raw: 5, height: _sixthRowHeight),
-              subjectTableRow(period: '7', raw: 6, height: _seventhRowHeight),
+              subjectTableRow(period: '6', raw: 5),
+              subjectTableRow(period: '7', raw: 6),
             ],
           ),
         ),
@@ -87,7 +121,7 @@ class _TimatebleState extends State<Timateble> {
         dayContainer(day: '水'),
         dayContainer(day: '木'),
         dayContainer(day: '金'),
-        dayContainer(width: _saturdayWidth, day: '土'),
+        dayContainer(day: '土'),
       ],
     );
   }
@@ -102,40 +136,34 @@ class _TimatebleState extends State<Timateble> {
     );
   }
 
-  TableRow subjectTableRow(
-      {double height = 14, String period = '', int raw = 0}) {
+  TableRow subjectTableRow({String period = '', int raw = 0}) {
     return TableRow(
       children: <Widget>[
-        periodContainer(height: height, period: period),
-        subjectContainer(height: height, raw: raw, column: 0),
-        subjectContainer(height: height, raw: raw, column: 1),
-        subjectContainer(height: height, raw: raw, column: 2),
-        subjectContainer(height: height, raw: raw, column: 3),
-        subjectContainer(height: height, raw: raw, column: 4),
-        subjectContainer(height: height, width: 10, raw: raw, column: 5),
+        periodContainer(period: period),
+        subjectContainer(raw: raw, column: 0),
+        subjectContainer(raw: raw, column: 1),
+        subjectContainer(raw: raw, column: 2),
+        subjectContainer(raw: raw, column: 3),
+        subjectContainer(raw: raw, column: 4),
+        subjectContainer(raw: raw, column: 5),
       ],
     );
   }
 
-  Widget periodContainer({double height = 14, String period = ''}) {
+  Widget periodContainer({String period = ''}) {
     return Container(
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * (height / 100),
+      height: MediaQuery.of(context).size.height * (14 / 100),
       width: MediaQuery.of(context).size.width * (10 / 100),
       color: Colors.lightBlue[100],
       child: Text(period),
     );
   }
 
-  Widget subjectContainer({
-    required double height,
-    double width = 18,
-    int raw = 0,
-    int column = 0,
-  }) {
+  Widget subjectContainer({int raw = 0, int column = 0}) {
     return Container(
-      height: MediaQuery.of(context).size.height * (height / 100),
-      width: MediaQuery.of(context).size.width * (width / 100),
+      height: MediaQuery.of(context).size.height * (14 / 100),
+      width: MediaQuery.of(context).size.width * (18 / 100),
       decoration: const BoxDecoration(color: Colors.white),
       child: Material(
         color: Colors.transparent,
@@ -148,58 +176,76 @@ class _TimatebleState extends State<Timateble> {
                 return SafeArea(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Icon(Icons.info),
-                              Text(
-                                _subject[raw][column],
-                                textAlign: TextAlign.center,
+                    children: <Widget>[
+                      Container(
+                        height: MediaQuery.of(context).size.height * (10 / 100),
+                        width: double.infinity,
+                        decoration: const BoxDecoration(color: Colors.white),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            IconButton(
+                              splashColor: Colors.grey,
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => RegistInfo(
+                                      result: result[raw][column],
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(Icons.info_outline),
+                            ),
+                            Text(subject[raw][column],
+                                textAlign: TextAlign.center),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                primary: Colors.black,
                               ),
-                              Text(_entry[raw][column]),
-                            ],
-                          ),
-                          onTap: () async {
-                            var result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      TextInput(_result[raw][column])),
-                            );
-                            setState(() {
-                              _result[raw][column] = result;
-                              _subject[raw][column] =
-                                  result.replaceAll('\n', '  ');
-                              _entry[raw][column] = '登録情報変更';
-                            });
-                            Navigator.pop(context);
-                          }),
-                      bottomSheetContainer(
-                        url:
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Google_Classroom_icon.svg/1186px-Google_Classroom_icon.svg.png",
-                        pagename: 'ClassroomPage',
-                        text: "Classroom",
-                        raw: raw,
-                        column: column,
+                              onPressed: () async {
+                                var classInfoList = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const TimeTableInput(),
+                                  ),
+                                );
+                                setState(() {
+                                  result[raw][column] = ['', ''];
+                                  result[raw][column][0] = classInfoList[0];
+                                  result[raw][column][1] = classInfoList[1];
+                                  for (int i = 2;
+                                      i < (classInfoList.length);
+                                      i++) {
+                                    result[raw][column].add(classInfoList[i]);
+                                  }
+                                  subject[raw][column] = result[raw][column]
+                                          [0] +
+                                      ' / ' +
+                                      result[raw][column][1];
+                                });
+                                Navigator.pop(context);
+                              },
+                              child: const Text(
+                                '登録情報変更',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      bottomSheetContainer(
-                        url:
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/330px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png",
-                        pagename: 'TeamsPage',
-                        text: "Teams",
-                        raw: raw,
-                        column: column,
-                      ),
-                      bottomSheetContainer(
-                        url:
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/640px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png",
-                        pagename: 'OutlookPage',
-                        text: "Outlook",
-                        raw: raw,
-                        column: column,
-                      ),
+                      for (int i = 0; i < result[raw][column].length; i++) ...{
+                        if (i != 0 && i != 1) ...{
+                          if (result[raw][column][i] != '') ...{
+                            bottomSheetContainer(
+                              raw: raw,
+                              column: column,
+                              i: i,
+                            ),
+                          }
+                        }
+                      }
                     ],
                   ),
                 );
@@ -209,10 +255,8 @@ class _TimatebleState extends State<Timateble> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                _result[raw][column],
-                textAlign: TextAlign.center,
-              ),
+              Text(result[raw][column][0], textAlign: TextAlign.center),
+              Text(result[raw][column][1], textAlign: TextAlign.center),
             ],
           ),
         ),
@@ -221,63 +265,61 @@ class _TimatebleState extends State<Timateble> {
   }
 
   Widget bottomSheetContainer({
-    String url = '',
-    String pagename = '',
-    String text = '',
-    int raw = 0,
-    int column = 0,
+    required int raw,
+    required int column,
+    required int i,
   }) {
     return Container(
       height: MediaQuery.of(context).size.height * (12 / 100),
       width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x80000000),
-            offset: Offset(0, 4),
-            blurRadius: 6,
-          )
-        ],
-      ),
+      decoration: const BoxDecoration(color: Colors.white),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          splashColor: Colors.lightBlue[50],
-          onTap: () {
-            if (pagename == 'ClassroomPage') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ClassroomPage()),
+          splashColor: Colors.grey,
+          onTap: () async {
+            if (await canLaunch(result[raw][column][i])) {
+              await launch(
+                result[raw][column][i],
+                forceSafariVC: false,
+                forceWebView: false,
               );
-            } else if (pagename == 'TeamsPage') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TeamsPage()),
-              );
-            } else if (pagename == 'OutlookPage') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => OutlookPage(_result[raw][column])),
-              );
-            } else {}
+            } else {
+              throw 'Could not launch';
+            }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Image.network(
-                url,
-                fit: BoxFit.fitHeight,
-              ),
-              SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(text),
-                ],
-              ),
+              if (i == 2) ...{
+                Image.asset('images/app_icons/classroom.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+                const Text("Classroom"),
+              } else if (i == 3) ...{
+                Image.asset('images/app_icons/teams.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+                const Text("Teams"),
+              } else if (i == 4) ...{
+                Image.asset('images/app_icons/slack.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+                const Text("Slack"),
+              } else if (i == 5) ...{
+                Image.asset('images/app_icons/outlook.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+                const Text("Outlook"),
+              } else if (i == 6) ...{
+                Image.asset('images/app_icons/portal.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+                const Text("OIT Portal"),
+              } else if (i == 7) ...{
+                Image.asset('images/app_icons/c-learning.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+                const Text("OIT C-Learning"),
+              } else if (i == 8) ...{
+                Image.asset('images/app_icons/internet.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+                const Text("Other"),
+              }
             ],
           ),
         ),
