@@ -25,14 +25,14 @@ class BookMark extends ConsumerWidget {
     final bkmState = ref.watch(bkmDatabaseProvider);
 
     // メソッドや値を取得する
-    final todoNotifier = ref.watch(bkmDatabaseProvider.notifier);
+    final bkmNotifier = ref.watch(bkmDatabaseProvider.notifier);
 
     // 追加画面を閉じたら再ビルドするために使用する
     // ignore: invalid_use_of_protected_member
-    List<BkmItemData> todoItems = todoNotifier.state.bkmItems;
+    List<BkmItemData> bkmItems = bkmNotifier.state.bkmItems;
 
     // todoの一覧を格納するリスト
-    List<Widget> tiles = _buildTodoList(todoItems, todoNotifier);
+    List<Widget> tiles = _buildBkmList(bkmItems, bkmNotifier);
 
     return Scaffold(
       body: ListView(children: tiles),
@@ -57,7 +57,7 @@ class BookMark extends ConsumerWidget {
   }
 
   // todo一覧
-  List<Widget> _buildTodoList(
+  List<Widget> _buildBkmList(
     List<BkmItemData> items,
     BkmDatabaseNotifier db,
   ) {
@@ -73,17 +73,38 @@ class BookMark extends ConsumerWidget {
   Widget _tile(BkmItemData item, BkmDatabaseNotifier db) {
     return Consumer(
       builder: ((context, ref, child) {
+        final Uri url = Uri.parse(item.url);
         return Slidable(
           // ignore: sort_child_properties_last
           child: Card(
             child: ListTile(
               title: Text(item.pagename),
               subtitle: Text(item.url),
-              onTap: () async {
-                final Uri url = Uri.parse(item.url);
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(url);
-                } else {}
+              onTap: () {
+                showDialog(
+                  context: context, 
+                  builder: (_) {
+                    return AlertDialog(
+                      title: Text(item.pagename),
+                      content: Text(item.url),
+                      actions: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              child: const Text('Junp to Page'),
+                              onPressed: () async {
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(url);
+                                } else {}
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    );
+                  }
+                );
               },
             ),
           ),
