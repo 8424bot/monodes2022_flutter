@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
- 
-DateTime gdate = DateTime.now();
-TimeOfDay gtime = TimeOfDay.now();
+
+import '../../main.dart';
+
+DateTime _date = DateTime.now();
+TimeOfDay _time = TimeOfDay.now();
 
 void main() {
   // 最初に表示するWidget
@@ -25,31 +27,39 @@ class MyTodoApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // リスト一覧画面を表示
-      home: TodoListPage(),
+      home: const TodoListPage(),
     );
   }
 }
 
 // リスト一覧画面用Widget
 class TodoListPage extends StatefulWidget {
+  const TodoListPage({Key? key}) : super(key: key);
+
   @override
   _TodoListPageState createState() => _TodoListPageState();
 }
 
 class _TodoListPageState extends State<TodoListPage> {
   // Todoリストのデータ
-  List<String> todoList = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // AppBarを表示し、タイトルも設定
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("課題一覧"),
+      ),
       // データを元にListViewを作成
       body: ListView.builder(
         itemCount: todoList.length,
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              title: Text(todoList[index]),
+              title: Text(todoList[index][0] +
+                  " ${todoList[index][1].year}年${todoList[index][1].month}月${todoList[index][1].day}日" +
+                  " ${todoList[index][2]}時${todoList[index][3]}分"),
             ),
           );
         },
@@ -61,26 +71,42 @@ class _TodoListPageState extends State<TodoListPage> {
           final newListText = await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               // 遷移先の画面としてリスト追加画面を指定
-              return TodoAddPage();
+              return const TodoAddPage();
             }),
           );
           if (newListText != null) {
             // キャンセルした場合は newListText が null となるので注意
             setState(() {
               // リスト追加
-              todoList.add(newListText +
-                  " ${gdate.year}年${gdate.month}月${gdate.day}日" +
-                  " ${gtime.hour}時${gtime.minute}分");
+              todoList.add([newListText, _date, _time.hour, _time.minute]);
+              todoList.sort((a, b) {
+                int result1 = a[1].compareTo(b[1]);
+                if (result1 != 0) return result1;
+                int result2 = a[2].compareTo(b[2]);
+                if (result2 != 0) return result2;
+                return a[3].compareTo(b[3]);
+              });
+              //臨時の時間切れ消去プログラム置き場
+              while (todoList.isNotEmpty) {
+                if (todoList[0][1].isBefore(
+                    DateTime.now().subtract(const Duration(days: 1)))) {
+                  todoList.removeAt(0);
+                } else {
+                  break;
+                }
+              }
             });
           }
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
 }
 
 class TodoAddPage extends StatefulWidget {
+  const TodoAddPage({Key? key}) : super(key: key);
+
   @override
   _TodoAddPageState createState() => _TodoAddPageState();
 }
@@ -95,16 +121,16 @@ class _TodoAddPageState extends State<TodoAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('リスト追加'),
+        title: const Text('リスト追加'),
       ),
       body: Container(
         // 余白を付ける
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            DatePicker(),
-            TimePicker(),
+            const DatePicker(),
+            const TimePicker(),
             // テキスト入力
             TextFormField(
               decoration: const InputDecoration(
@@ -133,7 +159,7 @@ class _TodoAddPageState extends State<TodoAddPage> {
               },
             ),
             const SizedBox(height: 8),
-            Container(
+            SizedBox(
               // 横幅いっぱいに広げる
               width: double.infinity,
               // リスト追加ボタン
@@ -141,13 +167,14 @@ class _TodoAddPageState extends State<TodoAddPage> {
                 onPressed: () {
                   // "pop"で前の画面に戻る
                   // "pop"の引数から前の画面にデータを渡す
-                  Navigator.of(context).pop(_text + " " + _task);
+                  Navigator.of(context).pop("$_text $_task");
                 },
-                child: Text('リスト追加', style: TextStyle(color: Colors.white)),
+                child:
+                    const Text('リスト追加', style: TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 8),
-            Container(
+            SizedBox(
               // 横幅いっぱいに広げる
               width: double.infinity,
               // キャンセルボタン
@@ -157,7 +184,7 @@ class _TodoAddPageState extends State<TodoAddPage> {
                   // "pop"で前の画面に戻る
                   Navigator.of(context).pop();
                 },
-                child: Text('キャンセル'),
+                child: const Text('キャンセル'),
               ),
             ),
           ],
@@ -168,29 +195,30 @@ class _TodoAddPageState extends State<TodoAddPage> {
 }
 
 class DatePicker extends StatefulWidget {
+  const DatePicker({Key? key}) : super(key: key);
+
   @override
   _DatePickerState createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> {
   // 現在日時
-  DateTime _date = DateTime.now();
 
   // ボタン押下時のイベント
   void onPressedRaisedButton() async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: _date,
-        firstDate: DateTime(2020),
-        lastDate: DateTime.now().add(const Duration(days: 360)));
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2020), //ここ編集
+        lastDate: DateTime.now().add(const Duration(days: 365)));
 
     if (picked != null) {
       // 日時反映
       setState(() => _date = picked);
-      setState(() => gdate = picked);
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(10.0),
@@ -199,14 +227,14 @@ class _DatePickerState extends State<DatePicker> {
             // 日時表示部分
             Center(
                 child: Text("${_date.year}年${_date.month}月${_date.day}日",
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold))),
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold))),
             // DatePicker表示ボタン。
             TextButton(
                 onPressed: () =>
                     // 押下時のイベントを宣言。
                     onPressedRaisedButton(),
-                child: Text('日付選択',
+                child: const Text('日付選択',
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))
           ],
@@ -216,26 +244,26 @@ class _DatePickerState extends State<DatePicker> {
 
 //time
 class TimePicker extends StatefulWidget {
+  const TimePicker({Key? key}) : super(key: key);
+
   @override
   _TimePickerState createState() => _TimePickerState();
 }
 
 class _TimePickerState extends State<TimePicker> {
   // 現在日時
-  TimeOfDay _time = TimeOfDay.now();
 
   // ボタン押下時のイベント
   void onPressedRaisedButton() async {
     final TimeOfDay? picked =
-        (await showTimePicker(context: context, initialTime: TimeOfDay.now()))
-            as TimeOfDay?;
+        (await showTimePicker(context: context, initialTime: TimeOfDay.now()));
     if (picked != null) {
       // 日時反映
       setState(() => _time = picked);
-      setState(() => gtime = picked);
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(10.0),
@@ -244,14 +272,14 @@ class _TimePickerState extends State<TimePicker> {
             // 日時表示部分
             Center(
                 child: Text("${_time.hour}時${_time.minute}分",
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold))),
+                    style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold))),
             // DatePicker表示ボタン。
             TextButton(
                 onPressed: () =>
                     // 押下時のイベントを宣言。
                     onPressedRaisedButton(),
-                child: Text('時刻選択',
+                child: const Text('時刻選択',
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))
           ],

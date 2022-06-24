@@ -1,3 +1,4 @@
+import 'package:app_home_demo/view/home/home.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:app_home_demo/view/bookmark/oitweb_page.dart';
@@ -34,10 +35,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    const Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    const home(),
     const MyTodoApp(),
     const Timateble(),
     BookMark(),
@@ -67,10 +65,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(_title),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text(_title),
+      // ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -79,25 +77,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Colors.red,
+            //backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-            backgroundColor: Colors.green,
+            icon: Icon(Icons.task_sharp),
+            label: 'Todo',
+            //backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'School',
-            backgroundColor: Colors.purple,
+            //backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-            backgroundColor: Colors.grey,
+            icon: Icon(Icons.launch),
+            label: 'Links',
+            //backgroundColor: Colors.pink,
           ),
         ],
         currentIndex: _selectedIndex,
+        unselectedItemColor: Colors.black45,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),

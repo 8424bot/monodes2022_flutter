@@ -12,41 +12,48 @@ class Timateble extends StatefulWidget {
 }
 
 var _result = [
-  [' ', ' ', ' ', ' ', ' ', ' '], 
-  [' ', ' ', ' ', ' ', ' ', ' '], 
-  [' ', ' ', ' ', ' ', ' ', ' '], 
-  [' ', ' ', ' ', ' ', ' ', ' '], 
-  [' ', ' ', ' ', ' ', ' ', ' '], 
   [' ', ' ', ' ', ' ', ' ', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' '] ];
+  [' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' '],
+  [' ', ' ', ' ', ' ', ' ', ' ']
+];
 
 var _subject = [
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'], 
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'], 
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'], 
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'], 
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'], 
   ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'] ];
+  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
+  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
+  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
+  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
+  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
+  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録']
+];
 
 var _entry = [
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'], 
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'], 
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'], 
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'], 
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'], 
   ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
-  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'] ];
+  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
+  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
+  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
+  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
+  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録'],
+  ['授業登録', '授業登録', '授業登録', '授業登録', '授業登録', '授業登録']
+];
 
 class _TimatebleState extends State<Timateble> {
   final double _saturdayWidth = 10;
   final double _sixthRowHeight = 8;
   final double _seventhRowHeight = 8;
   String url = 'https://picsum.photos/200';
-    
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("時間割"),
+      ),
       body: InteractiveViewer(
         constrained: false,
         child: Container(
@@ -95,7 +102,8 @@ class _TimatebleState extends State<Timateble> {
     );
   }
 
-  TableRow subjectTableRow({double height = 14, String period = '', int raw = 0}) {
+  TableRow subjectTableRow(
+      {double height = 14, String period = '', int raw = 0}) {
     return TableRow(
       children: <Widget>[
         periodContainer(height: height, period: period),
@@ -118,11 +126,11 @@ class _TimatebleState extends State<Timateble> {
       child: Text(period),
     );
   }
-  
+
   Widget subjectContainer({
     required double height,
-    double width = 18, 
-    int raw = 0, 
+    double width = 18,
+    int raw = 0,
     int column = 0,
   }) {
     return Container(
@@ -142,27 +150,32 @@ class _TimatebleState extends State<Timateble> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Icon(Icons.info),
-                            Text(_subject[raw][column], textAlign: TextAlign.center,),
-                            Text(_entry[raw][column]),                          
-                          ],
-                        ),
-                        onTap: () async {
-                          var result = await Navigator.push(
-                            context, 
-                            MaterialPageRoute(builder: (context) => TextInput(_result[raw][column])),  
-                          );
-                          setState(() {
-                            _result[raw][column] = result;
-                            _subject[raw][column] = result.replaceAll('\n', '  ');
-                            _entry[raw][column] = '登録情報変更';
-                          });
-                          Navigator.pop(context);
-                        }
-                      ),
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Icon(Icons.info),
+                              Text(
+                                _subject[raw][column],
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(_entry[raw][column]),
+                            ],
+                          ),
+                          onTap: () async {
+                            var result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      TextInput(_result[raw][column])),
+                            );
+                            setState(() {
+                              _result[raw][column] = result;
+                              _subject[raw][column] =
+                                  result.replaceAll('\n', '  ');
+                              _entry[raw][column] = '登録情報変更';
+                            });
+                            Navigator.pop(context);
+                          }),
                       bottomSheetContainer(
                         url:
                             "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Google_Classroom_icon.svg/1186px-Google_Classroom_icon.svg.png",
@@ -245,7 +258,8 @@ class _TimatebleState extends State<Timateble> {
             } else if (pagename == 'OutlookPage') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => OutlookPage(_result[raw][column])),
+                MaterialPageRoute(
+                    builder: (context) => OutlookPage(_result[raw][column])),
               );
             } else {}
           },
@@ -270,4 +284,4 @@ class _TimatebleState extends State<Timateble> {
       ),
     );
   }
-} 
+}

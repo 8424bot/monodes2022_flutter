@@ -35,6 +35,10 @@ class BookMark extends ConsumerWidget {
     List<Widget> tiles = _buildBkmList(bkmItems, bkmNotifier);
 
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("ページ登録"),
+      ),
       body: ListView(children: tiles),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -82,29 +86,28 @@ class BookMark extends ConsumerWidget {
               subtitle: Text(item.url),
               onTap: () {
                 showDialog(
-                  context: context, 
-                  builder: (_) {
-                    return AlertDialog(
-                      title: Text(item.pagename),
-                      content: Text(item.url),
-                      actions: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              child: const Text('Junp to Page'),
-                              onPressed: () async {
-                                if (await canLaunchUrl(url)) {
-                                  await launchUrl(url);
-                                } else {}
-                              },
-                            ),
-                          ],
-                        )
-                      ],
-                    );
-                  }
-                );
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: Text(item.pagename),
+                        content: Text(item.url),
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                child: const Text('Junp to Page'),
+                                onPressed: () async {
+                                  if (await canLaunchUrl(url)) {
+                                    await launchUrl(url);
+                                  } else {}
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      );
+                    });
               },
             ),
           ),
