@@ -1,19 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.app_home_demo">
-
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="https" />
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.SEND" />
-            <data android:mimeType="*/*" />
-        </intent>
-    </queries>
-
+    package="com.example.mainProduct">
    <application
-        android:label="app_home_demo"
+        android:label="mainProduct"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -43,11 +31,4 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme='https' />
-            <data android:scheme='http' />
-        </intent>
-    </queries>
 </manifest>
