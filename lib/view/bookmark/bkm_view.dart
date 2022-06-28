@@ -7,7 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:app_home_demo/model/db/bkm_db.dart';
 import 'package:app_home_demo/model/freezed/bkm/bkm_model.dart';
 import 'package:app_home_demo/view_model/bkm/bkm_provider.dart';
@@ -35,10 +35,6 @@ class BookMark extends ConsumerWidget {
     List<Widget> tiles = _buildBkmList(bkmItems, bkmNotifier);
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("ページ登録"),
-      ),
       body: ListView(children: tiles),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
@@ -86,28 +82,29 @@ class BookMark extends ConsumerWidget {
               subtitle: Text(item.url),
               onTap: () {
                 showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: Text(item.pagename),
-                        content: Text(item.url),
-                        actions: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton(
-                                child: const Text('Jump to Page'),
-                                onPressed: () async {
-                                  if (await canLaunchUrl(url)) {
-                                    await launchUrl(url);
-                                  } else {}
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      );
-                    });
+                  context: context, 
+                  builder: (_) {
+                    return AlertDialog(
+                      title: Text(item.pagename),
+                      content: Text(item.url),
+                      actions: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              child: const Text('Jump to Page'),
+                              onPressed: () async {
+                                if (await canLaunchUrl(url)) {
+                                  await launchUrl(url);
+                                } else {}
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    );
+                  }
+                );
               },
             ),
           ),

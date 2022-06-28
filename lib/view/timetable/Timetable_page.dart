@@ -1,93 +1,28 @@
-// ignore_for_file: use_build_context_synchronously, deprecated_member_use
+// ignore_for_file: file_names, deprecated_member_use, non_constant_identifier_names
 
+import 'package:app_home_demo/main.dart';
+import 'package:app_home_demo/view/timetable/timetable.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'textinput_page.dart';
 
-class TimeTable extends StatefulWidget {
-  const TimeTable({Key? key}) : super(key: key);
-
+class Timateble5 extends StatefulWidget {
+  const Timateble5({Key? key}) : super(key: key);
   @override
-  State<TimeTable> createState() => _TimeTableState();
+  // ignore: library_private_types_in_public_api
+  _TimatebleState createState() => _TimatebleState();
 }
 
-List result = [
-  [
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', '']
-  ],
-  [
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', '']
-  ],
-  [
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', '']
-  ],
-  [
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', '']
-  ],
-  [
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', '']
-  ],
-  [
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', '']
-  ],
-  [
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', ''],
-    ['', '']
-  ],
-];
-
-List subject = [
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-  ['未登録', '未登録', '未登録', '未登録', '未登録', '未登録'],
-];
-
-class _TimeTableState extends State<TimeTable> {
+class _TimatebleState extends State<Timateble5> {
+  final double _saturdayWidth = 10;
+  final double _sixthRowHeight = 8;
+  final double _seventhRowHeight = 8;
+  String url = 'https://picsum.photos/200';
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('時間割'),
-      ),
       body: InteractiveViewer(
         constrained: false,
         child: Container(
@@ -103,8 +38,8 @@ class _TimeTableState extends State<TimeTable> {
               subjectTableRow(period: '3', raw: 2),
               subjectTableRow(period: '4', raw: 3),
               subjectTableRow(period: '5', raw: 4),
-              subjectTableRow(period: '6', raw: 5),
-              subjectTableRow(period: '7', raw: 6),
+              subjectTableRow(period: '6', raw: 5, height: _sixthRowHeight),
+              subjectTableRow(period: '7', raw: 6, height: _seventhRowHeight),
             ],
           ),
         ),
@@ -121,7 +56,7 @@ class _TimeTableState extends State<TimeTable> {
         dayContainer(day: '水'),
         dayContainer(day: '木'),
         dayContainer(day: '金'),
-        dayContainer(day: '土'),
+        dayContainer(width: _saturdayWidth, day: '土'),
       ],
     );
   }
@@ -136,34 +71,48 @@ class _TimeTableState extends State<TimeTable> {
     );
   }
 
-  TableRow subjectTableRow({String period = '', int raw = 0}) {
+  TableRow subjectTableRow({double height = 14, String period = '', int raw = 0}) {
     return TableRow(
       children: <Widget>[
-        periodContainer(period: period),
-        subjectContainer(raw: raw, column: 0),
-        subjectContainer(raw: raw, column: 1),
-        subjectContainer(raw: raw, column: 2),
-        subjectContainer(raw: raw, column: 3),
-        subjectContainer(raw: raw, column: 4),
-        subjectContainer(raw: raw, column: 5),
+        periodContainer(height: height, period: period),
+        subjectContainer(height: height, raw: raw, column: 0),
+        subjectContainer(height: height, raw: raw, column: 1),
+        subjectContainer(height: height, raw: raw, column: 2),
+        subjectContainer(height: height, raw: raw, column: 3),
+        subjectContainer(height: height, raw: raw, column: 4),
+        subjectContainer(height: height, width: 10, raw: raw, column: 5),
       ],
     );
   }
 
-  Widget periodContainer({String period = ''}) {
+  Widget periodContainer({double height = 14, String period = ''}) {
     return Container(
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * (14 / 100),
+      height: MediaQuery.of(context).size.height * (height / 100),
       width: MediaQuery.of(context).size.width * (10 / 100),
       color: Colors.lightBlue[100],
       child: Text(period),
     );
   }
+  
+  Widget subjectContainer({
+    required double height,
+    double width = 18, 
+    int raw = 0, 
+    int column = 0,
+  }) {
+    var box = Hive.box(TableBoxName);
+    var num = raw.toString() + column.toString();
+    TTable? val = box.get(num, defaultValue: TTable('', '', '未登録', '', '', '', '', '', '', ''));
+    var Ttsubject = val!.tosubject();
+    var Ttteacher = val.toteacher();
+    var Ttresult = val.toresult();
+    var urlList = [];
+    var addList = [];
 
-  Widget subjectContainer({int raw = 0, int column = 0}) {
     return Container(
-      height: MediaQuery.of(context).size.height * (14 / 100),
-      width: MediaQuery.of(context).size.width * (18 / 100),
+      height: MediaQuery.of(context).size.height * (height / 100),
+      width: MediaQuery.of(context).size.width * (width / 100),
       decoration: const BoxDecoration(color: Colors.white),
       child: Material(
         color: Colors.transparent,
@@ -176,74 +125,96 @@ class _TimeTableState extends State<TimeTable> {
                 return SafeArea(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
+                    children: [
                       Container(
                         height: MediaQuery.of(context).size.height * (10 / 100),
                         width: double.infinity,
                         decoration: const BoxDecoration(color: Colors.white),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
+                          children: [
                             IconButton(
                               splashColor: Colors.grey,
                               onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => RegistInfo(
-                                      result: result[raw][column],
-                                    ),
-                                  ),
+                                Navigator.push(
+                                  context, 
+                                  MaterialPageRoute(builder: ((context) => RegistInfo(result: [Ttsubject, Ttteacher]))),
                                 );
                               },
                               icon: const Icon(Icons.info_outline),
                             ),
-                            Text(subject[raw][column],
-                                textAlign: TextAlign.center),
+                            Text(Ttresult, textAlign: TextAlign.center,),
                             TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.black,
-                              ),
+                              style:  TextButton.styleFrom(primary: Colors.black),
                               onPressed: () async {
                                 var classInfoList = await Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const TimeTableInput(),
-                                  ),
+                                  MaterialPageRoute(builder: (context) => const TimeTableInput())
                                 );
-                                setState(() {
-                                  result[raw][column] = ['', ''];
-                                  result[raw][column][0] = classInfoList[0];
-                                  result[raw][column][1] = classInfoList[1];
-                                  for (int i = 2;
-                                      i < (classInfoList.length);
-                                      i++) {
-                                    result[raw][column].add(classInfoList[i]);
-                                  }
-                                  subject[raw][column] = result[raw][column]
-                                          [0] +
-                                      ' / ' +
-                                      result[raw][column][1];
-                                });
+                                if (classInfoList.length == 1) {
+                                  setState(() {
+                                    Ttsubject = '';
+                                    Ttteacher = '';
+                                    Ttresult = '未登録';
+                                    urlList = [];
+                                    for (int j = 0; j < 7; j++) {
+                                      if (j < urlList.length) {
+                                        addList.add(urlList[j]);
+                                      } else {
+                                        addList.add('');
+                                      }
+                                    }
+                                    box.put(num, TTable(
+                                      Ttsubject, Ttteacher, Ttresult, 
+                                      addList[0], addList[1], addList[2], 
+                                      addList[3], addList[4], addList[5], addList[6]
+                                    ));
+                                  });
+                                  Navigator.pop(context);
+                                } else {
+                                  setState(() {
+                                    Ttsubject = classInfoList[0];
+                                    Ttteacher = classInfoList[1];
+                                    Ttresult = classInfoList[0] + ' / ' + classInfoList[1];
+                                    for (int i = 2; i < classInfoList.length; i++) {
+                                      urlList.add(classInfoList[i]);
+                                    }
+                                    for (int j = 0; j < 7; j++) {
+                                      if (j < urlList.length) {
+                                        addList.add(urlList[j]);
+                                      } else {
+                                        addList.add('');
+                                      }
+                                    }
+                                    box.put(num, TTable(
+                                      Ttsubject, Ttteacher, Ttresult, 
+                                      addList[0], addList[1], addList[2], 
+                                      addList[3], addList[4], addList[5], addList[6]
+                                    ));
+                                  });
+                                }
+                                print(urlList[0]);
+                                print(urlList[1]);
+                                print(urlList[2]);
+                                print(urlList[3]);
+                                print(urlList[4]);
+                                print(urlList[5]);
+                                print(urlList[6]);
                                 Navigator.pop(context);
                               },
-                              child: const Text(
-                                '登録情報変更',
-                                style: TextStyle(color: Colors.black),
-                              ),
+                              child: const Text('登録情報変更'),
                             ),
                           ],
                         ),
                       ),
-                      for (int i = 0; i < result[raw][column].length; i++) ...{
-                        if (i != 0 && i != 1) ...{
-                          if (result[raw][column][i] != '') ...{
-                            bottomSheetContainer(
-                              raw: raw,
-                              column: column,
-                              i: i,
-                            ),
-                          }
+                      for (int i = 0; i < urlList.length; i++) ...{
+                        if (urlList[i] != '') ...{
+                          bottomSheetContainer(
+                            raw: raw,
+                            column: column,
+                            URL: Uri.parse(urlList[i]),
+                            i: i,
+                          ),
                         }
                       }
                     ],
@@ -255,8 +226,8 @@ class _TimeTableState extends State<TimeTable> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(result[raw][column][0], textAlign: TextAlign.center),
-              Text(result[raw][column][1], textAlign: TextAlign.center),
+              Text(Ttsubject),
+              Text(Ttteacher)
             ],
           ),
         ),
@@ -267,6 +238,7 @@ class _TimeTableState extends State<TimeTable> {
   Widget bottomSheetContainer({
     required int raw,
     required int column,
+    required Uri URL,
     required int i,
   }) {
     return Container(
@@ -278,44 +250,38 @@ class _TimeTableState extends State<TimeTable> {
         child: InkWell(
           splashColor: Colors.grey,
           onTap: () async {
-            if (await canLaunch(result[raw][column][i])) {
-              await launch(
-                result[raw][column][i],
-                forceSafariVC: false,
-                forceWebView: false,
-              );
-            } else {
-              throw 'Could not launch';
-            }
+            if (await canLaunchUrl(URL)) {
+              await launchUrl(URL);
+            } else {}
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              if (i == 2) ...{
+              if (i == 0) ...{
                 Image.asset('images/app_icons/classroom.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Classroom"),
-              } else if (i == 3) ...{
+              } else if (i == 1) ...{
                 Image.asset('images/app_icons/teams.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Teams"),
-              } else if (i == 4) ...{
+              } else if (i == 2) ...{
                 Image.asset('images/app_icons/slack.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Slack"),
-              } else if (i == 5) ...{
+              } else if (i == 3) ...{
                 Image.asset('images/app_icons/outlook.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Outlook"),
-              } else if (i == 6) ...{
+              } else if (i == 4) ...{
                 Image.asset('images/app_icons/portal.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("OIT Portal"),
-              } else if (i == 7) ...{
+              } else if (i == 5) ...{
                 Image.asset('images/app_icons/c-learning.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("OIT C-Learning"),
-              } else if (i == 8) ...{
+              } else if (i == 6) ...{
                 Image.asset('images/app_icons/internet.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Other"),
@@ -326,4 +292,4 @@ class _TimeTableState extends State<TimeTable> {
       ),
     );
   }
-}
+} 

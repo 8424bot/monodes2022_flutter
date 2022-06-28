@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/view/root.dart';
+import 'package:app_home_demo/view/timetable/timetable.dart';
 
+// ignore: constant_identifier_names
+const TableBoxName = "tableBox";
 List todoList = [
   [
     "期限切れの課題",
@@ -11,7 +15,14 @@ List todoList = [
   ]
 ];
 
-void main() {
+
+void main() async {
+  await Hive.initFlutter();
+  //(1) タイプアダプタを登録
+  Hive.registerAdapter<TTable>(TTableAdapter());
+  //(2) 型指定してボックスをオープン
+  await Hive.openBox(TableBoxName);
+
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -25,7 +36,6 @@ class MyApp extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Root(),
     );
   }
