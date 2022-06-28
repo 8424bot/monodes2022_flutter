@@ -120,77 +120,81 @@ class _TodoAddPageState extends State<TodoAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('リスト追加'),
-      ),
-      body: Container(
-        // 余白を付ける
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const DatePicker(),
-            const TimePicker(),
-            // テキスト入力
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: '科目名を入力',
-              ),
-              // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
-              onChanged: (String value) {
-                // データが変更したことを知らせる（画面を更新する）
-                setState(() {
-                  // データを変更
-                  _text = value;
-                });
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: '課題内容を入力',
-              ),
-              // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
-              onChanged: (String value) {
-                // データが変更したことを知らせる（画面を更新する）
-                setState(() {
-                  // データを変更
-                  _task = value;
-                });
-              },
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              // 横幅いっぱいに広げる
-              width: double.infinity,
-              // リスト追加ボタン
-              child: ElevatedButton(
-                onPressed: () {
-                  // "pop"で前の画面に戻る
-                  // "pop"の引数から前の画面にデータを渡す
-                  Navigator.of(context).pop("$_text $_task");
-                },
-                child:
-                    const Text('リスト追加', style: TextStyle(color: Colors.white)),
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              // 横幅いっぱいに広げる
-              width: double.infinity,
-              // キャンセルボタン
-              child: TextButton(
-                // ボタンをクリックした時の処理
-                onPressed: () {
-                  // "pop"で前の画面に戻る
-                  Navigator.of(context).pop();
-                },
-                child: const Text('キャンセル'),
-              ),
-            ),
-          ],
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text('リスト追加'),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          //ここから3行と締めのカッコ編集
+          reverse: true,
+          child: Container(
+            // 余白を付ける
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const DatePicker(),
+                const TimePicker(),
+                // テキスト入力
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: '科目名を入力',
+                  ),
+                  // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
+                  onChanged: (String value) {
+                    // データが変更したことを知らせる（画面を更新する）
+                    setState(() {
+                      // データを変更
+                      _text = value;
+                    });
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: '課題内容を入力',
+                  ),
+                  // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
+                  onChanged: (String value) {
+                    // データが変更したことを知らせる（画面を更新する）
+                    setState(() {
+                      // データを変更
+                      _task = value;
+                    });
+                  },
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  // 横幅いっぱいに広げる
+                  width: double.infinity,
+                  // リスト追加ボタン
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // "pop"で前の画面に戻る
+                      // "pop"の引数から前の画面にデータを渡す
+                      Navigator.of(context).pop("$_text $_task");
+                    },
+                    child: const Text('リスト追加',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  // 横幅いっぱいに広げる
+                  width: double.infinity,
+                  // キャンセルボタン
+                  child: TextButton(
+                    // ボタンをクリックした時の処理
+                    onPressed: () {
+                      // "pop"で前の画面に戻る
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('キャンセル'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
 
@@ -209,7 +213,7 @@ class _DatePickerState extends State<DatePicker> {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
-        firstDate: DateTime(2020), //ここ編集
+        firstDate: DateTime.now(),
         lastDate: DateTime.now().add(const Duration(days: 365)));
 
     if (picked != null) {
