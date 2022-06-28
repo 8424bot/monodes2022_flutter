@@ -4,6 +4,7 @@ void main() {
   runApp(const home());
 }
 
+// ignore: camel_case_types
 class home extends StatelessWidget {
   const home({Key? key}) : super(key: key);
 

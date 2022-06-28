@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, deprecated_member_use, non_constant_identifier_names
 
 import 'package:app_home_demo/main.dart';
-import 'package:app_home_demo/view/timetable/timetable.dart';
+import 'package:app_home_demo/model/db/timetable/timetable.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hive_flutter/hive_flutter.dart';

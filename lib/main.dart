@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/view/root.dart';
-import 'package:app_home_demo/view/timetable/timetable.dart';
+import 'package:app_home_demo/model/db/timetable/timetable.dart';
 
 // ignore: constant_identifier_names
 const TableBoxName = "tableBox";

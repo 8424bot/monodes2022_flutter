@@ -4,7 +4,6 @@ import 'package:app_home_demo/view/timetable/Timetable_page.dart';
 import 'package:app_home_demo/view/todo/Todo.dart';
 import 'package:app_home_demo/view/bookmark/bkm_view.dart';
 import 'package:app_home_demo/view/home/home.dart';
-import 'package:app_home_demo/view/timetable/Timetable_page.dart';
 
 class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
