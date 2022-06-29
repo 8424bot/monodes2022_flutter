@@ -3,12 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:app_home_demo/view/root.dart';
 
 List todoList = [
-  [
-    "期限切れの課題",
-    DateTime.now().subtract(const Duration(days: 1)),
-    const TimeOfDay(hour: 23, minute: 59).hour,
-    const TimeOfDay(hour: 23, minute: 59).minute
-  ]
+  ["科目A ", "期限切れの課題 ", DateTime.now().subtract(const Duration(days: 1)), "S", 3]
 ];
 
 void main() {

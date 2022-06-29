@@ -5,6 +5,15 @@ import '../../main.dart';
 
 DateTime _date = DateTime.now();
 TimeOfDay _time = TimeOfDay.now();
+String course = 'R';
+int grade = 1;
+
+class textTodoList {
+  String _subject;
+  String _task;
+
+  textTodoList(this._subject, this._task);
+}
 
 void main() {
   // 最初に表示するWidget
@@ -55,11 +64,28 @@ class _TodoListPageState extends State<TodoListPage> {
       body: ListView.builder(
         itemCount: todoList.length,
         itemBuilder: (context, index) {
+          TextStyle TodoLimitd() {
+            if (todoList[index][2].isBefore(DateTime.now())) {
+              return const TextStyle(color: Colors.redAccent);
+            }
+            return const TextStyle(color: Colors.black);
+          }
+
+          Color TodoNearLimit() {
+            if (todoList[index][2]
+                .isBefore(DateTime.now().add(const Duration(days: 1)))) {
+              return Colors.yellow;
+            }
+            return Colors.white;
+          }
+
           return Card(
             child: ListTile(
-              title: Text(todoList[index][0] +
-                  " ${todoList[index][1].year}年${todoList[index][1].month}月${todoList[index][1].day}日" +
-                  " ${todoList[index][2]}時${todoList[index][3]}分"),
+              tileColor: TodoNearLimit(),
+              title: Text(
+                "${todoList[index][3]}科 ${todoList[index][4]}年 ${todoList[index][0] + " " + todoList[index][1]}\n${todoList[index][2].year}年${todoList[index][2].month}月${todoList[index][2].day}日 ${todoList[index][2].hour}時${todoList[index][2].minute}分",
+                style: TodoLimitd(),
+              ),
             ),
           );
         },
@@ -68,27 +94,29 @@ class _TodoListPageState extends State<TodoListPage> {
         onPressed: () async {
           // "push"で新規画面に遷移
           // リスト追加画面から渡される値を受け取る
-          final newListText = await Navigator.of(context).push(
+          final subject = await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               // 遷移先の画面としてリスト追加画面を指定
               return const TodoAddPage();
             }),
           );
-          if (newListText != null) {
+          if (subject != null) {
+            //_dateと_timeを統合
+            _date = DateTime(
+                _date.year, _date.month, _date.day, _time.hour, _time.minute);
             // キャンセルした場合は newListText が null となるので注意
             setState(() {
               // リスト追加
-              todoList.add([newListText, _date, _time.hour, _time.minute]);
-              todoList.sort((a, b) {
-                int result1 = a[1].compareTo(b[1]);
-                if (result1 != 0) return result1;
-                int result2 = a[2].compareTo(b[2]);
-                if (result2 != 0) return result2;
-                return a[3].compareTo(b[3]);
-              });
+              todoList
+                  .add([subject._subject, subject._task, _date, course, grade]);
+              todoList.sort(
+                (a, b) {
+                  return a[2].compareTo(b[2]);
+                },
+              );
               //臨時の時間切れ消去プログラム置き場
               while (todoList.isNotEmpty) {
-                if (todoList[0][1].isBefore(
+                if (todoList[0][2].isBefore(
                     DateTime.now().subtract(const Duration(days: 1)))) {
                   todoList.removeAt(0);
                 } else {
@@ -113,7 +141,7 @@ class TodoAddPage extends StatefulWidget {
 
 class _TodoAddPageState extends State<TodoAddPage> {
   // 入力されたテキストをデータとして持つ
-  String _text = '';
+  String _subject = '';
   String _task = '';
 
   // データを元に表示するWidget
@@ -131,68 +159,137 @@ class _TodoAddPageState extends State<TodoAddPage> {
             // 余白を付ける
             padding: const EdgeInsets.all(10),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const DatePicker(),
-                const TimePicker(),
-                // テキスト入力
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '科目名を入力',
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const DatePicker(),
+                  const TimePicker(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DropdownButton(
+                        //4
+                        items: const [
+                          //5
+                          DropdownMenuItem(
+                            value: 'R',
+                            child: Text('R科'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'S',
+                            child: Text('S科'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'W',
+                            child: Text('W科'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'RS',
+                            child: Text('RS科'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'RSW',
+                            child: Text('RSW科'),
+                          ),
+                        ],
+                        //6
+                        onChanged: (String? value) {
+                          setState(() {
+                            course = value!;
+                          });
+                        },
+                        //7
+                        value: course,
+                      ),
+                      DropdownButton(
+                        //4
+                        items: const [
+                          //5
+                          DropdownMenuItem(
+                            value: 1,
+                            child: Text('１年'),
+                          ),
+                          DropdownMenuItem(
+                            value: 2,
+                            child: Text('２年'),
+                          ),
+                          DropdownMenuItem(
+                            value: 3,
+                            child: Text('３年'),
+                          ),
+                          DropdownMenuItem(
+                            value: 4,
+                            child: Text("４年"),
+                          ),
+                        ],
+                        //6
+                        onChanged: (int? value) {
+                          setState(() {
+                            grade = value!;
+                          });
+                        },
+                        //7
+                        value: grade,
+                      ),
+                    ],
                   ),
-                  // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
-                  onChanged: (String value) {
-                    // データが変更したことを知らせる（画面を更新する）
-                    setState(() {
-                      // データを変更
-                      _text = value;
-                    });
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: '課題内容を入力',
-                  ),
-                  // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
-                  onChanged: (String value) {
-                    // データが変更したことを知らせる（画面を更新する）
-                    setState(() {
-                      // データを変更
-                      _task = value;
-                    });
-                  },
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  // 横幅いっぱいに広げる
-                  width: double.infinity,
-                  // リスト追加ボタン
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // "pop"で前の画面に戻る
-                      // "pop"の引数から前の画面にデータを渡す
-                      Navigator.of(context).pop("$_text $_task");
+// テキスト入力
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: '科目名を入力',
+                    ),
+                    // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
+                    onChanged: (String value) {
+                      // データが変更したことを知らせる（画面を更新する）
+                      setState(() {
+                        // データを変更
+                        _subject = value;
+                      });
                     },
-                    child: const Text('リスト追加',
-                        style: TextStyle(color: Colors.white)),
                   ),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  // 横幅いっぱいに広げる
-                  width: double.infinity,
-                  // キャンセルボタン
-                  child: TextButton(
-                    // ボタンをクリックした時の処理
-                    onPressed: () {
-                      // "pop"で前の画面に戻る
-                      Navigator.of(context).pop();
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: '課題内容を入力',
+                    ),
+                    // 入力されたテキストの値を受け取る（valueが入力されたテキスト）
+                    onChanged: (String value) {
+                      // データが変更したことを知らせる（画面を更新する）
+                      setState(() {
+                        // データを変更
+                        _task = value;
+                      });
                     },
-                    child: const Text('キャンセル'),
                   ),
-                ),
-              ],
-            ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    // 横幅いっぱいに広げる
+                    width: double.infinity,
+                    // リスト追加ボタン
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // "pop"で前の画面に戻る
+                        // "pop"の引数から前の画面にデータを渡す
+                        Navigator.of(context)
+                            .pop(textTodoList(_subject, _task));
+                      },
+                      child: const Text('リスト追加',
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    // 横幅いっぱいに広げる
+                    width: double.infinity,
+                    // キャンセルボタン
+                    child: TextButton(
+                      // ボタンをクリックした時の処理
+                      onPressed: () {
+                        // "pop"で前の画面に戻る
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('キャンセル'),
+                    ),
+                  ),
+                ]),
           ),
         ));
   }
