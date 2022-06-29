@@ -232,7 +232,7 @@ class _TodoAddPageState extends State<TodoAddPage> {
                       ),
                     ],
                   ),
-// テキスト入力
+                  // テキスト入力
                   TextFormField(
                     decoration: const InputDecoration(
                       labelText: '科目名を入力',
