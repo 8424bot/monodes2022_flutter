@@ -1,3 +1,4 @@
+import 'package:app_home_demo/view/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -5,11 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 DateTime _date = DateTime.now();
 TimeOfDay _time = TimeOfDay.now();
-String course = 'R';
-int grade = 1;
-
-String _subject = "";
-String _task = "";
 
 class PostPage extends StatefulWidget {
   @override
@@ -17,7 +13,10 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  TextEditingController _textEditingController = TextEditingController();
+  String _subject = "";
+  String _task = "";
+  String course = myCourse;
+  int grade = myGrade;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,3 +1,4 @@
+import 'package:app_home_demo/view/home/home.dart';
 import 'package:app_home_demo/view/todo/post.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,6 +36,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  // Stream<QuerySnapshot<Map<String, dynamic>>> stFilter(bool value) {
+  //   if (myCourse == "R") {
+  //     return FirebaseFirestore.instance
+  //         .collection("TodoList")
+  //         .orderBy("date")
+  //         .where("R")
+  //         .snapshots();
+  //   } else if (myCourse == "S") {
+  //     return FirebaseFirestore.instance
+  //         .collection("TodoList")
+  //         .orderBy("date")
+  //         .where("S")
+  //         .snapshots();
+  //   } else {
+  //     return FirebaseFirestore.instance
+  //         .collection("TodoList")
+  //         .orderBy("date")
+  //         .where("W")
+  //         .snapshots();
+  //   }
+  // }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -42,10 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('課題掲示板'),
         ),
         body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection("TodoList")
-              .orderBy("date")
-              .snapshots(),
+          stream:
+              //stFilter(true),
+
+              FirebaseFirestore.instance
+                  .collection("TodoList")
+                  .orderBy("date")
+                  .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -53,6 +79,15 @@ class _MyHomePageState extends State<MyHomePage> {
             }
             return ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                if (DateTime.now().isAfter(
+                    document["date"].toDate().add(Duration(hours: 3)))) {
+                  print(DateTime.now());
+                  String i = document.id;
+                  FirebaseFirestore.instance
+                      .collection("TodoList")
+                      .doc(i)
+                      .delete();
+                }
                 return Card(
                   child: ListTile(
                     title: Text("${document['subject']}"
@@ -64,6 +99,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         "${document["date"].toDate().minute}分"),
                     subtitle:
                         Text("${document['course']}科" " ${document['grade']}年"),
+                    tileColor:
+                        (DateTime.now().isAfter((document["date"].toDate())))
+                            ? Colors.black
+                            : Colors.white,
+                    textColor:
+                        (DateTime.now().isAfter((document["date"].toDate())))
+                            ? Colors.white
+                            : (DateTime.now().isAfter((document["date"]
+                                    .toDate()
+                                    .subtract(Duration(days: 1)))))
+                                ? Colors.redAccent
+                                : Colors.black,
                   ),
                 );
               }).toList(),
