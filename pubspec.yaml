@@ -52,6 +52,8 @@ dependencies:
   flutter_hooks: ^0.18.5
   awesome_notifications: ^0.6.21
   hooks_riverpod: ^1.0.4
+  firebase_core: ^1.18.0
+  cloud_firestore: ^3.1.18
 
 dev_dependencies:
   build_runner: ^2.1.11
