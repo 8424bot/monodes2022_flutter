@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -42,23 +44,18 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             Text(
-              'Support app',
+              'Support App',
+              style: TextStyle(fontSize: 50, fontWeight: FontWeight.w600),
+            ),
+            Image(image: AssetImage("images/OIT.jpg")),
+            Text(
+              'For OIT students',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             Padding(padding: EdgeInsets.all(5)),
-            Text("for OIT students"),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }

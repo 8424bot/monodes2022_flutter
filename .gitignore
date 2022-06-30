@@ -9,7 +9,11 @@
 .history
 .svn/
 migrate_working_dir/
+
+
 functions/
+=======
+>>>>>>> 927c8605a0284cea90a7a4028cee89eda454d33b
 
 # IntelliJ related
 *.iml
