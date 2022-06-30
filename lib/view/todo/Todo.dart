@@ -42,7 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('課題掲示板'),
         ),
         body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection("TodoList").snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection("TodoList")
+              .orderBy("date")
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
