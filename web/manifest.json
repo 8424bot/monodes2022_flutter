@@ -1,6 +1,6 @@
 {
-    "name": "mainProduct",
-    "short_name": "mainProduct",
+    "name": "home_test",
+    "short_name": "home_test",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

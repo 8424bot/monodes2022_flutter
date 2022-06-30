@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "12146954925",
+    "firebase_url": "https://monodes1-kawase-default-rtdb.firebaseio.com",
+    "project_id": "monodes1-kawase",
+    "storage_bucket": "monodes1-kawase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12146954925:android:352befc0908ef300a56c24",
+        "android_client_info": {
+          "package_name": "com.example.home_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12146954925-n0mdqg2mkvufvtgp3204goskiafdf2mq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4nBnJRzwasayDjgSIhWde_5w9-i309yE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12146954925-n0mdqg2mkvufvtgp3204goskiafdf2mq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12146954925:android:b9744766112f5799a56c24",
+        "android_client_info": {
+          "package_name": "com.example.keijiban"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12146954925-n0mdqg2mkvufvtgp3204goskiafdf2mq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4nBnJRzwasayDjgSIhWde_5w9-i309yE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12146954925-n0mdqg2mkvufvtgp3204goskiafdf2mq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
