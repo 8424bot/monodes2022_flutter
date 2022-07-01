@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'Thirdpage.dart';
+import 'Secondpage.dart';
 
 String myCourse = "R";
 int myGrade = 1;
@@ -39,92 +42,140 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
-      body: Center(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        // appBar: AppBar(
+        //   title: Text(widget.title),
+        // ),
+        body: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            child: const Text(
+              'Supprot App',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Image(
+            image: AssetImage(
+              "images/OIT.jpg",
+            ),
+            width: 200,
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 32),
+            child: Text(
+              'For OIT student',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              const Padding(padding: EdgeInsets.all(40)),
-              const Text(
-                'Support App',
-                style: TextStyle(fontSize: 50, fontWeight: FontWeight.w600),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (context) {
+                    return const MyThirdPage();
+                  }));
+                },
+                style: OutlinedButton.styleFrom(
+                  primary: Colors.red,
+                ),
+                child: Text('作成者'),
               ),
-              const Image(image: AssetImage("images/OIT.jpg"), height: 150),
-              const Text(
-                'For OIT students',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const Padding(padding: EdgeInsets.all(20)),
-              const Text(
-                'Your Status',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  DropdownButton(
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'R',
-                        child: Text('R科'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'S',
-                        child: Text('S科'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'W',
-                        child: Text('W科'),
-                      ),
-                    ],
-                    //6
-                    onChanged: (String? value) {
-                      setState(() {
-                        myCourse = value!;
-                      });
-                    },
-                    //7
-                    value: myCourse,
-                  ),
-                  DropdownButton(
-                    //4
-                    items: const [
-                      //5
-                      DropdownMenuItem(
-                        value: 1,
-                        child: Text('１年'),
-                      ),
-                      DropdownMenuItem(
-                        value: 2,
-                        child: Text('２年'),
-                      ),
-                      DropdownMenuItem(
-                        value: 3,
-                        child: Text('３年'),
-                      ),
-                      DropdownMenuItem(
-                        value: 4,
-                        child: Text("４年"),
-                      ),
-                    ],
-                    //6
-                    onChanged: (int? value) {
-                      setState(() {
-                        myGrade = value!;
-                      });
-                    },
-                    //7
-                    value: myGrade,
-                  ),
-                ],
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (context) {
+                    return const MySecondPage();
+                  }));
+                },
+                child: Text('取説'),
               ),
             ],
           ),
-        ),
+          Container(
+            child: Text('    '),
+          ),
+          Container(
+            child: const Text(
+              'Your Status',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              DropdownButton(
+                items: const [
+                  DropdownMenuItem(
+                    value: 'R',
+                    child: Text('R科'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'S',
+                    child: Text('S科'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'W',
+                    child: Text('W科'),
+                  ),
+                ],
+                //6
+                onChanged: (String? value) {
+                  setState(() {
+                    myCourse = value!;
+                  });
+                },
+                //7
+                value: myCourse,
+              ),
+              DropdownButton(
+                //4
+                items: const [
+                  //5
+                  DropdownMenuItem(
+                    value: 1,
+                    child: Text('１年'),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: Text('２年'),
+                  ),
+                  DropdownMenuItem(
+                    value: 3,
+                    child: Text('３年'),
+                  ),
+                  DropdownMenuItem(
+                    value: 4,
+                    child: Text("４年"),
+                  ),
+                ],
+                //6
+                onChanged: (int? value) {
+                  setState(() {
+                    myGrade = value!;
+                  });
+                },
+                //7
+                value: myGrade,
+              ),
+            ],
+          ),
+        ],
       ),
-    );
+    ));
   }
 }
