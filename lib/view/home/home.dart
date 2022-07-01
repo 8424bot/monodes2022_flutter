@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'Thirdpage.dart';
@@ -50,18 +51,24 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/images_home/OIT.jpg'),
+                    fit: BoxFit.cover)),
+          ),
+          Container(
             child: const Text(
-              'Supprot App',
+              'Support App',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.black,
-                  fontSize: 50,
+                  fontSize: 55,
                   fontWeight: FontWeight.bold),
             ),
           ),
           Image(
             image: AssetImage(
-              "images/OIT.jpg",
+              "images/images_home/OIT.jpg",
             ),
             width: 200,
           ),
@@ -92,13 +99,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text('作成者'),
               ),
               OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  primary: Colors.blue,
+                ),
                 onPressed: () {
                   Navigator.push(context,
                       CupertinoPageRoute(builder: (context) {
                     return const MySecondPage();
                   }));
                 },
-                child: Text('取説'),
+                child: Text('アプリの使い方'),
               ),
             ],
           ),
