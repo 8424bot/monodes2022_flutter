@@ -51,12 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('images/images_home/OIT.jpg'),
-                    fit: BoxFit.cover)),
-          ),
-          Container(
             child: const Text(
               'Support App',
               textAlign: TextAlign.center,
