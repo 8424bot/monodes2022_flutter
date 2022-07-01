@@ -37,7 +37,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static final List<Widget> _widgetOptions = <Widget>[
     const home(),
     const MyTodoApp(),
-    const TimeTable(),
+    const Timeteble(),
     BookMark(),
   ];
 

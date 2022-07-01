@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-//import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:app_home_demo/model/db/bkm_db.dart';
 import 'package:app_home_demo/model/freezed/bkm/bkm_model.dart';
 import 'package:app_home_demo/view_model/bkm/bkm_provider.dart';
@@ -36,8 +35,7 @@ class BookMark extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: const Text("ページ登録"),
+        title: const Text('ページ登録'),
       ),
       body: ListView(children: tiles),
       floatingActionButton: FloatingActionButton(
@@ -77,6 +75,7 @@ class BookMark extends ConsumerWidget {
   Widget _tile(BkmItemData item, BkmDatabaseNotifier db) {
     return Consumer(
       builder: ((context, ref, child) {
+        final select = item.url.contains('http');
         final Uri url = Uri.parse(item.url);
         return Slidable(
           // ignore: sort_child_properties_last
@@ -86,8 +85,9 @@ class BookMark extends ConsumerWidget {
               subtitle: Text(item.url),
               onTap: () {
                 showDialog(
-                    context: context,
-                    builder: (_) {
+                  context: context, 
+                  builder: (_) {
+                    if (select == true) {
                       return AlertDialog(
                         title: Text(item.pagename),
                         content: Text(item.url),
@@ -100,14 +100,31 @@ class BookMark extends ConsumerWidget {
                                 onPressed: () async {
                                   if (await canLaunchUrl(url)) {
                                     await launchUrl(url);
-                                  } else {}
+                                  } else {
+                                    showDialog(
+                                      context: context, 
+                                      builder: (_) {
+                                        return const AlertDialog(
+                                          title: Text('Error'),
+                                          content: Text('This URL is not open'),
+                                        );
+                                      }
+                                    );
+                                  }
                                 },
                               ),
-                            ],
+                          ],
                           )
                         ],
                       );
-                    });
+                    } else {
+                      return AlertDialog(
+                        title: Text(item.pagename),
+                        content: Text(item.url),
+                      );
+                    }
+                  }
+                );
               },
             ),
           ),
