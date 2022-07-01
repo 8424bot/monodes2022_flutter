@@ -1,14 +1,7 @@
 import 'package:app_home_demo/view/home/home.dart';
 import 'package:app_home_demo/view/todo/post.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyTodoApp());
-}
 
 class MyTodoApp extends StatelessWidget {
   const MyTodoApp({Key? key}) : super(key: key);
@@ -36,57 +29,28 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> stFilter(bool value) {
-    if (myCourse == "R") {
-      return FirebaseFirestore.instance
-          .collection("TodoList")
-          .orderBy("date")
-          .where("course", whereIn: ["R", "RS", "RSW"])
-          .where("grade", isEqualTo: myGrade)
-          .snapshots();
-    } else if (myCourse == "S") {
-      return FirebaseFirestore.instance
-          .collection("TodoList")
-          .orderBy("date")
-          .where("course", whereIn: ["S", "RS", "RSW"])
-          .where("grade", isEqualTo: myGrade)
-          .snapshots();
-    } else {
-      return FirebaseFirestore.instance
-          .collection("TodoList")
-          .orderBy("date")
-          .where("course", whereIn: ["W", "RSW"])
-          .where("grade", isEqualTo: myGrade)
-          .snapshots();
-    }
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('課題掲示板'),
+          title: const Text('課題掲示板'),
         ),
         body: StreamBuilder<QuerySnapshot>(
-          //stream: stFilter(true),
+            stream: FirebaseFirestore.instance
+                .collection("TodoList")
+                .orderBy("date")
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-          stream: FirebaseFirestore.instance
-              .collection("TodoList")
-              .orderBy("date")
-              .snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.data?.docs == null) {
-              return Text("no data");
-            } else {
               return ListView(
                 children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                  if (DateTime.now().isAfter(
-                      document["date"].toDate().add(Duration(hours: 3)))) {
-                    print(DateTime.now());
+                  if (DateTime.now().isAfter(document["date"]
+                      .toDate()
+                      .add(const Duration(hours: 3)))) {
                     String i = document.id;
                     FirebaseFirestore.instance
                         .collection("TodoList")
@@ -116,24 +80,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                   textColor: (DateTime.now()
                                           .isAfter((document["date"].toDate())))
                                       ? Colors.white
-                                      : (DateTime.now().isAfter(
-                                              (document["date"]
-                                                  .toDate()
-                                                  .subtract(
-                                                      Duration(days: 1)))))
+                                      : (DateTime.now().isAfter((document[
+                                                  "date"]
+                                              .toDate()
+                                              .subtract(
+                                                  const Duration(days: 1)))))
                                           ? Colors.redAccent
                                           : Colors.black,
                                 )
                               : null)));
                 }).toList(),
               );
-            }
-          },
-        ),
+            }),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return PostPage();
+                return const PostPage();
               }));
             },
             child: const Icon(Icons.edit)));
