@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
+            padding: EdgeInsets.only(bottom: 16),
             child: const Text(
               'Support App',
               textAlign: TextAlign.center,
@@ -67,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             width: 200,
           ),
           Container(
-            padding: EdgeInsets.only(top: 32),
+            padding: EdgeInsets.only(top: 16),
             child: Text(
               'For OIT student',
               textAlign: TextAlign.center,

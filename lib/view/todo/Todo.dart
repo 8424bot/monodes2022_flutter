@@ -95,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                //CupertinoPageRoute<=>MaterialPageRoute
                 return const PostPage();
               }));
             },
