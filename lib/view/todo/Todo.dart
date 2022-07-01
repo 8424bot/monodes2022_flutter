@@ -36,27 +36,30 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  // Stream<QuerySnapshot<Map<String, dynamic>>> stFilter(bool value) {
-  //   if (myCourse == "R") {
-  //     return FirebaseFirestore.instance
-  //         .collection("TodoList")
-  //         .orderBy("date")
-  //         .where("R")
-  //         .snapshots();
-  //   } else if (myCourse == "S") {
-  //     return FirebaseFirestore.instance
-  //         .collection("TodoList")
-  //         .orderBy("date")
-  //         .where("S")
-  //         .snapshots();
-  //   } else {
-  //     return FirebaseFirestore.instance
-  //         .collection("TodoList")
-  //         .orderBy("date")
-  //         .where("W")
-  //         .snapshots();
-  //   }
-  // }
+  Stream<QuerySnapshot<Map<String, dynamic>>> stFilter(bool value) {
+    if (myCourse == "R") {
+      return FirebaseFirestore.instance
+          .collection("TodoList")
+          .orderBy("date")
+          .where("course", whereIn: ["R", "RS", "RSW"])
+          .where("grade", isEqualTo: myGrade)
+          .snapshots();
+    } else if (myCourse == "S") {
+      return FirebaseFirestore.instance
+          .collection("TodoList")
+          .orderBy("date")
+          .where("course", whereIn: ["S", "RS", "RSW"])
+          .where("grade", isEqualTo: myGrade)
+          .snapshots();
+    } else {
+      return FirebaseFirestore.instance
+          .collection("TodoList")
+          .orderBy("date")
+          .where("course", whereIn: ["W", "RSW"])
+          .where("grade", isEqualTo: myGrade)
+          .snapshots();
+    }
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,56 +68,66 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text('課題掲示板'),
         ),
         body: StreamBuilder<QuerySnapshot>(
-          stream:
-              //stFilter(true),
+          //stream: stFilter(true),
 
-              FirebaseFirestore.instance
-                  .collection("TodoList")
-                  .orderBy("date")
-                  .snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection("TodoList")
+              .orderBy("date")
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             }
-            return ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                if (DateTime.now().isAfter(
-                    document["date"].toDate().add(Duration(hours: 3)))) {
-                  print(DateTime.now());
-                  String i = document.id;
-                  FirebaseFirestore.instance
-                      .collection("TodoList")
-                      .doc(i)
-                      .delete();
-                }
-                return Card(
-                  child: ListTile(
-                    title: Text("${document['subject']}"
-                        " ${document['task']}"
-                        //" ${document["date"].toDate().year}年"
-                        " ${document["date"].toDate().month}月"
-                        "${document["date"].toDate().day}日"
-                        " ${document["date"].toDate().hour}時"
-                        "${document["date"].toDate().minute}分"),
-                    subtitle:
-                        Text("${document['course']}科" " ${document['grade']}年"),
-                    tileColor:
-                        (DateTime.now().isAfter((document["date"].toDate())))
-                            ? Colors.black
-                            : Colors.white,
-                    textColor:
-                        (DateTime.now().isAfter((document["date"].toDate())))
-                            ? Colors.white
-                            : (DateTime.now().isAfter((document["date"]
-                                    .toDate()
-                                    .subtract(Duration(days: 1)))))
-                                ? Colors.redAccent
-                                : Colors.black,
-                  ),
-                );
-              }).toList(),
-            );
+            if (snapshot.data?.docs == null) {
+              return Text("no data");
+            } else {
+              return ListView(
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  if (DateTime.now().isAfter(
+                      document["date"].toDate().add(Duration(hours: 3)))) {
+                    print(DateTime.now());
+                    String i = document.id;
+                    FirebaseFirestore.instance
+                        .collection("TodoList")
+                        .doc(i)
+                        .delete();
+                  }
+                  return Visibility(
+                      visible: (myGrade == document["grade"] &&
+                          document["course"].contains(myCourse)),
+                      child: Card(
+                          child: (myGrade == document["grade"] &&
+                                  document["course"].contains(myCourse)
+                              ? ListTile(
+                                  title: Text("${document['subject']}"
+                                      " ${document['task']}"
+                                      //" ${document["date"].toDate().year}年"
+                                      " ${document["date"].toDate().month}月"
+                                      "${document["date"].toDate().day}日"
+                                      " ${document["date"].toDate().hour}時"
+                                      "${document["date"].toDate().minute}分"),
+                                  subtitle: Text("${document['course']}科"
+                                      " ${document['grade']}年"),
+                                  tileColor: (DateTime.now()
+                                          .isAfter((document["date"].toDate())))
+                                      ? Colors.black
+                                      : Colors.white,
+                                  textColor: (DateTime.now()
+                                          .isAfter((document["date"].toDate())))
+                                      ? Colors.white
+                                      : (DateTime.now().isAfter(
+                                              (document["date"]
+                                                  .toDate()
+                                                  .subtract(
+                                                      Duration(days: 1)))))
+                                          ? Colors.redAccent
+                                          : Colors.black,
+                                )
+                              : null)));
+                }).toList(),
+              );
+            }
           },
         ),
         floatingActionButton: FloatingActionButton(
