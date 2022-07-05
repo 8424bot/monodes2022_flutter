@@ -24,6 +24,7 @@ class _TimatebleState extends State<Timeteble> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('時間割'),
       ),
       body: InteractiveViewer(
