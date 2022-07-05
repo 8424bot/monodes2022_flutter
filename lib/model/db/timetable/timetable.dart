@@ -1,7 +1,9 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:hive/hive.dart';
 part 'timetable.g.dart';
 
-@HiveType(typeId : 0)
+@HiveType(typeId: 0)
 class TTable {
   @HiveField(0)
   String subject;
@@ -20,23 +22,24 @@ class TTable {
   @HiveField(7)
   String oit;
   @HiveField(8)
-  // ignore: non_constant_identifier_names
   String c_larning;
   @HiveField(9)
   String other;
+  @HiveField(10)
+  String partner;
 
   TTable(
-    this.subject, 
-    this.teacher, 
-    this.result, 
-    this.classroom, 
-    this.teams, 
-    this.slack, 
-    this.outlook, 
-    this.oit, 
-    this.c_larning,
-    this.other
-  );
+      this.subject,
+      this.teacher,
+      this.result,
+      this.classroom,
+      this.teams,
+      this.slack,
+      this.outlook,
+      this.oit,
+      this.c_larning,
+      this.other,
+      this.partner);
 
   String tosubject() {
     return subject;
@@ -51,6 +54,10 @@ class TTable {
   }
 
   List tourlList() {
-    return[classroom, teams, slack, outlook, oit, c_larning, other];
+    return [classroom, teams, slack, outlook, oit, c_larning, other];
+  }
+
+  String topartner() {
+    return partner;
   }
 }

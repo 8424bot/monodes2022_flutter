@@ -27,13 +27,14 @@ class TTableAdapter extends TypeAdapter<TTable> {
       fields[7] as String,
       fields[8] as String,
       fields[9] as String,
+      fields[10] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, TTable obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.subject)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class TTableAdapter extends TypeAdapter<TTable> {
       ..writeByte(8)
       ..write(obj.c_larning)
       ..writeByte(9)
-      ..write(obj.other);
+      ..write(obj.other)
+      ..writeByte(10)
+      ..write(obj.partner);
   }
 
   @override
