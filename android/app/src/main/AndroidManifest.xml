@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.home_test">
    <application
-        android:label="home_test"
+        android:label="OIT梅田学生支援アプリ"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
