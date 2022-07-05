@@ -90,8 +90,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             //backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.launch),
-            label: 'Links',
+            icon: Icon(Icons.menu_book),
+            label: 'Memo',
             //backgroundColor: Colors.pink,
           ),
         ],

@@ -5,25 +5,48 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 DateTime _date = DateTime.now();
 TimeOfDay _time = TimeOfDay.now();
 
-class PostPage extends StatefulWidget {
-  const PostPage({Key? key}) : super(key: key);
+class UpdatePage extends StatefulWidget {
+  String subject;
+  String task;
+  DateTime date;
+  TimeOfDay time;
+  String course;
+  int grade;
+  String id;
 
+  UpdatePage(
+      {Key? key,
+      required this.subject,
+      required this.task,
+      required this.date,
+      required this.time,
+      required this.course,
+      required this.grade,
+      required this.id})
+      : super(key: key);
   @override
-  _PostPageState createState() => _PostPageState();
+  _UpdatePageState createState() => _UpdatePageState();
 }
 
-class _PostPageState extends State<PostPage> {
-  String _subject = "";
-  String _task = "";
-  String course = myCourse;
-  int grade = myGrade;
+class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
+    print(_time);
+    _date = widget.date;
+    _time = widget.time;
+    print(_time);
+    // String subject = widget.subject;
+    // String task = widget.task;
+    // DateTime date = widget.date;
+    // TimeOfDay time =
+    //     TimeOfDay(hour: widget.date.hour, minute: widget.date.minute);
+    // String course = widget.course;
+    // int grade = widget.grade;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('新規課題投稿'),
+          title: const Text('課題編集'),
         ),
         body: SingleChildScrollView(
           reverse: true,
@@ -32,8 +55,10 @@ class _PostPageState extends State<PostPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const DatePicker(),
-                const TimePicker(),
+                DatePicker(
+                  date: widget.date,
+                ),
+                TimePicker(time: widget.time),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -62,10 +87,10 @@ class _PostPageState extends State<PostPage> {
                       ],
                       onChanged: (String? value) {
                         setState(() {
-                          course = value!;
+                          widget.course = value!;
                         });
                       },
-                      value: course,
+                      value: widget.course,
                     ),
                     DropdownButton(
                       items: const [
@@ -88,30 +113,32 @@ class _PostPageState extends State<PostPage> {
                       ],
                       onChanged: (int? value) {
                         setState(() {
-                          grade = value!;
+                          widget.grade = value!;
                         });
                       },
-                      value: grade,
+                      value: widget.grade,
                     ),
                   ],
                 ),
                 TextFormField(
+                  initialValue: widget.subject,
                   decoration: const InputDecoration(
                     labelText: '科目名を入力',
                   ),
                   onChanged: (String value) {
                     setState(() {
-                      _subject = value;
+                      widget.subject = value;
                     });
                   },
                 ),
                 TextFormField(
+                  initialValue: widget.task,
                   decoration: const InputDecoration(
                     labelText: '課題内容を入力',
                   ),
                   onChanged: (String value) {
                     setState(() {
-                      _task = value;
+                      widget.task = value;
                     });
                   },
                 ),
@@ -122,19 +149,21 @@ class _PostPageState extends State<PostPage> {
                       _date = DateTime(_date.year, _date.month, _date.day,
                           _time.hour, _time.minute);
                       Timestamp tsDate = Timestamp.fromDate(_date);
-                      CollectionReference Todo =
-                          FirebaseFirestore.instance.collection('TodoList');
-                      Todo.add({
-                        'course': course,
+                      //print(widget.subject + widget.subject);
+                      FirebaseFirestore.instance
+                          .collection('TodoList')
+                          .doc(widget.id)
+                          .update({
+                        'course': widget.course,
                         'date': tsDate,
-                        'grade': grade,
-                        'subject': _subject,
-                        'task': _task,
+                        'grade': widget.grade,
+                        'subject': widget.subject,
+                        'task': widget.task,
                       });
                       Navigator.of(context).pop();
                     },
                     child:
-                        const Text('投稿', style: TextStyle(color: Colors.white)),
+                        const Text('変更', style: TextStyle(color: Colors.white)),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -156,8 +185,8 @@ class _PostPageState extends State<PostPage> {
 
 //date
 class DatePicker extends StatefulWidget {
-  const DatePicker({Key? key}) : super(key: key);
-
+  DateTime date;
+  DatePicker({Key? key, required this.date}) : super(key: key);
   @override
   _DatePickerState createState() => _DatePickerState();
 }
@@ -166,13 +195,14 @@ class _DatePickerState extends State<DatePicker> {
   void onPressedRaisedButton() async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: DateTime.now(),
+        initialDate: widget.date,
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(const Duration(days: 365)));
-
     if (picked != null) {
+      setState(() => widget.date = picked);
       setState(() => _date = picked);
     }
+    print(widget.date);
   }
 
   @override
@@ -182,7 +212,8 @@ class _DatePickerState extends State<DatePicker> {
         child: Column(
           children: <Widget>[
             Center(
-                child: Text("${_date.year}年${_date.month}月${_date.day}日",
+                child: Text(
+                    "${widget.date.year}年${widget.date.month}月${widget.date.day}日",
                     style: const TextStyle(
                         fontSize: 30, fontWeight: FontWeight.bold))),
             TextButton(
@@ -197,7 +228,8 @@ class _DatePickerState extends State<DatePicker> {
 
 //time
 class TimePicker extends StatefulWidget {
-  const TimePicker({Key? key}) : super(key: key);
+  TimeOfDay time;
+  TimePicker({Key? key, required this.time}) : super(key: key);
 
   @override
   _TimePickerState createState() => _TimePickerState();
@@ -206,8 +238,9 @@ class TimePicker extends StatefulWidget {
 class _TimePickerState extends State<TimePicker> {
   void onPressedRaisedButton() async {
     final TimeOfDay? picked =
-        (await showTimePicker(context: context, initialTime: TimeOfDay.now()));
+        (await showTimePicker(context: context, initialTime: widget.time));
     if (picked != null) {
+      setState(() => widget.time = picked);
       setState(() => _time = picked);
     }
   }
@@ -219,7 +252,7 @@ class _TimePickerState extends State<TimePicker> {
         child: Column(
           children: <Widget>[
             Center(
-                child: Text("${_time.hour}時${_time.minute}分",
+                child: Text("${widget.time.hour}時${widget.time.minute}分",
                     style: const TextStyle(
                         fontSize: 30, fontWeight: FontWeight.bold))),
             TextButton(

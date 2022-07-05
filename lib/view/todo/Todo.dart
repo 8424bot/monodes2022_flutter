@@ -1,7 +1,11 @@
 import 'package:app_home_demo/view/home/home.dart';
 import 'package:app_home_demo/view/todo/post.dart';
+import 'package:app_home_demo/view/todo/update.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
 class MyTodoApp extends StatelessWidget {
   const MyTodoApp({Key? key}) : super(key: key);
@@ -48,6 +52,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
               return ListView(
                 children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  delete(String id) {
+                    FirebaseFirestore.instance
+                        .collection("TodoList")
+                        .doc(id)
+                        .delete();
+                  }
+
                   if (DateTime.now().isAfter(document["date"]
                       .toDate()
                       .add(const Duration(hours: 3)))) {
@@ -60,35 +71,106 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Visibility(
                       visible: (myGrade == document["grade"] &&
                           document["course"].contains(myCourse)),
-                      child: Card(
-                          child: (myGrade == document["grade"] &&
-                                  document["course"].contains(myCourse)
-                              ? ListTile(
-                                  title: Text("${document['subject']}"
-                                      " ${document['task']}"
-                                      //" ${document["date"].toDate().year}年"
-                                      " ${document["date"].toDate().month}月"
-                                      "${document["date"].toDate().day}日"
-                                      " ${document["date"].toDate().hour}時"
-                                      "${document["date"].toDate().minute}分"),
-                                  subtitle: Text("${document['course']}科"
-                                      " ${document['grade']}年"),
-                                  tileColor: (DateTime.now()
-                                          .isAfter((document["date"].toDate())))
-                                      ? Colors.black
-                                      : Colors.white,
-                                  textColor: (DateTime.now()
-                                          .isAfter((document["date"].toDate())))
-                                      ? Colors.white
-                                      : (DateTime.now().isAfter((document[
-                                                  "date"]
-                                              .toDate()
-                                              .subtract(
-                                                  const Duration(days: 1)))))
-                                          ? Colors.redAccent
-                                          : Colors.black,
-                                )
-                              : null)));
+                      child: Slidable(
+                        startActionPane: ActionPane(
+                            extentRatio: 0.22,
+                            motion: const DrawerMotion(),
+                            children: [
+                              SlidableAction(
+                                autoClose: true,
+                                flex: 1,
+                                icon: Icons.create,
+                                backgroundColor: Colors.green,
+                                label: '編集',
+                                onPressed: (BuildContext context) {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context) {
+                                    //CupertinoPageRoute<=>MaterialPageRoute
+                                    return UpdatePage(
+                                      subject: document["subject"],
+                                      task: document["task"],
+                                      date: document["date"].toDate(),
+                                      time: TimeOfDay(
+                                          hour: document["date"].toDate().hour,
+                                          minute:
+                                              document["date"].toDate().minute),
+                                      course: document["course"],
+                                      grade: document["grade"],
+                                      id: document.id,
+                                    );
+                                  }));
+                                },
+                              )
+                            ]),
+                        endActionPane: ActionPane(
+                            extentRatio: 0.22,
+                            motion: const DrawerMotion(),
+                            children: [
+                              SlidableAction(
+                                  flex: 1,
+                                  icon: Icons.delete,
+                                  backgroundColor: Colors.red,
+                                  label: '削除',
+                                  onPressed: (BuildContext context) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              "${document["task"]} を削除しますか？"),
+                                          content:
+                                              const Text("掲示板から削除され、元に戻せません"),
+                                          actions: <Widget>[
+                                            // ボタン領域
+                                            TextButton(
+                                                child: const Text("はい"),
+                                                onPressed: () {
+                                                  delete(document.id);
+                                                  Navigator.of(context).pop();
+                                                }),
+                                            Builder(builder: (context) {
+                                              return TextButton(
+                                                child: const Text("いいえ"),
+                                                onPressed: () =>
+                                                    Navigator.of(context).pop(),
+                                              );
+                                            }),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  })
+                            ]),
+                        child: Card(
+                            child: (myGrade == document["grade"] &&
+                                    document["course"].contains(myCourse)
+                                ? ListTile(
+                                    title: Text("${document['subject']}"
+                                        " ${document['task']}"
+                                        //" ${document["date"].toDate().year}年"
+                                        " ${document["date"].toDate().month}月"
+                                        "${document["date"].toDate().day}日"
+                                        " ${document["date"].toDate().hour}時"
+                                        "${document["date"].toDate().minute}分"),
+                                    subtitle: Text("${document['course']}科"
+                                        " ${document['grade']}年"),
+                                    tileColor: (DateTime.now().isAfter(
+                                            (document["date"].toDate())))
+                                        ? Colors.black
+                                        : Colors.white,
+                                    textColor: (DateTime.now().isAfter(
+                                            (document["date"].toDate())))
+                                        ? Colors.white
+                                        : (DateTime.now().isAfter((document[
+                                                    "date"]
+                                                .toDate()
+                                                .subtract(
+                                                    const Duration(days: 1)))))
+                                            ? Colors.redAccent
+                                            : Colors.black,
+                                  )
+                                : null)),
+                      ));
                 }).toList(),
               );
             }),
@@ -99,6 +181,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 return const PostPage();
               }));
             },
-            child: const Icon(Icons.edit)));
+            child: const Icon(Icons.add)));
   }
 }
