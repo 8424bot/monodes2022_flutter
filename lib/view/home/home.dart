@@ -83,8 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               OutlinedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      CupertinoPageRoute(builder: (context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MyThirdPage();
                   }));
                 },
@@ -98,8 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   primary: Colors.blue,
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      CupertinoPageRoute(builder: (context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MySecondPage();
                   }));
                 },
