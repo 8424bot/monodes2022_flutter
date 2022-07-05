@@ -1,15 +1,24 @@
-import 'package:firebase_core/firebase_core.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/view/root.dart';
 import 'package:app_home_demo/model/db/timetable/timetable.dart';
+import 'package:app_home_demo/model/db/home/CourseGrade.dart';
+import 'package:path_provider/path_provider.dart';
 
-// List todoList = [
-//   ["科目A ", "期限切れの課題 ", DateTime.now().subtract(const Duration(days: 1)), "S", 3]
-// ];
-// ignore: constant_identifier_names
-const TableBoxName = "tableBox";
+List<Box> boxList = [];
+Future<List<Box>> _openBox() async {
+  var dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
+  var TTableBox = await Hive.openBox('TT');
+  var CGBox = await Hive.openBox('CG');
+  boxList.add(TTableBox);
+  boxList.add(CGBox);
+  return boxList;
+}
 
 Future<void> main2() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +30,10 @@ void main() async {
   await Hive.initFlutter();
   //(1) タイプアダプタを登録
   Hive.registerAdapter<TTable>(TTableAdapter());
+  Hive.registerAdapter<CG>(CGAdapter());
   //(2) 型指定してボックスをオープン
-  await Hive.openBox(TableBoxName);
+  await _openBox();
+
   runApp(
     const ProviderScope(
       child: MyApp(),

@@ -122,7 +122,7 @@ class _TimatebleState extends State<Timeteble> {
     int raw = 0, 
     int column = 0,
   }) {
-    var box = Hive.box(TableBoxName);
+    var box = Hive.box('TT');
     var num = raw.toString() + column.toString();
     TTable? val = box.get(num, defaultValue: TTable('', '', '未登録', '', '', '', '', '', '', ''));
     var Ttsubject = val!.tosubject();

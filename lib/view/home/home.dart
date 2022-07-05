@@ -2,12 +2,16 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'Thirdpage.dart';
 import 'Secondpage.dart';
 
-String myCourse = "R";
-int myGrade = 1;
+var box = Hive.box('CG');
+CG val = box.get('0', defaultValue: CG('R', 1));
+String myCourse = val.tocourse();
+int myGrade = val.tograde();
+
 
 void main() {
   runApp(const home());
@@ -61,15 +65,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          Image(
+          const Image(
             image: AssetImage(
               "images/images_home/OIT.jpg",
             ),
             width: 200,
           ),
           Container(
-            padding: EdgeInsets.only(top: 16),
-            child: Text(
+            padding: const EdgeInsets.only(top: 16),
+            child: const Text(
               'For OIT student',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -101,12 +105,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     return const MySecondPage();
                   }));
                 },
-                child: Text('アプリの使い方'),
+                child: const Text('アプリの使い方'),
               ),
             ],
           ),
           Container(
-            child: Text('    '),
+            child: const Text('    '),
           ),
           Container(
             child: const Text(
@@ -141,6 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     myCourse = value!;
                   });
+                  box.put('0', CG(myCourse, myGrade));
                 },
                 //7
                 value: myCourse,
@@ -171,6 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     myGrade = value!;
                   });
+                  box.put('0', CG(myCourse, myGrade));
                 },
                 //7
                 value: myGrade,
