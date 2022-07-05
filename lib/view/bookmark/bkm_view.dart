@@ -35,6 +35,7 @@ class BookMark extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('ページ登録'),
       ),
       body: ListView(children: tiles),
