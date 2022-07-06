@@ -163,6 +163,7 @@ class _HomePageState extends State<BookMark> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('ページ登録'),
       ),
       body: _isLoading
