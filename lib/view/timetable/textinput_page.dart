@@ -34,7 +34,9 @@ class _TimeTableInputState extends State<TimeTableInput> {
       infoList2 = widget.urlList;
       i++;
     }
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -147,6 +149,7 @@ class _TimeTableInputState extends State<TimeTableInput> {
           ),
         ),
       ),
+    )
     );
   }
 
@@ -207,7 +210,9 @@ class _TimeTableUrlInputState extends State<TimeTableUrlInput> {
       url_value.text = widget.url;
       i++;
     }
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -259,6 +264,7 @@ class _TimeTableUrlInputState extends State<TimeTableUrlInput> {
           ],
         ),
       ),
+    )
     );
   }
 }

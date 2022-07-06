@@ -1,5 +1,5 @@
 // main.dart
-// ignore_for_file: deprecated_member_use, library_private_types_in_public_api
+// ignore_for_file: deprecated_member_use, library_private_types_in_public_api, non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -219,8 +219,9 @@ class _HomePageState extends State<BookMark> {
                                     ElevatedButton(
                                       child: const Text('Jump to Page'),
                                       onPressed: () async {
-                                        if (await canLaunch(_journals[index]['description'])) {
-                                          await launch(_journals[index]['description']);
+                                        Uri URL = Uri.parse(_journals[index]['description']);
+                                        if (await canLaunchUrl(URL)) {
+                                          await launchUrl(URL);
                                         } else {
                                           showDialog(
                                             context: context, 
