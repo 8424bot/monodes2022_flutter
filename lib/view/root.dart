@@ -1,10 +1,8 @@
 import 'package:app_home_demo/view/home/home.dart';
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'package:app_home_demo/view/bookmark/oitweb_page.dart';
 import 'package:app_home_demo/view/timetable/Timetable_page.dart';
 import 'package:app_home_demo/view/todo/Todo.dart';
-import 'package:app_home_demo/view/bookmark/bkm_view.dart';
+import 'package:app_home_demo/view/bookmark/memo.dart';
 
 class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
@@ -29,7 +27,6 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  var _title = 'Home';
   int _selectedIndex = 0;
   // ignore: unused_field
   static const TextStyle optionStyle =
@@ -38,27 +35,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     const home(),
     const MyTodoApp(),
     const TimeTable(),
-    BookMark(),
+    const BookMark(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-
-      switch (index) {
-        case 0:
-          _title = 'Home';
-          break;
-        case 1:
-          _title = '課題一覧';
-          break;
-        case 2:
-          _title = '時間割';
-          break;
-        case 3:
-          _title = 'ページ登録';
-          break;
-      }
     });
   }
 
