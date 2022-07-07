@@ -20,6 +20,61 @@ class _TimeTableState extends State<TimeTable> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('時間割'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            color: Colors.red,
+            onPressed: () {
+              showDialog(
+                context: context, 
+                builder: (_) {
+                  return WillPopScope(
+                    onWillPop: () async => true,
+                    child: AlertDialog(
+                      title: const Align(
+                        alignment: Alignment.center,
+                        child: Text('Caution!!'),
+                      ),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: [
+                            Column(
+                              children: [
+                                const Text('登録内容を全て削除します\n\n本当によろしいですか？'),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ElevatedButton(
+                                      child: const Text('No'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(primary: Colors.red),
+                                      onPressed: () {
+                                        _delete();
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Yes'),
+                                    )
+                                  ],
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    )
+                  );
+                }
+              );
+            },
+          )
+        ],
       ),
       body: InteractiveViewer(
         constrained: false,
@@ -52,6 +107,22 @@ class _TimeTableState extends State<TimeTable> {
         },
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  void _delete() {
+    for (int i = 0; i <= 6; i++) {
+      for (int j = 0; j <= 5; j++) {
+        var box = Hive.box('TT');
+        String num = i.toString() + j.toString();
+        box.put(num, TTable('', '', '未登録', '', '', '', '', '', '', '', ''));
+        setState(() {
+          
+        });
+      }
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('削除が完了しました'))
     );
   }
 
