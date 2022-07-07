@@ -35,122 +35,140 @@ class _TimeTableInputState extends State<TimeTableInput> {
       i++;
     }
     return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: const Text('授業登録'),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (80 / 100),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  controller: subject_value,
-                  decoration: const InputDecoration(
-                    hintText: '授業名を入力してください',
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (80 / 100),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  controller: teacher_value,
-                  decoration: const InputDecoration(
-                    hintText: '担当教員を入力してください',
-                  ),
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * (5 / 100)),
-              const Text('URL登録'),
-              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
-              Container(
-                height: MediaQuery.of(context).size.height * (15 / 100),
-                width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.transparent),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    appButton(
-                        filename: 'images/app_icons/classroom_button.png',
-                        id: 0),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/teams_button.png', id: 1),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/slack_button.png', id: 2),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/outlook_button.png', id: 3),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/portal_button.png', id: 4),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/c-learning_button.png',
-                        id: 5),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/other_button.png', id: 6),
-                  ],
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * (5 / 100)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (40 / 100),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (subject_value.text != '') {
-                      if (teacher_value.text != '') {
-                        infoList1 = [subject_value.text, teacher_value.text];
-                        infoList1.addAll(infoList2);
-                        Navigator.of(context).pop(infoList1);
-                      }
-                    }
-                  },
-                  child: const Text('登録'),
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (40 / 100),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('キャンセル'),
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (40 / 100),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop([' ']);
-                  },
-                  style: ElevatedButton.styleFrom(primary: Colors.red),
-                  child: const Text('登録情報削除'),
-                ),
-              ),
-            ],
+        onWillPop: () async => false,
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            title: const Text('授業登録'),
           ),
-        ),
-      ),
-    )
-    );
+          body: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (80 / 100),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      controller: subject_value,
+                      decoration: const InputDecoration(
+                        hintText: '授業名を入力してください',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (80 / 100),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      controller: teacher_value,
+                      decoration: const InputDecoration(
+                        hintText: '担当教員を入力してください',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * (5 / 100)),
+                  const Text('URL登録'),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * (1 / 100)),
+                  Container(
+                    height: MediaQuery.of(context).size.height * (15 / 100),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(color: Colors.transparent),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        appButton(
+                            filename: 'images/app_icons/classroom_button.png',
+                            id: 0),
+                        SizedBox(
+                            width:
+                                MediaQuery.of(context).size.width * (2 / 100)),
+                        appButton(
+                            filename: 'images/app_icons/teams_button.png',
+                            id: 1),
+                        SizedBox(
+                            width:
+                                MediaQuery.of(context).size.width * (2 / 100)),
+                        appButton(
+                            filename: 'images/app_icons/slack_button.png',
+                            id: 2),
+                        SizedBox(
+                            width:
+                                MediaQuery.of(context).size.width * (2 / 100)),
+                        appButton(
+                            filename: 'images/app_icons/outlook_button.png',
+                            id: 3),
+                        SizedBox(
+                            width:
+                                MediaQuery.of(context).size.width * (2 / 100)),
+                        appButton(
+                            filename: 'images/app_icons/portal_button.png',
+                            id: 4),
+                        SizedBox(
+                            width:
+                                MediaQuery.of(context).size.width * (2 / 100)),
+                        appButton(
+                            filename: 'images/app_icons/c-learning_button.png',
+                            id: 5),
+                        SizedBox(
+                            width:
+                                MediaQuery.of(context).size.width * (2 / 100)),
+                        appButton(
+                            filename: 'images/app_icons/other_button.png',
+                            id: 6),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * (5 / 100)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (40 / 100),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (subject_value.text != '') {
+                          if (teacher_value.text != '') {
+                            infoList1 = [
+                              subject_value.text,
+                              teacher_value.text
+                            ];
+                            infoList1.addAll(infoList2);
+                            Navigator.of(context).pop(infoList1);
+                          }
+                        }
+                      },
+                      child: const Text('登録'),
+                    ),
+                  ),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * (1 / 100)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (40 / 100),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('キャンセル'),
+                    ),
+                  ),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height * (1 / 100)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (40 / 100),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop([' ']);
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.red),
+                      child: const Text('登録情報削除'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   Widget appButton({required String filename, required int id}) {
@@ -211,61 +229,62 @@ class _TimeTableUrlInputState extends State<TimeTableUrlInput> {
       i++;
     }
     return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * (80 / 100),
-              child: TextField(
-                textAlign: TextAlign.center,
-                controller: url_value,
-                decoration: const InputDecoration(
-                  hintText: "URLを入力してください",
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (80 / 100),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: url_value,
+                    decoration: const InputDecoration(
+                      hintText: "URLを入力してください",
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * (5 / 100)),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * (40 / 100),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (url_value.text != '') {
-                    Navigator.of(context).pop(url_value.text);
-                  }
-                },
-                child: const Text('登録'),
-              ),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * (40 / 100),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('キャンセル'),
-              ),
-            ),
-            if (widget.num == 1) ...{
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (40 / 100),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop('');
-                  },
-                  style: ElevatedButton.styleFrom(primary: Colors.red),
-                  child: const Text('登録情報削除'),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (5 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (url_value.text != '') {
+                        Navigator.of(context).pop(url_value.text);
+                      }
+                    },
+                    child: const Text('登録'),
+                  ),
                 ),
-              ),
-            }
-          ],
-        ),
-      ),
-    )
-    );
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (1 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('キャンセル'),
+                  ),
+                ),
+                if (widget.num == 1) ...{
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (40 / 100),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop('');
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.red),
+                      child: const Text('登録情報削除'),
+                    ),
+                  ),
+                }
+              ],
+            ),
+          ),
+        ));
   }
 }
 
@@ -471,187 +490,196 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
     var Ttteacher = val.toteacher();
     var Ttresult = val.toresult();
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: const Text('授業登録'),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (80 / 100),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  controller: subject_value,
-                  decoration: const InputDecoration(
-                    hintText: '授業名を入力してください',
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (80 / 100),
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  controller: teacher_value,
-                  decoration: const InputDecoration(
-                    hintText: '担当教員を入力してください',
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (50 / 100),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: (number + 1),
-                      itemBuilder: (BuildContext context, index) {
-                        return Container(
-                          child: SelectButton(number: index),
-                        );
-                      },
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          title: const Text('授業登録'),
+        ),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (80 / 100),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: subject_value,
+                    decoration: const InputDecoration(
+                      hintText: '授業名を入力してください',
                     ),
                   ),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * (5 / 100)),
-                  SizedBox(
-                    child: IconButton(
-                      onPressed: () {
-                        if (number < 1) {
-                          setState(() {
-                            number++;
-                          });
-                        }
-                      },
-                      icon: const Icon(Icons.add),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (80 / 100),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: teacher_value,
+                    decoration: const InputDecoration(
+                      hintText: '担当教員を入力してください',
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * (5 / 100)),
-              const Text('URL登録'),
-              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
-              Container(
-                height: MediaQuery.of(context).size.height * (15 / 100),
-                width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.transparent),
-                child: Row(
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    appButton(
-                        filename: 'images/app_icons/classroom_button.png',
-                        id: 0),
                     SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/teams_button.png', id: 1),
+                      width: MediaQuery.of(context).size.width * (50 / 100),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: (number + 1),
+                        itemBuilder: (BuildContext context, index) {
+                          return Container(
+                            child: SelectButton(number: index),
+                          );
+                        },
+                      ),
+                    ),
                     SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/slack_button.png', id: 2),
+                        width: MediaQuery.of(context).size.width * (5 / 100)),
                     SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/outlook_button.png', id: 3),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/portal_button.png', id: 4),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/c-learning_button.png',
-                        id: 5),
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width * (2 / 100)),
-                    appButton(
-                        filename: 'images/app_icons/other_button.png', id: 6),
+                      child: IconButton(
+                        onPressed: () {
+                          if (number < 1) {
+                            setState(() {
+                              number++;
+                            });
+                          }
+                        },
+                        icon: const Icon(Icons.add),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * (5 / 100)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (40 / 100),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (subject_value.text != '') {
-                      if (teacher_value.text != '') {
-                        Ttsubject = subject_value.text;
-                        Ttteacher = teacher_value.text;
-                        Ttresult =
-                            subject_value.text + ' / ' + teacher_value.text;
-                        if (number == 0) {
-                          box.put(
-                            selectedRawValue[0] + selectedColumnValue[0],
-                            TTable(
-                                Ttsubject,
-                                Ttteacher,
-                                Ttresult,
-                                urlList[0],
-                                urlList[1],
-                                urlList[2],
-                                urlList[3],
-                                urlList[4],
-                                urlList[5],
-                                urlList[6],
-                                ''),
-                          );
-                        } else if (number == 1) {
-                          box.put(
-                            selectedRawValue[0] + selectedColumnValue[0],
-                            TTable(
-                                Ttsubject,
-                                Ttteacher,
-                                Ttresult,
-                                urlList[0],
-                                urlList[1],
-                                urlList[2],
-                                urlList[3],
-                                urlList[4],
-                                urlList[5],
-                                urlList[6],
-                                selectedRawValue[1] + selectedColumnValue[1]),
-                          );
-                          box.put(
-                            selectedRawValue[1] + selectedColumnValue[1],
-                            TTable(
-                                Ttsubject,
-                                Ttteacher,
-                                Ttresult,
-                                urlList[0],
-                                urlList[1],
-                                urlList[2],
-                                urlList[3],
-                                urlList[4],
-                                urlList[5],
-                                urlList[6],
-                                selectedRawValue[0] + selectedColumnValue[0]),
-                          );
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (5 / 100)),
+                const Text('URL登録'),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (1 / 100)),
+                Container(
+                  height: MediaQuery.of(context).size.height * (15 / 100),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(color: Colors.transparent),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      appButton(
+                          filename: 'images/app_icons/classroom_button.png',
+                          id: 0),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/teams_button.png', id: 1),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/slack_button.png', id: 2),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/outlook_button.png',
+                          id: 3),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/portal_button.png',
+                          id: 4),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/c-learning_button.png',
+                          id: 5),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/other_button.png', id: 6),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (5 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (subject_value.text != '') {
+                        if (teacher_value.text != '') {
+                          Ttsubject = subject_value.text;
+                          Ttteacher = teacher_value.text;
+                          Ttresult =
+                              subject_value.text + ' / ' + teacher_value.text;
+                          if (number == 0) {
+                            box.put(
+                              selectedRawValue[0] + selectedColumnValue[0],
+                              TTable(
+                                  Ttsubject,
+                                  Ttteacher,
+                                  Ttresult,
+                                  urlList[0],
+                                  urlList[1],
+                                  urlList[2],
+                                  urlList[3],
+                                  urlList[4],
+                                  urlList[5],
+                                  urlList[6],
+                                  ''),
+                            );
+                          } else if (number == 1) {
+                            box.put(
+                              selectedRawValue[0] + selectedColumnValue[0],
+                              TTable(
+                                  Ttsubject,
+                                  Ttteacher,
+                                  Ttresult,
+                                  urlList[0],
+                                  urlList[1],
+                                  urlList[2],
+                                  urlList[3],
+                                  urlList[4],
+                                  urlList[5],
+                                  urlList[6],
+                                  selectedRawValue[1] + selectedColumnValue[1]),
+                            );
+                            box.put(
+                              selectedRawValue[1] + selectedColumnValue[1],
+                              TTable(
+                                  Ttsubject,
+                                  Ttteacher,
+                                  Ttresult,
+                                  urlList[0],
+                                  urlList[1],
+                                  urlList[2],
+                                  urlList[3],
+                                  urlList[4],
+                                  urlList[5],
+                                  urlList[6],
+                                  selectedRawValue[0] + selectedColumnValue[0]),
+                            );
+                          }
+                          Navigator.of(context).pop();
                         }
-                        Navigator.of(context).pop();
                       }
-                    }
-                  },
-                  child: const Text('登録'),
+                    },
+                    child: const Text('登録'),
+                  ),
                 ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * (40 / 100),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('キャンセル'),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (1 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('キャンセル'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

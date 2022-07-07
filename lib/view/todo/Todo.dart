@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 
 class MyTodoApp extends StatelessWidget {
   const MyTodoApp({Key? key}) : super(key: key);
@@ -34,6 +36,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var box = Hive.box('CG');
+    CG val = box.get('0', defaultValue: CG('R', 1));
+    String myCourse = val.tocourse();
+    int myGrade = val.tograde();
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

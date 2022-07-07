@@ -1,8 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:app_home_demo/view/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:app_home_demo/view/timetable/Timetable_page.dart';
 import 'package:app_home_demo/view/todo/Todo.dart';
 import 'package:app_home_demo/view/bookmark/memo.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:app_home_demo/model/db/home/CourseGrade.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Root extends StatefulWidget {
   const Root({Key? key}) : super(key: key);
@@ -31,6 +36,8 @@ class _MyStatefulWidgetState extends State<Root> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _showStatusPage(context));
     return Scaffold(
       // appBar: AppBar(
       //   centerTitle: true,
@@ -66,6 +73,123 @@ class _MyStatefulWidgetState extends State<Root> {
         unselectedItemColor: Colors.black45,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+void _showStatusPage(BuildContext context) async {
+  final pref = await SharedPreferences.getInstance();
+
+  if (pref.getBool('isAlreadyFirstLaunch') != true) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const StatusPage(),
+        fullscreenDialog: true,
+      ),
+    );
+    pref.setBool('isAlreadyFirstLaunch', true);
+  }
+}
+
+class StatusPage extends StatefulWidget {
+  const StatusPage({Key? key}) : super(key: key);
+
+  @override
+  State<StatusPage> createState() => _StatusPageState();
+}
+
+class _StatusPageState extends State<StatusPage> {
+  @override
+  Widget build(BuildContext context) {
+    var box = Hive.box('CG');
+    CG val = box.get('0', defaultValue: CG('R', 1));
+    String myCourse = val.tocourse();
+    int myGrade = val.tograde();
+
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * (8 / 100),
+                width: double.infinity,
+                color: Colors.transparent,
+                child: const FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'あなたの学科・学年を選択してください',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (15 / 100),
+                    child: DropdownButton(
+                      items: const [
+                        DropdownMenuItem(value: 'R', child: Text('R科')),
+                        DropdownMenuItem(value: 'S', child: Text('S科')),
+                        DropdownMenuItem(value: 'W', child: Text('W科')),
+                      ],
+                      onChanged: (String? value) {
+                        setState(() {
+                          myCourse = value!;
+                        });
+                        box.put('0', CG(myCourse, myGrade));
+                      },
+                      value: myCourse,
+                    ),
+                  ),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * (5 / 100)),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (15 / 100),
+                    child: DropdownButton(
+                      items: const [
+                        DropdownMenuItem(value: 1, child: Text('１年')),
+                        DropdownMenuItem(value: 2, child: Text('２年')),
+                        DropdownMenuItem(value: 3, child: Text('３年')),
+                        DropdownMenuItem(value: 4, child: Text("４年")),
+                      ],
+                      onChanged: (int? value) {
+                        setState(() {
+                          myGrade = value!;
+                        });
+                        box.put('0', CG(myCourse, myGrade));
+                      },
+                      value: myGrade,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * (35 / 100),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Root()),
+                      (_) => false,
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                  ),
+                  child:
+                      const Text('決定', style: TextStyle(color: Colors.white)),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

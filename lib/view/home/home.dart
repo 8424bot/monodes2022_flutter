@@ -7,12 +7,6 @@ import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'Thirdpage.dart';
 import 'Secondpage.dart';
 
-var box = Hive.box('CG');
-CG val = box.get('0', defaultValue: CG('R', 1));
-String myCourse = val.tocourse();
-int myGrade = val.tograde();
-
-
 void main() {
   runApp(const home());
 }
@@ -46,6 +40,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var box = Hive.box('CG');
+    CG val = box.get('0', defaultValue: CG('R', 1));
+    String myCourse = val.tocourse();
+    int myGrade = val.tograde();
+
     return Scaffold(
         // appBar: AppBar(
         //   title: Text(widget.title),

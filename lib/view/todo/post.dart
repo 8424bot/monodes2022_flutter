@@ -1,6 +1,8 @@
 import 'package:app_home_demo/view/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 
 DateTime _date = DateTime.now();
 TimeOfDay _time = TimeOfDay.now();
@@ -15,10 +17,14 @@ class PostPage extends StatefulWidget {
 class _PostPageState extends State<PostPage> {
   String _subject = "";
   String _task = "";
-  String course = myCourse;
-  int grade = myGrade;
+
   @override
   Widget build(BuildContext context) {
+    var box = Hive.box('CG');
+    CG val = box.get('0', defaultValue: CG('R', 1));
+    String course = val.tocourse();
+    int grade = val.tograde();
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
