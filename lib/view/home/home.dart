@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // appBar: AppBar(
         //   title: Text(widget.title),
         // ),
-        body: SingleChildScrollView(
+        body: Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[

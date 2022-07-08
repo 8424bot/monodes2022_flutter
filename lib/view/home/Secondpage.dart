@@ -17,7 +17,7 @@ class MySecondPage extends StatelessWidget {
           centerTitle: true,
           title: const Text("取扱説明書"),
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             //mainAxisSize: MainAxisSize.min,
             children: <Widget>[
