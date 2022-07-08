@@ -139,9 +139,9 @@ class _PostPageState extends State<PostPage> {
                       CollectionReference Todo =
                           FirebaseFirestore.instance.collection('TodoList');
                       Todo.add({
-                        'course': course,
+                        'course': _course,
                         'date': tsDate,
-                        'grade': grade,
+                        'grade': _grade,
                         'subject': _subject,
                         'task': _task,
                       });
