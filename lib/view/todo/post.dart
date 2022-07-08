@@ -17,6 +17,9 @@ class PostPage extends StatefulWidget {
 class _PostPageState extends State<PostPage> {
   String _subject = "";
   String _task = "";
+  String _course = '';
+  int _grade = 0;
+  int i = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,11 @@ class _PostPageState extends State<PostPage> {
     CG val = box.get('0', defaultValue: CG('R', 1));
     String course = val.tocourse();
     int grade = val.tograde();
+    if (i == 0) {
+      _course = course;
+      _grade = grade;
+      i++;
+    }
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -68,11 +76,10 @@ class _PostPageState extends State<PostPage> {
                       ],
                       onChanged: (String? value) {
                         setState(() {
-                          course = value!;
+                          _course = value!;
                         });
-                        box.put('0', CG(course, grade));
                       },
-                      value: course,
+                      value: _course,
                     ),
                     DropdownButton(
                       items: const [
@@ -95,11 +102,10 @@ class _PostPageState extends State<PostPage> {
                       ],
                       onChanged: (int? value) {
                         setState(() {
-                          grade = value!;
+                          _grade = value!;
                         });
-                        box.put('0', CG(course, grade));
                       },
-                      value: grade,
+                      value: _grade,
                     ),
                   ],
                 ),
