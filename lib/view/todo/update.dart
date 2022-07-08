@@ -1,5 +1,7 @@
 import 'package:app_home_demo/view/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 DateTime _date = DateTime.now();
@@ -35,6 +37,7 @@ class _UpdatePageState extends State<UpdatePage> {
     _date = widget.date;
     _time = widget.time;
     print(_time);
+    var box = Hive.box('CG');
     // String subject = widget.subject;
     // String task = widget.task;
     // DateTime date = widget.date;
@@ -89,6 +92,7 @@ class _UpdatePageState extends State<UpdatePage> {
                         setState(() {
                           widget.course = value!;
                         });
+                        box.put('0', CG(widget.course, widget.grade));
                       },
                       value: widget.course,
                     ),
@@ -115,6 +119,7 @@ class _UpdatePageState extends State<UpdatePage> {
                         setState(() {
                           widget.grade = value!;
                         });
+                        box.put('0', CG(widget.course, widget.grade));
                       },
                       value: widget.grade,
                     ),

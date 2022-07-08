@@ -70,6 +70,7 @@ class _PostPageState extends State<PostPage> {
                         setState(() {
                           course = value!;
                         });
+                        box.put('0', CG(course, grade));
                       },
                       value: course,
                     ),
@@ -96,6 +97,7 @@ class _PostPageState extends State<PostPage> {
                         setState(() {
                           grade = value!;
                         });
+                        box.put('0', CG(course, grade));
                       },
                       value: grade,
                     ),
