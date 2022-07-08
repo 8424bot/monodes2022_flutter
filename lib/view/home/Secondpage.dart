@@ -35,7 +35,7 @@ class MySecondPage extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "これはものづくりデザイン思考実践演習Ⅰで作成したOIT梅田キャンパス生専用学生生活支援アプリです。\n"
+                "　これはものづくりデザイン思考実践演習Ⅰで作成したOIT梅田キャンパス生専用学生生活支援アプリです。\n"
                 "不具合やご意見・ご要望等ありましたら作成者までご連絡ください。",
                 style: TextStyle(fontSize: 15),
               ),
