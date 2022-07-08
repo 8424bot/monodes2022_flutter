@@ -20,9 +20,8 @@ class _TimeTableState extends State<TimeTable> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('時間割'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.delete),
+        leading: IconButton(
+          icon: const Icon(Icons.delete),
             color: Colors.red,
             onPressed: () {
               showDialog(
@@ -73,8 +72,7 @@ class _TimeTableState extends State<TimeTable> {
                 }
               );
             },
-          )
-        ],
+        ),
       ),
       body: InteractiveViewer(
         constrained: false,
