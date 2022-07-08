@@ -91,6 +91,7 @@ flutter:
     - images/app_icons/
     - images/images_home/
     - images/icon/
+    - images/explain/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
