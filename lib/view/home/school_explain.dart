@@ -12,8 +12,18 @@ class MySchoolExplainPage extends StatelessWidget {
           centerTitle: true,
           title: const Text("説明3"),
         ),
-        body: Center(
-          child: Column(children: <Widget>[]),
+        body: SingleChildScrollView(
+          child: Column(children: <Widget>[
+            Container(
+                child: const Text.rich(TextSpan(children: [
+              TextSpan(
+                text: "　準備中・・・\n",
+                style: TextStyle(
+                  fontSize: 50,
+                ),
+              ),
+            ])))
+          ]),
         ));
   }
 }
