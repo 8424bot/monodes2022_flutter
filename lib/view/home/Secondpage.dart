@@ -37,7 +37,7 @@ class MySecondPage extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "　これはものづくりデザイン思考実践演習Ⅰで作成したOIT梅田キャンパス生専用学生生活支援アプリです。\n"
+                  "このアプリはものづくりデザイン思考実践演習で作成したOIT梅田キャンパス生専用学生生活支援アプリです。\n"
                   "不具合やご意見・ご要望等ありましたら作成者までご連絡ください。",
                   style: TextStyle(fontSize: 15),
                 ),
@@ -70,7 +70,7 @@ class MySecondPage extends StatelessWidget {
                         minimumSize: Size(120, 120),
                       ),
                       icon: Icon(Icons.home),
-                      label: Text('home'),
+                      label: Text('Home'),
                     ),
                     SizedBox(
                       width: 30,
@@ -108,7 +108,7 @@ class MySecondPage extends StatelessWidget {
                         minimumSize: Size(120, 120),
                       ),
                       icon: Icon(Icons.school),
-                      label: Text('school'),
+                      label: Text('School'),
                     ),
                     SizedBox(
                       width: 30,
@@ -125,7 +125,7 @@ class MySecondPage extends StatelessWidget {
                         minimumSize: Size(120, 120),
                       ),
                       icon: Icon(Icons.menu_book),
-                      label: Text('memo'),
+                      label: Text('Memo'),
                     ),
                   ],
                 ),
