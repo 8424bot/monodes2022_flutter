@@ -9,14 +9,28 @@ class MyHomeExplainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.red,
           centerTitle: true,
           title: const Text("Homeタブの使い方"),
         ),
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Container(
+                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                child: const Text.rich(
+                  TextSpan(children: [
+                    TextSpan(
+                      text:
+                          "Homeタブはアプリ起動時のページです。作成者ページやアプリの使い方、自分の所属を確認できます。\n",
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
+                    ),
+                  ]),
+                )),
+            Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -34,16 +48,10 @@ class MyHomeExplainPage extends StatelessWidget {
               margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
-                  text: "Homeタブはアプリ起動時のページです。作成者ページやアプリの使い方、自分の所属を確認できます。\n",
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
-                TextSpan(
                     text: "①",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text: "を押すと作成者ページへ飛ぶことができます。",
+                  text: "をタップすると作成者ページへ遷移できます。",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -52,7 +60,7 @@ class MyHomeExplainPage extends StatelessWidget {
                     text: "②",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text: "を押すとアプリの使い方ページへ飛ぶことができます。\n",
+                  text: "をタップするとアプリの使い方ページへ遷移できます。\n",
                   style: TextStyle(
                     fontSize: 17,
                   ),
