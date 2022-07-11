@@ -81,43 +81,50 @@ class _TimeTableInputState extends State<TimeTableInput> {
                       children: [
                         appButton(
                             filename: 'images/app_icons/classroom_button.png',
-                            id: 0),
+                            id: 0,
+                            text: 'Classroom'),
                         SizedBox(
                             width:
                                 MediaQuery.of(context).size.width * (2 / 100)),
                         appButton(
                             filename: 'images/app_icons/teams_button.png',
-                            id: 1),
+                            id: 1,
+                            text: 'Teams'),
                         SizedBox(
                             width:
                                 MediaQuery.of(context).size.width * (2 / 100)),
                         appButton(
                             filename: 'images/app_icons/slack_button.png',
-                            id: 2),
+                            id: 2,
+                            text: 'Slack'),
                         SizedBox(
                             width:
                                 MediaQuery.of(context).size.width * (2 / 100)),
                         appButton(
                             filename: 'images/app_icons/outlook_button.png',
-                            id: 3),
+                            id: 3,
+                            text: 'Outlook'),
                         SizedBox(
                             width:
                                 MediaQuery.of(context).size.width * (2 / 100)),
                         appButton(
                             filename: 'images/app_icons/portal_button.png',
-                            id: 4),
+                            id: 4,
+                            text: 'Portal'),
                         SizedBox(
                             width:
                                 MediaQuery.of(context).size.width * (2 / 100)),
                         appButton(
                             filename: 'images/app_icons/c-learning_button.png',
-                            id: 5),
+                            id: 5,
+                            text: 'C-Learning'),
                         SizedBox(
                             width:
                                 MediaQuery.of(context).size.width * (2 / 100)),
                         appButton(
                             filename: 'images/app_icons/other_button.png',
-                            id: 6),
+                            id: 6,
+                            text: 'Other'),
                       ],
                     ),
                   ),
@@ -171,39 +178,73 @@ class _TimeTableInputState extends State<TimeTableInput> {
         ));
   }
 
-  Widget appButton({required String filename, required int id}) {
-    return InkWell(
-      splashColor: Colors.grey,
-      onTap: () async {
-        var url = await Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  TimeTableUrlInput(url: infoList2[id], num: 1)),
-        );
-        setState(() {
-          if (url == null) {
-          } else {
-            infoList2[id] = url;
-          }
-        });
-      },
+  Widget appButton(
+      {required String text, required String filename, required int id}) {
+    return Tooltip(
+      message: text,
+      verticalOffset: MediaQuery.of(context).size.width * (6 / 100),
+      preferBelow: true,
       child: Container(
         height: MediaQuery.of(context).size.width * (12 / 100),
         width: MediaQuery.of(context).size.width * (12 / 100),
-        decoration: const BoxDecoration(color: Colors.transparent),
-        child: imageAsset(filename: filename, id: id),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.transparent,
+        ),
+        child: inkImage(filename: filename, id: id),
       ),
     );
   }
 
-  Widget imageAsset({required String filename, required int id}) {
+  Widget inkImage({required String filename, required int id}) {
     if (infoList2[id] == '') {
-      return Image.asset(filename,
-          color: const Color.fromARGB(80, 40, 40, 40),
-          colorBlendMode: BlendMode.srcATop);
+      return Ink.image(
+        image: AssetImage(filename),
+        colorFilter: const ColorFilter.mode(
+          Color.fromARGB(80, 40, 40, 40),
+          BlendMode.srcATop,
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(50),
+          splashColor: const Color.fromARGB(50, 0, 0, 0),
+          onTap: () async {
+            var url = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      TimeTableUrlInput(url: infoList2[id], num: 1)),
+            );
+            setState(() {
+              if (url == null) {
+              } else {
+                infoList2[id] = url;
+              }
+            });
+          },
+        ),
+      );
     } else {
-      return Image.asset(filename);
+      return Ink.image(
+        image: AssetImage(filename),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(50),
+          splashColor: const Color.fromARGB(50, 0, 0, 0),
+          onTap: () async {
+            var url = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      TimeTableUrlInput(url: infoList2[id], num: 1)),
+            );
+            setState(() {
+              if (url == null) {
+              } else {
+                infoList2[id] = url;
+              }
+            });
+          },
+        ),
+      );
     }
   }
 }
@@ -541,18 +582,33 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
                     ),
                     SizedBox(
                         width: MediaQuery.of(context).size.width * (5 / 100)),
-                    SizedBox(
-                      child: IconButton(
-                        onPressed: () {
-                          if (number < 1) {
-                            setState(() {
-                              number++;
-                            });
-                          }
-                        },
-                        icon: const Icon(Icons.add),
+                    if (number < 1) ...{
+                      SizedBox(
+                        child: IconButton(
+                          onPressed: () {
+                            if (number < 1) {
+                              setState(() {
+                                number++;
+                              });
+                            }
+                          },
+                          icon: const Icon(Icons.add),
+                        ),
                       ),
-                    ),
+                    } else if (number == 1) ...{
+                      SizedBox(
+                        child: IconButton(
+                          onPressed: () {
+                            if (number == 1) {
+                              setState(() {
+                                number--;
+                              });
+                            }
+                          },
+                          icon: const Icon(Icons.remove),
+                        ),
+                      ),
+                    }
                   ],
                 ),
                 SizedBox(
@@ -569,34 +625,44 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
                     children: [
                       appButton(
                           filename: 'images/app_icons/classroom_button.png',
-                          id: 0),
+                          id: 0,
+                          text: 'Classroom'),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * (2 / 100)),
                       appButton(
-                          filename: 'images/app_icons/teams_button.png', id: 1),
+                          filename: 'images/app_icons/teams_button.png',
+                          id: 1,
+                          text: 'Teams'),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * (2 / 100)),
                       appButton(
-                          filename: 'images/app_icons/slack_button.png', id: 2),
+                          filename: 'images/app_icons/slack_button.png',
+                          id: 2,
+                          text: 'Slack'),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * (2 / 100)),
                       appButton(
                           filename: 'images/app_icons/outlook_button.png',
-                          id: 3),
+                          id: 3,
+                          text: 'Outlook'),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * (2 / 100)),
                       appButton(
                           filename: 'images/app_icons/portal_button.png',
-                          id: 4),
+                          id: 4,
+                          text: 'Portal'),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * (2 / 100)),
                       appButton(
                           filename: 'images/app_icons/c-learning_button.png',
-                          id: 5),
+                          id: 5,
+                          text: 'C-Learning'),
                       SizedBox(
                           width: MediaQuery.of(context).size.width * (2 / 100)),
                       appButton(
-                          filename: 'images/app_icons/other_button.png', id: 6),
+                          filename: 'images/app_icons/other_button.png',
+                          id: 6,
+                          text: 'Other'),
                     ],
                   ),
                 ),
@@ -738,39 +804,73 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
     );
   }
 
-  Widget appButton({required String filename, required int id}) {
-    return InkWell(
-      splashColor: Colors.grey,
-      onTap: () async {
-        var url = await Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  TimeTableUrlInput(url: urlList[id], num: 2)),
-        );
-        if (url == null) {
-        } else {
-          setState(() {
-            urlList[id] = url;
-          });
-        }
-      },
+  Widget appButton(
+      {required String text, required String filename, required int id}) {
+    return Tooltip(
+      message: text,
+      verticalOffset: MediaQuery.of(context).size.width * (6 / 100),
+      preferBelow: true,
       child: Container(
         height: MediaQuery.of(context).size.width * (12 / 100),
         width: MediaQuery.of(context).size.width * (12 / 100),
-        decoration: const BoxDecoration(color: Colors.transparent),
-        child: imageAsset(filename: filename, id: id),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.transparent,
+        ),
+        child: inkImage(filename: filename, id: id),
       ),
     );
   }
 
-  Widget imageAsset({required String filename, required int id}) {
+  Widget inkImage({required String filename, required int id}) {
     if (urlList[id] == '') {
-      return Image.asset(filename,
-          color: const Color.fromARGB(80, 40, 40, 40),
-          colorBlendMode: BlendMode.srcATop);
+      return Ink.image(
+        image: AssetImage(filename),
+        colorFilter: const ColorFilter.mode(
+          Color.fromARGB(80, 40, 40, 40),
+          BlendMode.srcATop,
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(50),
+          splashColor: const Color.fromARGB(50, 0, 0, 0),
+          onTap: () async {
+            var url = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      TimeTableUrlInput(url: urlList[id], num: 2)),
+            );
+            setState(() {
+              if (url == null) {
+              } else {
+                urlList[id] = url;
+              }
+            });
+          },
+        ),
+      );
     } else {
-      return Image.asset(filename);
+      return Ink.image(
+        image: AssetImage(filename),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(50),
+          splashColor: const Color.fromARGB(50, 0, 0, 0),
+          onTap: () async {
+            var url = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      TimeTableUrlInput(url: urlList[id], num: 2)),
+            );
+            setState(() {
+              if (url == null) {
+              } else {
+                urlList[id] = url;
+              }
+            });
+          },
+        ),
+      );
     }
   }
 }

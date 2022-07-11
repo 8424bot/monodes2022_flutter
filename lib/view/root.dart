@@ -82,12 +82,10 @@ void _showStatusPage(BuildContext context) async {
   final pref = await SharedPreferences.getInstance();
 
   if (pref.getBool('isAlreadyFirstLaunch') != true) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const StatusPage(),
-        fullscreenDialog: true,
-      ),
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const StatusPage(),
     );
     pref.setBool('isAlreadyFirstLaunch', true);
   }
@@ -110,24 +108,14 @@ class _StatusPageState extends State<StatusPage> {
 
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
-        body: Center(
-          child: Column(
+      child: AlertDialog(
+        title: const Text('ようこそ', textAlign: TextAlign.center),
+        content:
+            const Text('あなたの学科・学年を\n選択してください', textAlign: TextAlign.center),
+        actions: [
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height * (8 / 100),
-                width: double.infinity,
-                color: Colors.transparent,
-                child: const FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    'あなたの学科・学年を選択してください',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ),
-              SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -189,7 +177,7 @@ class _StatusPageState extends State<StatusPage> {
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
