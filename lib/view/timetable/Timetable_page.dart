@@ -46,13 +46,15 @@ class _TimeTableState extends State<TimeTable> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          ElevatedButton(
-                                            child: const Text('閉じる'),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          )
-                                        ],
+                                            Builder(builder: (context) {
+                                              return ElevatedButton(
+                                                child: const Text('閉じる'),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              );
+                                            }),
+                                          ],
                                       )
                                     ],
                                   )
@@ -183,7 +185,7 @@ class _TimeTableState extends State<TimeTable> {
       height: MediaQuery.of(context).size.height * (6 / 100),
       width: MediaQuery.of(context).size.width * (width / 100),
       color: Colors.lightBlue,
-      child: Text(day),
+      child: Text(day, style: const TextStyle(color: Colors.black)),
     );
   }
 
@@ -207,7 +209,7 @@ class _TimeTableState extends State<TimeTable> {
       height: MediaQuery.of(context).size.height * (14 / 100),
       width: MediaQuery.of(context).size.width * (10 / 100),
       color: Colors.lightBlue[100],
-      child: Text(period),
+      child: Text(period, style: const TextStyle(color: Colors.black)),
     );
   }
 
@@ -247,7 +249,6 @@ class _TimeTableState extends State<TimeTable> {
     return Container(
       height: MediaQuery.of(context).size.height * (14 / 100),
       width: MediaQuery.of(context).size.width * (18 / 100),
-      decoration: const BoxDecoration(color: Colors.white),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -268,13 +269,12 @@ class _TimeTableState extends State<TimeTable> {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(dayandperiod,
-                              style: const TextStyle(fontSize: 16)),
+                              style: const TextStyle(fontSize: 16, color: Colors.black)),
                         ),
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height * (8 / 100),
                         width: double.infinity,
-                        decoration: const BoxDecoration(color: Colors.white),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -474,7 +474,6 @@ class _TimeTableState extends State<TimeTable> {
     return Container(
       height: MediaQuery.of(context).size.height * (9 / 100),
       width: double.infinity,
-      decoration: const BoxDecoration(color: Colors.white),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

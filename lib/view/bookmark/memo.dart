@@ -190,13 +190,15 @@ class _HomePageState extends State<BookMark> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          ElevatedButton(
-                                            child: const Text('閉じる'),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          )
-                                        ],
+                                            Builder(builder: (context) {
+                                              return ElevatedButton(
+                                                child: const Text('閉じる'),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              );
+                                            }),
+                                          ],
                                       )
                                     ],
                                   )
