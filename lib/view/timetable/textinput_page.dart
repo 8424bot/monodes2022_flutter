@@ -41,6 +41,48 @@ class _TimeTableInputState extends State<TimeTableInput> {
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: const Text('授業登録'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.help_outline),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (_) {
+                        return WillPopScope(
+                            onWillPop: () async => true,
+                            child: AlertDialog(
+                                title: const Align(
+                                  alignment: Alignment.center,
+                                  child: Text('explain'),
+                                ),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          const Text('test'),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ElevatedButton(
+                                                child: const Text('close'),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                )));
+                      });
+                },
+              )
+            ],
           ),
           body: Center(
             child: SingleChildScrollView(

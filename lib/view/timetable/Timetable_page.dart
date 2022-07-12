@@ -20,58 +20,100 @@ class _TimeTableState extends State<TimeTable> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('時間割'),
-        leading: IconButton(
-          icon: const Icon(Icons.delete),
-            color: Colors.red,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline),
             onPressed: () {
               showDialog(
-                context: context, 
+                  context: context,
+                  builder: (_) {
+                    return WillPopScope(
+                        onWillPop: () async => true,
+                        child: AlertDialog(
+                            title: const Align(
+                              alignment: Alignment.center,
+                              child: Text('操作説明'),
+                            ),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  Column(
+                                    children: [
+                                      const Text(
+                                          '＋アイコン又は登録したい曜日時間のパネルをタッチして授業の登録ができます。\n詳しい説明はHomeの「アプリの使い方」を参照してください。'),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ElevatedButton(
+                                            child: const Text('閉じる'),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )));
+                  });
+            },
+          )
+        ],
+        leading: IconButton(
+          icon: const Icon(Icons.delete),
+          color: Colors.red,
+          onPressed: () {
+            showDialog(
+                context: context,
                 builder: (_) {
                   return WillPopScope(
-                    onWillPop: () async => true,
-                    child: AlertDialog(
-                      title: const Align(
-                        alignment: Alignment.center,
-                        child: Text('Caution!!'),
-                      ),
-                      content: SingleChildScrollView(
-                        child: ListBody(
-                          children: [
-                            Column(
+                      onWillPop: () async => true,
+                      child: AlertDialog(
+                          title: const Align(
+                            alignment: Alignment.center,
+                            child: Text('Caution!!'),
+                          ),
+                          content: SingleChildScrollView(
+                            child: ListBody(
                               children: [
-                                const Text('登録内容を全て削除します\n\n本当によろしいですか？'),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                Column(
                                   children: [
-                                    ElevatedButton(
-                                      child: const Text('No'),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
+                                    const Text('登録内容を全て削除します\n\n本当によろしいですか？'),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(primary: Colors.red),
-                                      onPressed: () {
-                                        _delete();
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text('Yes'),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        ElevatedButton(
+                                          child: const Text('No'),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.red),
+                                          onPressed: () {
+                                            _delete();
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('Yes'),
+                                        )
+                                      ],
                                     )
                                   ],
                                 )
                               ],
-                            )
-                          ],
-                        ),
-                      )
-                    )
-                  );
-                }
-              );
-            },
+                            ),
+                          )));
+                });
+          },
         ),
       ),
       body: InteractiveViewer(
@@ -114,14 +156,11 @@ class _TimeTableState extends State<TimeTable> {
         var box = Hive.box('TT');
         String num = i.toString() + j.toString();
         box.put(num, TTable('', '', '未登録', '', '', '', '', '', '', '', ''));
-        setState(() {
-          
-        });
+        setState(() {});
       }
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('削除が完了しました'))
-    );
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('削除が完了しました')));
   }
 
   TableRow dayofweekTableRow() {

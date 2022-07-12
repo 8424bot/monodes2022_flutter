@@ -45,6 +45,51 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('課題掲示板'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.help_outline),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return WillPopScope(
+                          onWillPop: () async => true,
+                          child: AlertDialog(
+                              title: const Align(
+                                alignment: Alignment.center,
+                                child: Text('操作説明'),
+                              ),
+                              content: SingleChildScrollView(
+                                child: ListBody(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        const Text(
+                                            '＋アイコンから課題登録ができます。登録したものは横にスライドして「編集」「削除」ができます。\n詳しい説明はHomeの「アプリの使い方」を参照してください。'),
+                                        const SizedBox(height: 15),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Builder(builder: (context) {
+                                              return ElevatedButton(
+                                                child: const Text('閉じる'),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              );
+                                            }),
+                                          ],
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )));
+                    });
+              },
+            )
+          ],
         ),
         body: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
