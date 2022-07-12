@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             padding: const EdgeInsets.only(top: 16),
             child: const Text(
-              'For OIT student',
+              'For OIT students',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.black,
