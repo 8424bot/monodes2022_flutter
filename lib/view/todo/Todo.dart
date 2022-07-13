@@ -67,9 +67,10 @@ class _MyHomePageState extends State<MyTodoApp> {
                                                 child: const Text('詳しく見る'),
                                                 onPressed: () {
                                                   Navigator.push(
-                                                    context, 
-                                                    MaterialPageRoute(builder: (context) => const MyTodoExplainPage())
-                                                  );
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const MyTodoExplainPage()));
                                                 },
                                               );
                                             }),
@@ -168,12 +169,6 @@ class _MyHomePageState extends State<MyTodoApp> {
                                               const Text("掲示板から削除され、元に戻せません"),
                                           actions: <Widget>[
                                             // ボタン領域
-                                            TextButton(
-                                                child: const Text("はい"),
-                                                onPressed: () {
-                                                  delete(document.id);
-                                                  Navigator.of(context).pop();
-                                                }),
                                             Builder(builder: (context) {
                                               return TextButton(
                                                 child: const Text("いいえ"),
@@ -181,6 +176,12 @@ class _MyHomePageState extends State<MyTodoApp> {
                                                     Navigator.of(context).pop(),
                                               );
                                             }),
+                                            TextButton(
+                                                child: const Text("はい"),
+                                                onPressed: () {
+                                                  delete(document.id);
+                                                  Navigator.of(context).pop();
+                                                }),
                                           ],
                                         );
                                       },

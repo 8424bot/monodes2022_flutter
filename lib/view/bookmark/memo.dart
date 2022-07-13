@@ -164,7 +164,7 @@ class _HomePageState extends State<BookMark> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('ページ登録'),
+        title: const Text('メモ帳'),
         actions: [
           IconButton(
             icon: const Icon(Icons.help_outline),
@@ -188,28 +188,30 @@ class _HomePageState extends State<BookMark> {
                                           '＋アイコンからURLなどの必要な情報の登録ができます。\n詳しい説明は右下の「詳しく見る」ボタンから参照してください。'),
                                       const SizedBox(height: 10),
                                       Row(
-                                        mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                            Builder(builder: (context) {
-                                              return ElevatedButton(
-                                                child: const Text('閉じる'),
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                              );
-                                            }),
-                                            Builder(builder: (context) {
-                                              return ElevatedButton(
-                                                child: const Text('詳しく見る'),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context, 
-                                                    MaterialPageRoute(builder: (context) => const MyMemoExplainPage())
-                                                  );
-                                                },
-                                              );
-                                            }),
-                                          ],
+                                          Builder(builder: (context) {
+                                            return ElevatedButton(
+                                              child: const Text('閉じる'),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            );
+                                          }),
+                                          Builder(builder: (context) {
+                                            return ElevatedButton(
+                                              child: const Text('詳しく見る'),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const MyMemoExplainPage()));
+                                              },
+                                            );
+                                          }),
+                                        ],
                                       )
                                     ],
                                   )
@@ -228,27 +230,34 @@ class _HomePageState extends State<BookMark> {
           : ListView.builder(
               itemCount: _journals.length,
               itemBuilder: (context, index) => Slidable(
-                    endActionPane:
-                        ActionPane(motion: const DrawerMotion(), children: [
-                      SlidableAction(
-                        flex: 1,
-                        icon: Icons.create,
-                        backgroundColor: Colors.green,
-                        label: '編集',
-                        onPressed: (_) {
-                          _showForm(_journals[index]['id']);
-                        },
-                      ),
-                      SlidableAction(
-                        flex: 1,
-                        icon: Icons.delete,
-                        backgroundColor: Colors.red,
-                        label: '削除',
-                        onPressed: (_) {
-                          _deleteItem(_journals[index]['id']);
-                        },
-                      ),
-                    ]),
+                    startActionPane: ActionPane(
+                        extentRatio: 0.22,
+                        motion: const DrawerMotion(),
+                        children: [
+                          SlidableAction(
+                            flex: 1,
+                            icon: Icons.create,
+                            backgroundColor: Colors.green,
+                            label: '編集',
+                            onPressed: (_) {
+                              _showForm(_journals[index]['id']);
+                            },
+                          ),
+                        ]),
+                    endActionPane: ActionPane(
+                        motion: const DrawerMotion(),
+                        extentRatio: 0.22,
+                        children: [
+                          SlidableAction(
+                            flex: 1,
+                            icon: Icons.delete,
+                            backgroundColor: Colors.red,
+                            label: '削除',
+                            onPressed: (_) {
+                              _deleteItem(_journals[index]['id']);
+                            },
+                          ),
+                        ]),
                     child: Card(
                       margin: const EdgeInsets.all(5),
                       child: ListTile(
