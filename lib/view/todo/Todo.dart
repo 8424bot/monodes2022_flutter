@@ -67,9 +67,10 @@ class _MyHomePageState extends State<MyTodoApp> {
                                                 child: const Text('詳しく見る'),
                                                 onPressed: () {
                                                   Navigator.push(
-                                                    context, 
-                                                    MaterialPageRoute(builder: (context) => const MyTodoExplainPage())
-                                                  );
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const MyTodoExplainPage()));
                                                 },
                                               );
                                             }),

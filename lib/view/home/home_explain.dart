@@ -45,7 +45,7 @@ class MyHomeExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 30),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "①",
