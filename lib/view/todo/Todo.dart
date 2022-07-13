@@ -198,14 +198,20 @@ class _MyHomePageState extends State<MyHomePage> {
                                     document["course"].contains(myCourse)
                                 ? ListTile(
                                     title: Text("${document['subject']}"
-                                        " ${document['task']}"
-                                        //" ${document["date"].toDate().year}年"
-                                        " ${document["date"].toDate().month}月"
-                                        "${document["date"].toDate().day}日"
-                                        " ${document["date"].toDate().hour}時"
-                                        "${document["date"].toDate().minute}分"),
-                                    subtitle: Text("${document['course']}科"
-                                        " ${document['grade']}年"),
+                                        " ${document['task']}"),
+                                    subtitle: Row(
+                                      children: [
+                                        Text(
+                                            //" ${document["date"].toDate().year}年"
+                                            " ${document["date"].toDate().month}月"
+                                            "${document["date"].toDate().day}日"
+                                            " ${document["date"].toDate().hour}時"
+                                            "${document["date"].toDate().minute}分"),
+                                        const Expanded(child: SizedBox()),
+                                        Text(" ${document['course']}科"
+                                            " ${document['grade']}年"),
+                                      ],
+                                    ),
                                     tileColor: (DateTime.now().isAfter(
                                             (document["date"].toDate())))
                                         ? Colors.black
