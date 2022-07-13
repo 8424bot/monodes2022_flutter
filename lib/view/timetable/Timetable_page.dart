@@ -47,26 +47,27 @@ class _TimeTableState extends State<TimeTable> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                            Builder(builder: (context) {
-                                              return ElevatedButton(
-                                                child: const Text('閉じる'),
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                              );
-                                            }),
-                                            Builder(builder: (context) {
-                                              return ElevatedButton(
-                                                child: const Text('詳しく見る'),
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context, 
-                                                    MaterialPageRoute(builder: (context) => const MySchoolExplainPage())
-                                                  );
-                                                },
-                                              );
-                                            }),
-                                          ],
+                                          Builder(builder: (context) {
+                                            return ElevatedButton(
+                                              child: const Text('閉じる'),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                            );
+                                          }),
+                                          Builder(builder: (context) {
+                                            return ElevatedButton(
+                                              child: const Text('詳しく見る'),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const MySchoolExplainPage()));
+                                              },
+                                            );
+                                          }),
+                                        ],
                                       )
                                     ],
                                   )
@@ -105,7 +106,7 @@ class _TimeTableState extends State<TimeTable> {
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         Builder(builder: (context) {
-                                          return ElevatedButton(
+                                          return TextButton(
                                             child: const Text('No'),
                                             onPressed: () {
                                               Navigator.pop(context);
@@ -113,9 +114,9 @@ class _TimeTableState extends State<TimeTable> {
                                           );
                                         }),
                                         Builder(builder: (context) {
-                                          return ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              primary: Colors.red),
+                                          return TextButton(
+                                            //style: ElevatedButton.styleFrom(
+                                            //    primary: Colors.red),
                                             child: const Text('Yes'),
                                             onPressed: () {
                                               _delete();
@@ -285,7 +286,8 @@ class _TimeTableState extends State<TimeTable> {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(dayandperiod,
-                              style: const TextStyle(fontSize: 16, color: Colors.black)),
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.black)),
                         ),
                       ),
                       Container(
@@ -336,8 +338,8 @@ class _TimeTableState extends State<TimeTable> {
                                   (20 / 100),
                               color: Colors.transparent,
                               child: TextButton(
-                                style:
-                                    TextButton.styleFrom(primary: Colors.black),
+                                // style:
+                                //     TextButton.styleFrom(primary: Colors.black),
                                 onPressed: () async {
                                   var classInfoList = await Navigator.push(
                                       context,
