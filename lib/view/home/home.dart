@@ -6,38 +6,19 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'Thirdpage.dart';
 import 'Secondpage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const home());
+  runApp(home());
 }
 
-class home extends StatelessWidget {
+class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  State<home> createState() => _MyHomePageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<home> {
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('CG');
@@ -59,7 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
               'Support App',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.black,
                   fontSize: 55,
                   fontWeight: FontWeight.bold),
             ),
@@ -76,7 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
               'For OIT students',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.black,
                   fontSize: 40,
                   fontWeight: FontWeight.bold),
             ),
@@ -116,7 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
               'Your Status',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.bold),
             ),
@@ -182,6 +160,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
+          /* SwitchListTile(
+            value: darkmode, 
+            title: const Text('ダークモード'),
+            onChanged: (value) {
+              _changeStyle();
+              setState(() {
+                darkmode = value;
+              });
+            }
+          )  */
         ],
       ),
     ));

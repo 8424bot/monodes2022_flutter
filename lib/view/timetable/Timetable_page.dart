@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'textinput_page.dart';
+import 'package:app_home_demo/view/home/school_explain.dart';
 
 class TimeTable extends StatefulWidget {
   const TimeTable({Key? key}) : super(key: key);
@@ -40,19 +41,32 @@ class _TimeTableState extends State<TimeTable> {
                                   Column(
                                     children: [
                                       const Text(
-                                          '＋アイコン又は登録したい曜日時間のパネルをタッチして授業の登録ができます。\n詳しい説明はHomeの「アプリの使い方」を参照してください。'),
+                                          '＋アイコン又は登録したい曜日時間のパネルをタッチして授業の登録ができます。\n詳しい説明は右下の「詳しく見る」ボタンから参照してください。'),
                                       const SizedBox(height: 10),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          ElevatedButton(
-                                            child: const Text('閉じる'),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          )
-                                        ],
+                                            Builder(builder: (context) {
+                                              return ElevatedButton(
+                                                child: const Text('閉じる'),
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              );
+                                            }),
+                                            Builder(builder: (context) {
+                                              return ElevatedButton(
+                                                child: const Text('詳しく見る'),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context, 
+                                                    MaterialPageRoute(builder: (context) => const MySchoolExplainPage())
+                                                  );
+                                                },
+                                              );
+                                            }),
+                                          ],
                                       )
                                     ],
                                   )
@@ -90,21 +104,25 @@ class _TimeTableState extends State<TimeTable> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
-                                        ElevatedButton(
-                                          child: const Text('No'),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
+                                        Builder(builder: (context) {
+                                          return ElevatedButton(
+                                            child: const Text('No'),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          );
+                                        }),
+                                        Builder(builder: (context) {
+                                          return ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
                                               primary: Colors.red),
-                                          onPressed: () {
-                                            _delete();
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: const Text('Yes'),
-                                        )
+                                            child: const Text('Yes'),
+                                            onPressed: () {
+                                              _delete();
+                                              Navigator.pop(context);
+                                            },
+                                          );
+                                        }),
                                       ],
                                     )
                                   ],
@@ -183,7 +201,7 @@ class _TimeTableState extends State<TimeTable> {
       height: MediaQuery.of(context).size.height * (6 / 100),
       width: MediaQuery.of(context).size.width * (width / 100),
       color: Colors.lightBlue,
-      child: Text(day),
+      child: Text(day, style: const TextStyle(color: Colors.black)),
     );
   }
 
@@ -207,7 +225,7 @@ class _TimeTableState extends State<TimeTable> {
       height: MediaQuery.of(context).size.height * (14 / 100),
       width: MediaQuery.of(context).size.width * (10 / 100),
       color: Colors.lightBlue[100],
-      child: Text(period),
+      child: Text(period, style: const TextStyle(color: Colors.black)),
     );
   }
 
@@ -247,7 +265,6 @@ class _TimeTableState extends State<TimeTable> {
     return Container(
       height: MediaQuery.of(context).size.height * (14 / 100),
       width: MediaQuery.of(context).size.width * (18 / 100),
-      decoration: const BoxDecoration(color: Colors.white),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -268,13 +285,12 @@ class _TimeTableState extends State<TimeTable> {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(dayandperiod,
-                              style: const TextStyle(fontSize: 16)),
+                              style: const TextStyle(fontSize: 16, color: Colors.black)),
                         ),
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height * (8 / 100),
                         width: double.infinity,
-                        decoration: const BoxDecoration(color: Colors.white),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -474,7 +490,6 @@ class _TimeTableState extends State<TimeTable> {
     return Container(
       height: MediaQuery.of(context).size.height * (9 / 100),
       width: double.infinity,
-      decoration: const BoxDecoration(color: Colors.white),
       child: Material(
         color: Colors.transparent,
         child: InkWell(

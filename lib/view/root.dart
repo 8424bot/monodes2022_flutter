@@ -8,21 +8,51 @@ import 'package:app_home_demo/view/bookmark/memo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
-class Root extends StatefulWidget {
-  const Root({Key? key}) : super(key: key);
+class MyTheme extends ChangeNotifier {
+  ThemeData current = ThemeData.light();
+  bool _isDark = false;
 
-  @override
-  State<Root> createState() => _MyStatefulWidgetState();
+  toggle() {
+    _isDark = !_isDark;
+    current = _isDark ? ThemeData.dark() : ThemeData.light();
+    notifyListeners();
+  }
 }
 
-class _MyStatefulWidgetState extends State<Root> {
+
+
+class Root extends StatelessWidget {
+  const Root({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: const _Root(),
+    );
+  }
+}
+
+class _Root extends StatefulWidget {
+  const _Root({Key? key}) : super(key: key);
+
+  @override
+  State<_Root> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<_Root> {
   int _selectedIndex = 0;
   // ignore: unused_field
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    const home(),
+    home(),
     const MyTodoApp(),
     const TimeTable(),
     const BookMark(),
