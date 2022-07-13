@@ -8,6 +8,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
+import 'package:app_home_demo/view/home/Todo_explain.dart';
 
 class MyTodoApp extends StatefulWidget {
   const MyTodoApp({Key? key}) : super(key: key);
@@ -47,17 +48,28 @@ class _MyHomePageState extends State<MyTodoApp> {
                                     Column(
                                       children: [
                                         const Text(
-                                            '＋アイコンから課題登録ができます。登録したものは横にスライドして「編集」「削除」ができます。\n詳しい説明はHomeの「アプリの使い方」を参照してください。'),
+                                            '＋アイコンから課題登録ができます。登録したものは横にスライドして「編集」「削除」ができます。\n詳しい説明は右下の「詳しく見る」ボタンから参照してください。'),
                                         const SizedBox(height: 15),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Builder(builder: (context) {
                                               return ElevatedButton(
                                                 child: const Text('閉じる'),
                                                 onPressed: () {
                                                   Navigator.pop(context);
+                                                },
+                                              );
+                                            }),
+                                            Builder(builder: (context) {
+                                              return ElevatedButton(
+                                                child: const Text('詳しく見る'),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context, 
+                                                    MaterialPageRoute(builder: (context) => const MyTodoExplainPage())
+                                                  );
                                                 },
                                               );
                                             }),
