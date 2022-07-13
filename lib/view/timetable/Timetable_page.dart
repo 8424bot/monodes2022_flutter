@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, deprecated_member_use, non_constant_identifier_names, use_build_context_synchronously
+// ignore_for_file: file_names, deprecated_member_use, non_constant_identifier_names, use_build_context_synchronously, sized_box_for_whitespace
 
 import 'package:app_home_demo/main.dart';
 import 'package:app_home_demo/model/db/timetable/timetable.dart';
@@ -15,6 +15,11 @@ class TimeTable extends StatefulWidget {
 }
 
 class _TimeTableState extends State<TimeTable> {
+  double periodWidth = 8.2;
+  double subjectWidth = 15.3;
+  double dayHeight = 5;
+  double subjectHeight = 14.5;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,7 +179,21 @@ class _TimeTableState extends State<TimeTable> {
       for (int j = 0; j <= 5; j++) {
         var box = Hive.box('TT');
         String num = i.toString() + j.toString();
-        box.put(num, TTable('', '', '未登録', '', '', '', '', '', '', '', ''));
+        box.put(
+            num,
+            TTable(
+                subject: '',
+                teacher: '',
+                room: '',
+                result: '未登録',
+                classroom: '',
+                teams: '',
+                slack: '',
+                outlook: '',
+                portal: '',
+                c_learning: '',
+                other: '',
+                partner: ''));
         setState(() {});
       }
     }
@@ -185,21 +204,22 @@ class _TimeTableState extends State<TimeTable> {
   TableRow dayofweekTableRow() {
     return TableRow(
       children: <Widget>[
-        dayContainer(width: 10),
-        dayContainer(day: '月'),
-        dayContainer(day: '火'),
-        dayContainer(day: '水'),
-        dayContainer(day: '木'),
-        dayContainer(day: '金'),
-        dayContainer(day: '土'),
+        dayContainer(height: dayHeight, width: periodWidth),
+        dayContainer(height: dayHeight, width: subjectWidth, day: '月'),
+        dayContainer(height: dayHeight, width: subjectWidth, day: '火'),
+        dayContainer(height: dayHeight, width: subjectWidth, day: '水'),
+        dayContainer(height: dayHeight, width: subjectWidth, day: '木'),
+        dayContainer(height: dayHeight, width: subjectWidth, day: '金'),
+        dayContainer(height: dayHeight, width: subjectWidth, day: '土'),
       ],
     );
   }
 
-  Widget dayContainer({double width = 18, String day = ''}) {
+  Widget dayContainer(
+      {required double height, required double width, String day = ''}) {
     return Container(
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * (6 / 100),
+      height: MediaQuery.of(context).size.height * (height / 100),
       width: MediaQuery.of(context).size.width * (width / 100),
       color: Colors.lightBlue,
       child: Text(day, style: const TextStyle(color: Colors.black)),
@@ -209,22 +229,30 @@ class _TimeTableState extends State<TimeTable> {
   TableRow subjectTableRow({String period = '', int raw = 0}) {
     return TableRow(
       children: <Widget>[
-        periodContainer(period: period),
-        subjectContainer(raw: raw, column: 0),
-        subjectContainer(raw: raw, column: 1),
-        subjectContainer(raw: raw, column: 2),
-        subjectContainer(raw: raw, column: 3),
-        subjectContainer(raw: raw, column: 4),
-        subjectContainer(raw: raw, column: 5),
+        periodContainer(
+            height: subjectHeight, width: periodWidth, period: period),
+        subjectContainer(
+            height: subjectHeight, width: subjectWidth, raw: raw, column: 0),
+        subjectContainer(
+            height: subjectHeight, width: subjectWidth, raw: raw, column: 1),
+        subjectContainer(
+            height: subjectHeight, width: subjectWidth, raw: raw, column: 2),
+        subjectContainer(
+            height: subjectHeight, width: subjectWidth, raw: raw, column: 3),
+        subjectContainer(
+            height: subjectHeight, width: subjectWidth, raw: raw, column: 4),
+        subjectContainer(
+            height: subjectHeight, width: subjectWidth, raw: raw, column: 5),
       ],
     );
   }
 
-  Widget periodContainer({String period = ''}) {
+  Widget periodContainer(
+      {required double height, required double width, String period = ''}) {
     return Container(
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * (14 / 100),
-      width: MediaQuery.of(context).size.width * (10 / 100),
+      height: MediaQuery.of(context).size.height * (height / 100),
+      width: MediaQuery.of(context).size.width * (width / 100),
       color: Colors.lightBlue[100],
       child: Text(period, style: const TextStyle(color: Colors.black)),
     );
@@ -248,24 +276,39 @@ class _TimeTableState extends State<TimeTable> {
   }
 
   Widget subjectContainer({
+    required double height,
+    required double width,
     int raw = 0,
     int column = 0,
   }) {
     var box = Hive.box('TT');
     var num = raw.toString() + column.toString();
     TTable? val = box.get(num,
-        defaultValue: TTable('', '', '未登録', '', '', '', '', '', '', '', ''));
-    var Ttsubject = val!.tosubject();
-    var Ttteacher = val.toteacher();
-    var Ttresult = val.toresult();
-    var TturlList = val.tourlList();
-    var Ttpartner = val.topartner();
+        defaultValue: TTable(
+            subject: '',
+            teacher: '',
+            room: '',
+            result: '未登録',
+            classroom: '',
+            teams: '',
+            slack: '',
+            outlook: '',
+            portal: '',
+            c_learning: '',
+            other: '',
+            partner: ''));
+    var Ttsubject = val!.toSubject();
+    var Ttteacher = val.toTeacher();
+    var Ttroom = val.toRoom();
+    var Ttresult = val.toResult();
+    var TturlList = val.toUrlList();
+    var Ttpartner = val.toPartner();
     var urlList = [];
     var dayandperiod = _dayandperiod(raw: raw, column: column);
 
     return Container(
-      height: MediaQuery.of(context).size.height * (14 / 100),
-      width: MediaQuery.of(context).size.width * (18 / 100),
+      height: MediaQuery.of(context).size.height * (height / 100),
+      width: MediaQuery.of(context).size.width * (width / 100),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -298,27 +341,29 @@ class _TimeTableState extends State<TimeTable> {
                           children: [
                             Container(
                               width: MediaQuery.of(context).size.width *
-                                  (10 / 100),
+                                  (15 / 100),
                               color: Colors.transparent,
                               child: IconButton(
-                                splashColor: Colors.grey,
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            RegistInfo(result: [
-                                              Ttsubject,
-                                              Ttteacher,
-                                              TturlList[0],
-                                              TturlList[1],
-                                              TturlList[2],
-                                              TturlList[3],
-                                              TturlList[4],
-                                              TturlList[5],
-                                              TturlList[6],
-                                            ]))),
-                                  );
+                                  if (Ttsubject != '') {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              RegistInfo(result: [
+                                                Ttsubject,
+                                                Ttteacher,
+                                                Ttroom,
+                                                TturlList[0],
+                                                TturlList[1],
+                                                TturlList[2],
+                                                TturlList[3],
+                                                TturlList[4],
+                                                TturlList[5],
+                                                TturlList[6],
+                                              ]))),
+                                    );
+                                  }
                                 },
                                 icon: const Icon(Icons.info_outline),
                               ),
@@ -335,7 +380,7 @@ class _TimeTableState extends State<TimeTable> {
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width *
-                                  (20 / 100),
+                                  (15 / 100),
                               color: Colors.transparent,
                               child: TextButton(
                                 // style:
@@ -347,6 +392,7 @@ class _TimeTableState extends State<TimeTable> {
                                           builder: (context) => TimeTableInput(
                                               subject: Ttsubject,
                                               teacher: Ttteacher,
+                                              room: Ttroom,
                                               urlList: TturlList)));
                                   if (classInfoList == null) {
                                   } else {
@@ -354,47 +400,69 @@ class _TimeTableState extends State<TimeTable> {
                                       setState(() {
                                         Ttsubject = '';
                                         Ttteacher = '';
+                                        Ttroom = '';
                                         Ttresult = '未登録';
                                         urlList = ['', '', '', '', '', '', ''];
                                         box.put(
                                             num,
                                             TTable(
-                                                Ttsubject,
-                                                Ttteacher,
-                                                Ttresult,
-                                                urlList[0],
-                                                urlList[1],
-                                                urlList[2],
-                                                urlList[3],
-                                                urlList[4],
-                                                urlList[5],
-                                                urlList[6],
-                                                ''));
+                                                subject: Ttsubject,
+                                                teacher: Ttteacher,
+                                                room: Ttroom,
+                                                result: Ttresult,
+                                                classroom: urlList[0],
+                                                teams: urlList[1],
+                                                slack: urlList[2],
+                                                outlook: urlList[3],
+                                                portal: urlList[4],
+                                                c_learning: urlList[5],
+                                                other: urlList[5],
+                                                partner: ''));
                                         if (Ttpartner != '') {
                                           box.put(
                                               Ttpartner,
                                               TTable(
-                                                  Ttsubject,
-                                                  Ttteacher,
-                                                  Ttresult,
-                                                  urlList[0],
-                                                  urlList[1],
-                                                  urlList[2],
-                                                  urlList[3],
-                                                  urlList[4],
-                                                  urlList[5],
-                                                  urlList[6],
-                                                  ''));
+                                                  subject: Ttsubject,
+                                                  teacher: Ttteacher,
+                                                  room: Ttroom,
+                                                  result: Ttresult,
+                                                  classroom: urlList[0],
+                                                  teams: urlList[1],
+                                                  slack: urlList[2],
+                                                  outlook: urlList[3],
+                                                  portal: urlList[4],
+                                                  c_learning: urlList[5],
+                                                  other: urlList[5],
+                                                  partner: ''));
                                         }
                                       });
                                     } else {
                                       setState(() {
                                         Ttsubject = classInfoList[0];
                                         Ttteacher = classInfoList[1];
-                                        Ttresult = classInfoList[0] +
-                                            ' / ' +
-                                            classInfoList[1];
-                                        for (int i = 2;
+                                        Ttroom = classInfoList[2];
+                                        if (classInfoList[1] != '' &&
+                                            classInfoList[2] != '') {
+                                          Ttresult = classInfoList[0] +
+                                              '\n' +
+                                              classInfoList[1] +
+                                              '\n' +
+                                              classInfoList[2];
+                                        } else if (classInfoList[1] == '' &&
+                                            classInfoList[2] == '') {
+                                          Ttresult = classInfoList[0];
+                                        } else if (classInfoList[1] == '' &&
+                                            classInfoList[2] != '') {
+                                          Ttresult = classInfoList[0] +
+                                              '\n' +
+                                              classInfoList[2];
+                                        } else if (classInfoList[1] != '' &&
+                                            classInfoList[2] == '') {
+                                          Ttresult = classInfoList[0] +
+                                              '\n' +
+                                              classInfoList[1];
+                                        }
+                                        for (int i = 3;
                                             i < classInfoList.length;
                                             i++) {
                                           urlList.add(classInfoList[i]);
@@ -402,39 +470,50 @@ class _TimeTableState extends State<TimeTable> {
                                         box.put(
                                             num,
                                             TTable(
-                                                Ttsubject,
-                                                Ttteacher,
-                                                Ttresult,
-                                                urlList[0],
-                                                urlList[1],
-                                                urlList[2],
-                                                urlList[3],
-                                                urlList[4],
-                                                urlList[5],
-                                                urlList[6],
-                                                Ttpartner));
+                                                subject: Ttsubject,
+                                                teacher: Ttteacher,
+                                                room: Ttroom,
+                                                result: Ttresult,
+                                                classroom: urlList[0],
+                                                teams: urlList[1],
+                                                slack: urlList[2],
+                                                outlook: urlList[3],
+                                                portal: urlList[4],
+                                                c_learning: urlList[5],
+                                                other: urlList[5],
+                                                partner: Ttpartner));
                                         if (Ttpartner != '') {
                                           var box2 = Hive.box('TT');
-                                          TTable? val2 = box2.get(
-                                            Ttpartner,
-                                            defaultValue: TTable('', '', '未登録',
-                                                '', '', '', '', '', '', '', ''),
-                                          );
-                                          var Ttcompanion2 = val2!.topartner();
+                                          TTable? val2 = box2.get(Ttpartner,
+                                              defaultValue: TTable(
+                                                  subject: '',
+                                                  teacher: '',
+                                                  room: '',
+                                                  result: '未登録',
+                                                  classroom: '',
+                                                  teams: '',
+                                                  slack: '',
+                                                  outlook: '',
+                                                  portal: '',
+                                                  c_learning: '',
+                                                  other: '',
+                                                  partner: ''));
+                                          var Ttpartner2 = val2!.toPartner();
                                           box.put(
                                               Ttpartner,
                                               TTable(
-                                                  Ttsubject,
-                                                  Ttteacher,
-                                                  Ttresult,
-                                                  urlList[0],
-                                                  urlList[1],
-                                                  urlList[2],
-                                                  urlList[3],
-                                                  urlList[4],
-                                                  urlList[5],
-                                                  urlList[6],
-                                                  Ttcompanion2));
+                                                  subject: Ttsubject,
+                                                  teacher: Ttteacher,
+                                                  room: Ttroom,
+                                                  result: Ttresult,
+                                                  classroom: urlList[0],
+                                                  teams: urlList[1],
+                                                  slack: urlList[2],
+                                                  outlook: urlList[3],
+                                                  portal: urlList[4],
+                                                  c_learning: urlList[5],
+                                                  other: urlList[5],
+                                                  partner: Ttpartner2));
                                         }
                                       });
                                     }
@@ -473,11 +552,20 @@ class _TimeTableState extends State<TimeTable> {
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
               ),
-              Text(
-                Ttteacher,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-              ),
+              if (Ttteacher != '') ...{
+                Text(
+                  Ttteacher,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              },
+              if (Ttroom != '') ...{
+                Text(
+                  Ttroom,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              }
             ],
           ),
         ),
@@ -499,37 +587,53 @@ class _TimeTableState extends State<TimeTable> {
           onTap: () async {
             if (await canLaunchUrl(URL)) {
               await launchUrl(URL);
-            } else {}
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (_) {
+                    return const AlertDialog(
+                      title: Text('Error'),
+                      content: Text('Cannot open this URL'),
+                    );
+                  });
+            }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               if (i == 0) ...{
-                Image.asset('images/app_icons/classroom.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (1 / 100)),
+                imageAsset(path: 'images/app_icons/classroom.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Classroom"),
               } else if (i == 1) ...{
-                Image.asset('images/app_icons/teams.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (1 / 100)),
+                imageAsset(path: 'images/app_icons/teams.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Teams"),
               } else if (i == 2) ...{
-                Image.asset('images/app_icons/slack.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (1 / 100)),
+                imageAsset(path: 'images/app_icons/slack.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Slack"),
               } else if (i == 3) ...{
-                Image.asset('images/app_icons/outlook.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (1 / 100)),
+                imageAsset(path: 'images/app_icons/outlook.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("Outlook"),
               } else if (i == 4) ...{
-                Image.asset('images/app_icons/portal.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (1 / 100)),
+                imageAsset(path: 'images/app_icons/portal.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("OIT Portal"),
               } else if (i == 5) ...{
-                Image.asset('images/app_icons/c-learning.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (1 / 100)),
+                imageAsset(path: 'images/app_icons/c-learning.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("OIT C-Learning"),
               } else if (i == 6) ...{
-                Image.asset('images/app_icons/other.png'),
+                SizedBox(width: MediaQuery.of(context).size.width * (1 / 100)),
+                imageAsset(path: 'images/app_icons/other.png'),
                 SizedBox(width: MediaQuery.of(context).size.width * (5 / 100)),
                 const Text("その他"),
               }
@@ -537,6 +641,15 @@ class _TimeTableState extends State<TimeTable> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget imageAsset({required String path}) {
+    return Container(
+      height: MediaQuery.of(context).size.height * (7 / 100),
+      width: MediaQuery.of(context).size.height * (7 / 100),
+      color: Colors.transparent,
+      child: Image.asset(path),
     );
   }
 }
