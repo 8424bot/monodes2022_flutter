@@ -21,8 +21,6 @@ class MyTheme extends ChangeNotifier {
   }
 }
 
-
-
 class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
 
@@ -100,7 +98,7 @@ class _MyStatefulWidgetState extends State<_Root> {
           ),
         ],
         currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.black45,
+        unselectedItemColor: Colors.blue,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
