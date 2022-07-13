@@ -10,6 +10,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'package:app_home_demo/view/home/Todo_explain.dart';
 
+List<String> weekdays = [
+  "",
+  "月",
+  "火",
+  "水",
+  "木",
+  "金",
+  "土",
+  "日",
+];
+
 class MyTodoApp extends StatefulWidget {
   const MyTodoApp({Key? key}) : super(key: key);
   @override
@@ -106,6 +117,7 @@ class _MyHomePageState extends State<MyTodoApp> {
                         .delete();
                   }
 
+                  print(DateTime.now().weekday);
                   if (DateTime.now().isAfter(document["date"]
                       .toDate()
                       .add(const Duration(hours: 3)))) {
@@ -200,6 +212,7 @@ class _MyHomePageState extends State<MyTodoApp> {
                                             //" ${document["date"].toDate().year}年"
                                             " ${document["date"].toDate().month}月"
                                             "${document["date"].toDate().day}日"
+                                            "(${weekdays[document["date"].toDate().weekday]})"
                                             " ${document["date"].toDate().hour}時"
                                             "${document["date"].toDate().minute}分"),
                                         const Expanded(child: SizedBox()),
