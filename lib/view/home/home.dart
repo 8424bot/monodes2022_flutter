@@ -31,147 +31,127 @@ class _MyHomePageState extends State<home> {
         //   title: Text(widget.title),
         // ),
         body: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(bottom: 16),
-            child: const Text(
-              'Support App',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 55,
-                  fontWeight: FontWeight.bold),
-            ),
+      child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(top: 90),
+          padding: EdgeInsets.only(bottom: 16),
+          child: const Text(
+            'Support App',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold),
           ),
-          const Image(
-            image: AssetImage(
-              "images/images_home/OIT.jpg",
-            ),
-            width: 200,
+        ),
+        const Image(
+          image: AssetImage(
+            "images/images_home/OIT.png",
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 16),
-            child: const Text(
-              'For OIT students',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold),
-            ),
+          width: 200,
+        ),
+        Container(
+          padding: const EdgeInsets.only(top: 16),
+          child: const Text(
+            'For OIT students',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              OutlinedButton(
+        ),
+        Container(
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              primary: Colors.blue,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const MySecondPage();
+              }));
+            },
+            child: const Text('アプリの使い方'),
+          ),
+        ),
+        Container(
+          child: const Text('    '),
+        ),
+        Container(
+          child: const Text(
+            'Your Status',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            DropdownButton(
+              items: const [
+                DropdownMenuItem(
+                  value: 'R',
+                  child: Text('R科'),
+                ),
+                DropdownMenuItem(
+                  value: 'S',
+                  child: Text('S科'),
+                ),
+                DropdownMenuItem(
+                  value: 'W',
+                  child: Text('W科'),
+                ),
+              ],
+              //6
+              onChanged: (String? value) {
+                setState(() {
+                  myCourse = value!;
+                });
+                box.put('0', CG(myCourse, myGrade));
+              },
+              //7
+              value: myCourse,
+            ),
+            DropdownButton(
+              //4
+              items: const [
+                //5
+                DropdownMenuItem(
+                  value: 1,
+                  child: Text('１年'),
+                ),
+                DropdownMenuItem(
+                  value: 2,
+                  child: Text('２年'),
+                ),
+                DropdownMenuItem(
+                  value: 3,
+                  child: Text('３年'),
+                ),
+                DropdownMenuItem(
+                  value: 4,
+                  child: Text("４年"),
+                ),
+              ],
+              //6
+              onChanged: (int? value) {
+                setState(() {
+                  myGrade = value!;
+                });
+                box.put('0', CG(myCourse, myGrade));
+              },
+              //7
+              value: myGrade,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 90,
+        ),
+        Container(
+            alignment: Alignment.bottomLeft,
+            child: IconButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MyThirdPage();
                   }));
                 },
-                style: OutlinedButton.styleFrom(
-                  primary: Colors.red,
-                ),
-                child: Text('作成者'),
-              ),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  primary: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const MySecondPage();
-                  }));
-                },
-                child: const Text('アプリの使い方'),
-              ),
-            ],
-          ),
-          Container(
-            child: const Text('    '),
-          ),
-          Container(
-            child: const Text(
-              'Your Status',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DropdownButton(
-                items: const [
-                  DropdownMenuItem(
-                    value: 'R',
-                    child: Text('R科'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'S',
-                    child: Text('S科'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'W',
-                    child: Text('W科'),
-                  ),
-                ],
-                //6
-                onChanged: (String? value) {
-                  setState(() {
-                    myCourse = value!;
-                  });
-                  box.put('0', CG(myCourse, myGrade));
-                },
-                //7
-                value: myCourse,
-              ),
-              DropdownButton(
-                //4
-                items: const [
-                  //5
-                  DropdownMenuItem(
-                    value: 1,
-                    child: Text('１年'),
-                  ),
-                  DropdownMenuItem(
-                    value: 2,
-                    child: Text('２年'),
-                  ),
-                  DropdownMenuItem(
-                    value: 3,
-                    child: Text('３年'),
-                  ),
-                  DropdownMenuItem(
-                    value: 4,
-                    child: Text("４年"),
-                  ),
-                ],
-                //6
-                onChanged: (int? value) {
-                  setState(() {
-                    myGrade = value!;
-                  });
-                  box.put('0', CG(myCourse, myGrade));
-                },
-                //7
-                value: myGrade,
-              ),
-            ],
-          ),
-          /* SwitchListTile(
-            value: darkmode, 
-            title: const Text('ダークモード'),
-            onChanged: (value) {
-              _changeStyle();
-              setState(() {
-                darkmode = value;
-              });
-            }
-          )  */
-        ],
-      ),
+                icon: Icon(Icons.account_box))),
+      ]),
     ));
   }
 }
