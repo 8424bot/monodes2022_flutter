@@ -33,7 +33,7 @@ class _MyHomePageState extends State<home> {
         body: Center(
       child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
         Container(
-          margin: EdgeInsets.only(top: 90),
+          margin: EdgeInsets.only(top: 60),
           padding: EdgeInsets.only(bottom: 16),
           child: const Text(
             'Support App',
@@ -139,9 +139,7 @@ class _MyHomePageState extends State<home> {
             ),
           ],
         ),
-        SizedBox(
-          height: 90,
-        ),
+        const Expanded(child: SizedBox()),
         Container(
             alignment: Alignment.bottomLeft,
             child: IconButton(
