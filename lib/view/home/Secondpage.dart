@@ -70,8 +70,8 @@ class MySecondPage extends StatelessWidget {
                         primary: Colors.red,
                         minimumSize: const Size(120, 120),
                       ),
-                      icon: Icon(Icons.home),
-                      label: Text('Home'),
+                      icon: const Icon(Icons.home),
+                      label: const Text('Home'),
                     ),
                     const SizedBox(
                       width: 30,
@@ -85,7 +85,7 @@ class MySecondPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.blue,
-                        minimumSize: Size(120, 120),
+                        minimumSize: const Size(120, 120),
                       ),
                       icon: const Icon(Icons.task_sharp),
                       label: const Text('Todo'),
