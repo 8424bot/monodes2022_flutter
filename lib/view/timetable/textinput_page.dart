@@ -428,11 +428,13 @@ class _RegistInfoState extends State<RegistInfo> {
                   children: const [
                     FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Text('登録URL', style: TextStyle(fontSize: 20)),
+                      child: Text('登録URL',
+                          style: TextStyle(fontSize: 20, color: Colors.black)),
                     ),
                     FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Text('タップして詳細確認', style: TextStyle(fontSize: 12)),
+                      child: Text('タップして詳細確認',
+                          style: TextStyle(fontSize: 12, color: Colors.black)),
                     ),
                   ],
                 ),
