@@ -115,7 +115,7 @@ class MyMemoExplainPage extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: "また、リストの項目を左にスライドすると編集と削除が行えます。",
+                  text: "また、リストの項目を左にスライドすると削除、右にスライドすると編集が行えます。",
                   style: TextStyle(
                     fontSize: 17,
                   ),
