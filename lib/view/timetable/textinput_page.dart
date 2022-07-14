@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names, must_be_immutable, prefer_interpolation_to_compose_strings
 
-import 'package:app_home_demo/main.dart';
 import 'package:app_home_demo/model/db/timetable/timetable.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -203,12 +202,13 @@ class _TimeTableInputState extends State<TimeTableInput> {
           shape: BoxShape.circle,
           color: Colors.transparent,
         ),
-        child: inkImage(filename: filename, id: id),
+        child: inkImage(filename: filename, name: text, id: id),
       ),
     );
   }
 
-  Widget inkImage({required String filename, required int id}) {
+  Widget inkImage(
+      {required String filename, required String name, required int id}) {
     if (infoList2[id] == '') {
       return Ink.image(
         image: AssetImage(filename),
@@ -223,8 +223,8 @@ class _TimeTableInputState extends State<TimeTableInput> {
             var url = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      TimeTableUrlInput(url: infoList2[id], num: 1)),
+                  builder: (context) => TimeTableUrlInput(
+                      url: infoList2[id], name: name, num: 1)),
             );
             setState(() {
               if (url == null) {
@@ -245,8 +245,8 @@ class _TimeTableInputState extends State<TimeTableInput> {
             var url = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      TimeTableUrlInput(url: infoList2[id], num: 1)),
+                  builder: (context) => TimeTableUrlInput(
+                      url: infoList2[id], name: name, num: 1)),
             );
             setState(() {
               if (url == null) {
@@ -262,9 +262,10 @@ class _TimeTableInputState extends State<TimeTableInput> {
 }
 
 class TimeTableUrlInput extends StatefulWidget {
-  final String url;
+  final String url, name;
   final int num;
-  const TimeTableUrlInput({Key? key, required this.url, required this.num})
+  const TimeTableUrlInput(
+      {Key? key, required this.url, required this.name, required this.num})
       : super(key: key);
 
   @override
@@ -284,6 +285,11 @@ class _TimeTableUrlInputState extends State<TimeTableUrlInput> {
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            title: Text(widget.name),
+          ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -541,19 +547,8 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
     var box = Hive.box('TT');
     var num = '00';
     TTable? val = box.get(num,
-        defaultValue: TTable(
-            subject: '',
-            teacher: '',
-            room: '',
-            result: '未登録',
-            classroom: '',
-            teams: '',
-            slack: '',
-            outlook: '',
-            portal: '',
-            c_learning: '',
-            other: '',
-            partner: ''));
+        defaultValue:
+            TTable('', '', '', '未登録', '', '', '', '', '', '', '', ''));
     var Ttsubject = val!.toSubject();
     var Ttteacher = val.toTeacher();
     var Ttroom = val.toRoom();
@@ -740,54 +735,51 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
                           box.put(
                             selectedRawValue[0] + selectedColumnValue[0],
                             TTable(
-                                subject: Ttsubject,
-                                teacher: Ttteacher,
-                                room: Ttroom,
-                                result: Ttresult,
-                                classroom: urlList[0],
-                                teams: urlList[1],
-                                slack: urlList[2],
-                                outlook: urlList[3],
-                                portal: urlList[4],
-                                c_learning: urlList[5],
-                                other: urlList[5],
-                                partner: selectedRawValue[1] +
-                                    selectedColumnValue[1]),
+                                Ttsubject,
+                                Ttteacher,
+                                Ttroom,
+                                Ttresult,
+                                urlList[0],
+                                urlList[1],
+                                urlList[2],
+                                urlList[3],
+                                urlList[4],
+                                urlList[5],
+                                urlList[5],
+                                selectedRawValue[1] + selectedColumnValue[1]),
                           );
                         } else if (number == 1) {
                           box.put(
                             selectedRawValue[0] + selectedColumnValue[0],
                             TTable(
-                                subject: Ttsubject,
-                                teacher: Ttteacher,
-                                room: Ttroom,
-                                result: Ttresult,
-                                classroom: urlList[0],
-                                teams: urlList[1],
-                                slack: urlList[2],
-                                outlook: urlList[3],
-                                portal: urlList[4],
-                                c_learning: urlList[5],
-                                other: urlList[5],
-                                partner: selectedRawValue[1] +
-                                    selectedColumnValue[1]),
+                                Ttsubject,
+                                Ttteacher,
+                                Ttroom,
+                                Ttresult,
+                                urlList[0],
+                                urlList[1],
+                                urlList[2],
+                                urlList[3],
+                                urlList[4],
+                                urlList[5],
+                                urlList[5],
+                                selectedRawValue[1] + selectedColumnValue[1]),
                           );
                           box.put(
                             selectedRawValue[1] + selectedColumnValue[1],
                             TTable(
-                                subject: Ttsubject,
-                                teacher: Ttteacher,
-                                room: Ttroom,
-                                result: Ttresult,
-                                classroom: urlList[0],
-                                teams: urlList[1],
-                                slack: urlList[2],
-                                outlook: urlList[3],
-                                portal: urlList[4],
-                                c_learning: urlList[5],
-                                other: urlList[5],
-                                partner: selectedRawValue[0] +
-                                    selectedColumnValue[0]),
+                                Ttsubject,
+                                Ttteacher,
+                                Ttroom,
+                                Ttresult,
+                                urlList[0],
+                                urlList[1],
+                                urlList[2],
+                                urlList[3],
+                                urlList[4],
+                                urlList[5],
+                                urlList[5],
+                                selectedRawValue[0] + selectedColumnValue[0]),
                           );
                         }
                         Navigator.of(context).pop();
@@ -880,12 +872,13 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
           shape: BoxShape.circle,
           color: Colors.transparent,
         ),
-        child: inkImage(filename: filename, id: id),
+        child: inkImage(filename: filename, name: text, id: id),
       ),
     );
   }
 
-  Widget inkImage({required String filename, required int id}) {
+  Widget inkImage(
+      {required String filename, required String name, required int id}) {
     if (urlList[id] == '') {
       return Ink.image(
         image: AssetImage(filename),
@@ -901,7 +894,7 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      TimeTableUrlInput(url: urlList[id], num: 2)),
+                      TimeTableUrlInput(url: urlList[id], name: name, num: 2)),
             );
             setState(() {
               if (url == null) {
@@ -923,7 +916,7 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      TimeTableUrlInput(url: urlList[id], num: 2)),
+                      TimeTableUrlInput(url: urlList[id], name: name, num: 2)),
             );
             setState(() {
               if (url == null) {

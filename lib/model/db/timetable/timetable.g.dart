@@ -17,18 +17,18 @@ class TTableAdapter extends TypeAdapter<TTable> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TTable(
-      subject: fields[0] as String,
-      teacher: fields[1] as String,
-      room: fields[2] as String,
-      result: fields[3] as String,
-      classroom: fields[4] as String,
-      teams: fields[5] as String,
-      slack: fields[6] as String,
-      outlook: fields[7] as String,
-      portal: fields[8] as String,
-      c_learning: fields[9] as String,
-      other: fields[10] as String,
-      partner: fields[11] as String,
+      fields[0] as String,
+      fields[1] as String,
+      fields[2] as String,
+      fields[3] as String,
+      fields[4] as String,
+      fields[5] as String,
+      fields[6] as String,
+      fields[7] as String,
+      fields[8] as String,
+      fields[9] as String,
+      fields[10] as String,
+      fields[11] as String,
     );
   }
 
