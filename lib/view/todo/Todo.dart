@@ -1,14 +1,14 @@
-import 'package:app_home_demo/view/home/home.dart';
+// ignore_for_file: file_names
+
 import 'package:app_home_demo/view/todo/post.dart';
 import 'package:app_home_demo/view/todo/update.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'package:app_home_demo/view/home/Todo_explain.dart';
+import 'package:app_home_demo/view/setting/setting_page.dart';
 
 List<String> weekdays = [
   "",
@@ -219,6 +219,26 @@ class _MyHomePageState extends State<MyTodoApp> {
                                         Text(" ${document['course']}科"
                                             " ${document['grade']}年"),
                                       ],
+                                    ),
+                                    trailing: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey)
+                                      ),
+                                      child: IconButton(
+                                        icon: const Icon(Icons.notifications, color: Colors.grey),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context, 
+                                            MaterialPageRoute(builder: (context) {
+                                              return Setting(
+                                                subject: document["subject"], 
+                                                task: document["task"], 
+                                                date: document["date"].toDate()
+                                              );
+                                            })
+                                          );
+                                        },
+                                      ),
                                     ),
                                     tileColor: (DateTime.now().isAfter(
                                             (document["date"].toDate())))

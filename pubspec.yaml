@@ -55,6 +55,9 @@ dependencies:
   hive_flutter: ^1.1.0
   flutter_launcher_icons: ^0.9.3
   provider: ^6.0.3
+  flutter_local_notifications: ^9.7.0
+  flutter_native_timezone: ^2.0.0
+  flutter_app_badger: ^1.4.0
 
 
 flutter_icons:
