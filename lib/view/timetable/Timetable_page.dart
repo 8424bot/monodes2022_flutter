@@ -179,21 +179,7 @@ class _TimeTableState extends State<TimeTable> {
       for (int j = 0; j <= 5; j++) {
         var box = Hive.box('TT');
         String num = i.toString() + j.toString();
-        box.put(
-            num,
-            TTable(
-                subject: '',
-                teacher: '',
-                room: '',
-                result: '未登録',
-                classroom: '',
-                teams: '',
-                slack: '',
-                outlook: '',
-                portal: '',
-                c_learning: '',
-                other: '',
-                partner: ''));
+        box.put(num, TTable('', '', '', '未登録', '', '', '', '', '', '', '', ''));
         setState(() {});
       }
     }
@@ -284,19 +270,8 @@ class _TimeTableState extends State<TimeTable> {
     var box = Hive.box('TT');
     var num = raw.toString() + column.toString();
     TTable? val = box.get(num,
-        defaultValue: TTable(
-            subject: '',
-            teacher: '',
-            room: '',
-            result: '未登録',
-            classroom: '',
-            teams: '',
-            slack: '',
-            outlook: '',
-            portal: '',
-            c_learning: '',
-            other: '',
-            partner: ''));
+        defaultValue:
+            TTable('', '', '', '未登録', '', '', '', '', '', '', '', ''));
     var Ttsubject = val!.toSubject();
     var Ttteacher = val.toTeacher();
     var Ttroom = val.toRoom();
@@ -406,34 +381,34 @@ class _TimeTableState extends State<TimeTable> {
                                         box.put(
                                             num,
                                             TTable(
-                                                subject: Ttsubject,
-                                                teacher: Ttteacher,
-                                                room: Ttroom,
-                                                result: Ttresult,
-                                                classroom: urlList[0],
-                                                teams: urlList[1],
-                                                slack: urlList[2],
-                                                outlook: urlList[3],
-                                                portal: urlList[4],
-                                                c_learning: urlList[5],
-                                                other: urlList[5],
-                                                partner: ''));
+                                                Ttsubject,
+                                                Ttteacher,
+                                                Ttroom,
+                                                Ttresult,
+                                                urlList[0],
+                                                urlList[1],
+                                                urlList[2],
+                                                urlList[3],
+                                                urlList[4],
+                                                urlList[5],
+                                                urlList[5],
+                                                ''));
                                         if (Ttpartner != '') {
                                           box.put(
                                               Ttpartner,
                                               TTable(
-                                                  subject: Ttsubject,
-                                                  teacher: Ttteacher,
-                                                  room: Ttroom,
-                                                  result: Ttresult,
-                                                  classroom: urlList[0],
-                                                  teams: urlList[1],
-                                                  slack: urlList[2],
-                                                  outlook: urlList[3],
-                                                  portal: urlList[4],
-                                                  c_learning: urlList[5],
-                                                  other: urlList[5],
-                                                  partner: ''));
+                                                  Ttsubject,
+                                                  Ttteacher,
+                                                  Ttroom,
+                                                  Ttresult,
+                                                  urlList[0],
+                                                  urlList[1],
+                                                  urlList[2],
+                                                  urlList[3],
+                                                  urlList[4],
+                                                  urlList[5],
+                                                  urlList[5],
+                                                  ''));
                                         }
                                       });
                                     } else {
@@ -470,50 +445,50 @@ class _TimeTableState extends State<TimeTable> {
                                         box.put(
                                             num,
                                             TTable(
-                                                subject: Ttsubject,
-                                                teacher: Ttteacher,
-                                                room: Ttroom,
-                                                result: Ttresult,
-                                                classroom: urlList[0],
-                                                teams: urlList[1],
-                                                slack: urlList[2],
-                                                outlook: urlList[3],
-                                                portal: urlList[4],
-                                                c_learning: urlList[5],
-                                                other: urlList[5],
-                                                partner: Ttpartner));
+                                                Ttsubject,
+                                                Ttteacher,
+                                                Ttroom,
+                                                Ttresult,
+                                                urlList[0],
+                                                urlList[1],
+                                                urlList[2],
+                                                urlList[3],
+                                                urlList[4],
+                                                urlList[5],
+                                                urlList[5],
+                                                Ttpartner));
                                         if (Ttpartner != '') {
                                           var box2 = Hive.box('TT');
                                           TTable? val2 = box2.get(Ttpartner,
                                               defaultValue: TTable(
-                                                  subject: '',
-                                                  teacher: '',
-                                                  room: '',
-                                                  result: '未登録',
-                                                  classroom: '',
-                                                  teams: '',
-                                                  slack: '',
-                                                  outlook: '',
-                                                  portal: '',
-                                                  c_learning: '',
-                                                  other: '',
-                                                  partner: ''));
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  '未登録',
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  '',
+                                                  ''));
                                           var Ttpartner2 = val2!.toPartner();
                                           box.put(
                                               Ttpartner,
                                               TTable(
-                                                  subject: Ttsubject,
-                                                  teacher: Ttteacher,
-                                                  room: Ttroom,
-                                                  result: Ttresult,
-                                                  classroom: urlList[0],
-                                                  teams: urlList[1],
-                                                  slack: urlList[2],
-                                                  outlook: urlList[3],
-                                                  portal: urlList[4],
-                                                  c_learning: urlList[5],
-                                                  other: urlList[5],
-                                                  partner: Ttpartner2));
+                                                  Ttsubject,
+                                                  Ttteacher,
+                                                  Ttroom,
+                                                  Ttresult,
+                                                  urlList[0],
+                                                  urlList[1],
+                                                  urlList[2],
+                                                  urlList[3],
+                                                  urlList[4],
+                                                  urlList[5],
+                                                  urlList[5],
+                                                  Ttpartner2));
                                         }
                                       });
                                     }

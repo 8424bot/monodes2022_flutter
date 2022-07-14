@@ -31,20 +31,20 @@ class TTable {
   @HiveField(11)
   String partner;
 
-  TTable({
-    required this.subject,
-    required this.teacher,
-    required this.room,
-    required this.result,
-    required this.classroom,
-    required this.teams,
-    required this.slack,
-    required this.outlook,
-    required this.portal,
-    required this.c_learning,
-    required this.other,
-    required this.partner,
-  });
+  TTable(
+    this.subject,
+    this.teacher,
+    this.room,
+    this.result,
+    this.classroom,
+    this.teams,
+    this.slack,
+    this.outlook,
+    this.portal,
+    this.c_learning,
+    this.other,
+    this.partner,
+  );
 
   String toSubject() {
     return subject;
