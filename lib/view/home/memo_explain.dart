@@ -1,5 +1,3 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyMemoExplainPage extends StatelessWidget {
@@ -16,7 +14,7 @@ class MyMemoExplainPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                margin: const EdgeInsets.fromLTRB(10, 20, 10, 0),
                 child: const Text.rich(
                   TextSpan(children: [
                     TextSpan(
@@ -29,7 +27,7 @@ class MyMemoExplainPage extends StatelessWidget {
                 )),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -44,7 +42,7 @@ class MyMemoExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "①",
@@ -59,7 +57,7 @@ class MyMemoExplainPage extends StatelessWidget {
             ),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -74,7 +72,7 @@ class MyMemoExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "②",
@@ -90,7 +88,7 @@ class MyMemoExplainPage extends StatelessWidget {
             ),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -105,7 +103,7 @@ class MyMemoExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 30),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 30),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                   text:
@@ -126,10 +124,3 @@ class MyMemoExplainPage extends StatelessWidget {
         ));
   }
 }
-//         "\n\n4.Linksタブ\n",
-              //     style: TextStyle(fontSize: 15),
-              //   ),
-              //   TextSpan(
-              //     text: "個人的なメモや様々なページへのリンクなどを保存できるページです。右下のボタンをタップすると登録ができます。"
-              //         "リストの項目をタップすると詳細を確認でき、URLを登録していた場合はそのページを開くことができます。URLの欄に文字を入力することでメモ帳代わりにも使えます。"
-              //         "項目を左にスライドすると編集と削除が行えます。\n",

@@ -1,5 +1,4 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 
 class MyThirdPage extends StatelessWidget {
@@ -19,7 +18,6 @@ class MyThirdPage extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-            //mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -35,7 +33,7 @@ class MyThirdPage extends StatelessWidget {
                 margin: const EdgeInsets.fromLTRB(0, 30, 0, 30),
                 padding: const EdgeInsets.fromLTRB(80, 30, 80, 30),
                 decoration: BoxDecoration(
-                    image: DecorationImage(
+                    image: const DecorationImage(
                         image: AssetImage('images/images_home/background.jpg'),
                         fit: BoxFit.cover),
                     color: const Color.fromARGB(255, 141, 191, 232),
@@ -53,13 +51,11 @@ class MyThirdPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                child: Text(
-                  'ものづくりデザイン実践演習で作成',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+              const Text(
+                'ものづくりデザイン実践演習で作成',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],

@@ -1,17 +1,17 @@
-import 'dart:ui';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'dart:ui';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
-import 'Thirdpage.dart';
+//import 'Thirdpage.dart';
 import 'Secondpage.dart';
-import 'package:provider/provider.dart';
+//import 'package:provider/provider.dart';
 
 void main() {
-  runApp(home());
+  runApp(const home());
 }
 
+// ignore: camel_case_types
 class home extends StatefulWidget {
   const home({Key? key}) : super(key: key);
   @override
@@ -38,14 +38,13 @@ class _MyHomePageState extends State<home> {
             image: DecorationImage(
                 image: AssetImage('images/images_home/background.jpg'),
                 fit: BoxFit.cover),
-            color: const Color.fromARGB(255, 141, 191, 232),
-            //borderRadius: BorderRadius.circular(5.0),
+            color: Color.fromARGB(255, 141, 191, 232),
           ),
           child: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: 60),
-                padding: EdgeInsets.only(bottom: 16),
+                margin: const EdgeInsets.only(top: 60),
+                padding: const EdgeInsets.only(bottom: 16),
                 child: const Text(
                   'Support App',
                   textAlign: TextAlign.center,
@@ -66,29 +65,22 @@ class _MyHomePageState extends State<home> {
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
               ),
-              Container(
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    primary: Colors.blue,
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const MySecondPage();
-                    }));
-                  },
-                  child: const Text('アプリの使い方'),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  primary: Colors.blue,
                 ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const MySecondPage();
+                  }));
+                },
+                child: const Text('アプリの使い方'),
               ),
-              Container(
-                child: const Text('    '),
-              ),
-              Container(
-                child: const Text(
-                  'Your Status',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
+              const Text('    '),
+              const Text(
+                'Your Status',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

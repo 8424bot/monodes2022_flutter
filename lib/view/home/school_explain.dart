@@ -1,5 +1,5 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/services.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MySchoolExplainPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class MySchoolExplainPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                margin: const EdgeInsets.fromLTRB(10, 20, 10, 10),
                 child: const Text.rich(
                   TextSpan(children: [
                     TextSpan(
@@ -29,7 +29,7 @@ class MySchoolExplainPage extends StatelessWidget {
                 )),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -44,7 +44,7 @@ class MySchoolExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "①",
@@ -68,7 +68,7 @@ class MySchoolExplainPage extends StatelessWidget {
             ),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -83,7 +83,7 @@ class MySchoolExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "③",
@@ -129,7 +129,7 @@ class MySchoolExplainPage extends StatelessWidget {
             ),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -144,7 +144,7 @@ class MySchoolExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                margin: const EdgeInsets.fromLTRB(10, 20, 10, 10),
                 child: const Text.rich(
                   TextSpan(children: [
                     TextSpan(
@@ -158,7 +158,7 @@ class MySchoolExplainPage extends StatelessWidget {
                 )),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -173,7 +173,7 @@ class MySchoolExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 30),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 30),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "⑥",
@@ -208,8 +208,3 @@ class MySchoolExplainPage extends StatelessWidget {
         ));
   }
 }
-
- //         "\n\n3.Schoolタブ\n"
-              //         "自分の時間割を保存することができるページです。"
-              //         "コマをタップすると登録された情報が表示されます。”登録情報変更”をタップすると情報の登録と変更を行えます。"
-              //         "登録ページでは授業名や教員情報のほか、各種サービスへのURLをペーストすると登録できます。URLを登録したサービスは時間割をタップするとすばやくアクセスできるようになります。"

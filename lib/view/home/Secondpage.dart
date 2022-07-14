@@ -1,11 +1,12 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/services.dart';
+//import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'home_explain.dart';
 import 'Todo_explain.dart';
 import 'school_explain.dart';
 import 'memo_explain.dart';
-import 'Thirdpage.dart';
+//import 'Thirdpage.dart';
 
 class MySecondPage extends StatelessWidget {
   const MySecondPage({Key? key}) : super(key: key);
@@ -23,32 +24,32 @@ class MySecondPage extends StatelessWidget {
             child: Column(
               //mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text(
+                const Text(
                   "1.はじめに",
                   style: TextStyle(
                     fontSize: 25,
                   ),
                 ),
-                Text(
+                const Text(
                   "\n現在はテスト版です\n",
                   style: TextStyle(
                       fontSize: 15,
                       color: Colors.redAccent,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
+                const Text(
                   "このアプリはものづくりデザイン思考実践演習で作成したOIT梅田キャンパス生専用学生生活支援アプリです。\n"
                   "不具合やご意見・ご要望等ありましたら作成者までご連絡ください。",
                   style: TextStyle(fontSize: 15),
                 ),
-                Text(
+                const Text(
                   "課題掲示板には不適切な投稿を防止する機能がありません。良識ある利用をよろしくお願いします。\n"
                   "本アプリはより多くの人に使ってもらうことでより便利になっていきます。便利だと思ったらお友達に拡散していただけると幸いです。",
                   style: TextStyle(
                     fontSize: 15,
                   ),
                 ),
-                Text(
+                const Text(
                   "2.機能説明",
                   style: TextStyle(
                     fontSize: 25,
@@ -67,12 +68,12 @@ class MySecondPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red,
-                        minimumSize: Size(120, 120),
+                        minimumSize: const Size(120, 120),
                       ),
                       icon: Icon(Icons.home),
                       label: Text('Home'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
                     ElevatedButton.icon(
@@ -86,12 +87,12 @@ class MySecondPage extends StatelessWidget {
                         primary: Colors.blue,
                         minimumSize: Size(120, 120),
                       ),
-                      icon: Icon(Icons.task_sharp),
-                      label: Text('Todo'),
+                      icon: const Icon(Icons.task_sharp),
+                      label: const Text('Todo'),
                     ),
                   ],
                 ),
-                Text("\n"),
+                const Text("\n"),
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.min,
@@ -105,12 +106,12 @@ class MySecondPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.green,
-                        minimumSize: Size(120, 120),
+                        minimumSize: const Size(120, 120),
                       ),
-                      icon: Icon(Icons.school),
-                      label: Text('School'),
+                      icon: const Icon(Icons.school),
+                      label: const Text('School'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
                     ElevatedButton.icon(
@@ -122,10 +123,10 @@ class MySecondPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.orange,
-                        minimumSize: Size(120, 120),
+                        minimumSize: const Size(120, 120),
                       ),
-                      icon: Icon(Icons.menu_book),
-                      label: Text('Memo'),
+                      icon: const Icon(Icons.menu_book),
+                      label: const Text('Memo'),
                     ),
                   ],
                 ),

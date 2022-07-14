@@ -1,5 +1,7 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/services.dart';
+//import 'package:flutter/cupertino.dart';
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class MyTodoExplainPage extends StatelessWidget {
@@ -15,7 +17,7 @@ class MyTodoExplainPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                margin: const EdgeInsets.fromLTRB(10, 20, 10, 0),
                 child: const Text.rich(
                   TextSpan(children: [
                     TextSpan(
@@ -29,7 +31,7 @@ class MyTodoExplainPage extends StatelessWidget {
                 )),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -44,7 +46,7 @@ class MyTodoExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "①",
@@ -59,7 +61,7 @@ class MyTodoExplainPage extends StatelessWidget {
             ),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -74,7 +76,7 @@ class MyTodoExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "②",
@@ -124,7 +126,7 @@ class MyTodoExplainPage extends StatelessWidget {
             ),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -139,7 +141,7 @@ class MyTodoExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                   text: "登録した課題の提出期限が１日（24時間）以内に迫ると文字が",
@@ -170,7 +172,7 @@ class MyTodoExplainPage extends StatelessWidget {
             ),
             Container(
               //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
@@ -185,7 +187,7 @@ class MyTodoExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-                margin: EdgeInsets.fromLTRB(10, 10, 10, 30),
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 30),
                 child: const Text.rich(
                   TextSpan(children: [
                     TextSpan(

@@ -1,5 +1,5 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/services.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyHomeExplainPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class MyHomeExplainPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(children: <Widget>[
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                margin: const EdgeInsets.fromLTRB(10, 20, 10, 0),
                 child: const Text.rich(
                   TextSpan(children: [
                     TextSpan(
@@ -29,14 +29,12 @@ class MyHomeExplainPage extends StatelessWidget {
                   ]),
                 )),
             Container(
-              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
                 width: 3,
               )),
-              //alignment: Alignment.topLeft,
               child: const Image(
                 image: AssetImage(
                   "images/explain/home1.jpg",
@@ -45,7 +43,7 @@ class MyHomeExplainPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(10, 10, 10, 30),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 30),
               child: const Text.rich(TextSpan(children: [
                 TextSpan(
                     text: "①",
