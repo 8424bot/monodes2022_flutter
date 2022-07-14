@@ -45,7 +45,7 @@ class _MyHomePageState extends State<home> {
           image: AssetImage(
             "images/images_home/OIT.png",
           ),
-          width: 200,
+          width: double.infinity,
         ),
         Container(
           padding: const EdgeInsets.only(top: 16),
