@@ -139,16 +139,6 @@ class _MyHomePageState extends State<home> {
             ),
           ],
         ),
-        const Expanded(child: SizedBox()),
-        Container(
-            alignment: Alignment.bottomLeft,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const MyThirdPage();
-                  }));
-                },
-                icon: Icon(Icons.account_box))),
       ]),
     ));
   }
