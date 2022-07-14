@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class TimeTableInput extends StatefulWidget {
-  final String subject, teacher;
+  final String subject, teacher, room;
   final List urlList;
   const TimeTableInput(
       {Key? key,
       required this.subject,
       required this.teacher,
+      required this.room,
       required this.urlList})
       : super(key: key);
 
@@ -22,6 +23,7 @@ class TimeTableInput extends StatefulWidget {
 class _TimeTableInputState extends State<TimeTableInput> {
   final subject_value = TextEditingController();
   final teacher_value = TextEditingController();
+  final room_value = TextEditingController();
   List infoList1 = [];
   List infoList2 = ['', '', '', '', '', '', ''];
   int i = 0;
@@ -31,6 +33,7 @@ class _TimeTableInputState extends State<TimeTableInput> {
     if (i == 0) {
       subject_value.text = widget.subject;
       teacher_value.text = widget.teacher;
+      room_value.text = widget.room;
       infoList2 = widget.urlList;
       i++;
     }
@@ -41,48 +44,6 @@ class _TimeTableInputState extends State<TimeTableInput> {
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: const Text('授業登録'),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.help_outline),
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (_) {
-                        return WillPopScope(
-                            onWillPop: () async => true,
-                            child: AlertDialog(
-                                title: const Align(
-                                  alignment: Alignment.center,
-                                  child: Text('explain'),
-                                ),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          const Text('test'),
-                                          const SizedBox(height: 10),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              ElevatedButton(
-                                                child: const Text('close'),
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )));
-                      });
-                },
-              )
-            ],
           ),
           body: Center(
             child: SingleChildScrollView(
@@ -106,6 +67,16 @@ class _TimeTableInputState extends State<TimeTableInput> {
                       controller: teacher_value,
                       decoration: const InputDecoration(
                         hintText: '担当教員を入力してください',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (80 / 100),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      controller: room_value,
+                      decoration: const InputDecoration(
+                        hintText: '教室名を入力してください',
                       ),
                     ),
                   ),
@@ -177,14 +148,13 @@ class _TimeTableInputState extends State<TimeTableInput> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (subject_value.text != '') {
-                          if (teacher_value.text != '') {
-                            infoList1 = [
-                              subject_value.text,
-                              teacher_value.text
-                            ];
-                            infoList1.addAll(infoList2);
-                            Navigator.of(context).pop(infoList1);
-                          }
+                          infoList1 = [
+                            subject_value.text,
+                            teacher_value.text,
+                            room_value.text
+                          ];
+                          infoList1.addAll(infoList2);
+                          Navigator.of(context).pop(infoList1);
                         }
                       },
                       child: const Text('登録'),
@@ -224,8 +194,8 @@ class _TimeTableInputState extends State<TimeTableInput> {
       {required String text, required String filename, required int id}) {
     return Tooltip(
       message: text,
-      verticalOffset: MediaQuery.of(context).size.width * (6 / 100),
-      preferBelow: true,
+      verticalOffset: MediaQuery.of(context).size.width * (8 / 100),
+      preferBelow: false,
       child: Container(
         height: MediaQuery.of(context).size.width * (12 / 100),
         width: MediaQuery.of(context).size.width * (12 / 100),
@@ -354,6 +324,8 @@ class _TimeTableUrlInputState extends State<TimeTableUrlInput> {
                 ),
                 if (widget.num == 1) ...{
                   SizedBox(
+                      height: MediaQuery.of(context).size.height * (1 / 100)),
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * (40 / 100),
                     child: ElevatedButton(
                       onPressed: () {
@@ -414,16 +386,17 @@ class _RegistInfoState extends State<RegistInfo> {
         ),
         body: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * (2 / 100)),
-              Container1(text1: widget.result[0], text2: widget.result[1]),
-              SizedBox(height: MediaQuery.of(context).size.height * (2 / 100)),
+              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
+              Container1(text: '授業名: ${widget.result[0]}'),
+              Container1(text: '担当教員: ${widget.result[1]}'),
+              Container1(text: '教室名: ${widget.result[2]}'),
+              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
               Container(
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height * (7 / 100),
                 width: double.infinity,
-                color: Colors.lightBlue[50],
+                color: Colors.grey[200],
                 child: Column(
                   children: const [
                     FittedBox(
@@ -440,45 +413,45 @@ class _RegistInfoState extends State<RegistInfo> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * (2 / 100)),
-              for (int i = 2; i < widget.result.length; i++) ...{
+              for (int i = 3; i < widget.result.length; i++) ...{
                 if (widget.result[i] != '') ...{
-                  if (i == 2) ...{
+                  if (i == 3) ...{
                     Container2(
                       title: 'Classroom',
                       url: widget.result[i],
                       filename: 'images/app_icons/classroom.png',
                     ),
-                  } else if (i == 3) ...{
+                  } else if (i == 4) ...{
                     Container2(
                       title: 'Teams',
                       url: widget.result[i],
                       filename: 'images/app_icons/teams.png',
                     ),
-                  } else if (i == 4) ...{
+                  } else if (i == 5) ...{
                     Container2(
                       title: 'Slack',
                       url: widget.result[i],
                       filename: 'images/app_icons/slack.png',
                     ),
-                  } else if (i == 5) ...{
+                  } else if (i == 6) ...{
                     Container2(
                       title: 'Outlook',
                       url: widget.result[i],
                       filename: 'images/app_icons/outlook.png',
                     ),
-                  } else if (i == 6) ...{
+                  } else if (i == 7) ...{
                     Container2(
                       title: 'OIT Portal',
                       url: widget.result[i],
                       filename: 'images/app_icons/portal.png',
                     ),
-                  } else if (i == 7) ...{
+                  } else if (i == 8) ...{
                     Container2(
                       title: 'OIT C-Learning',
                       url: widget.result[i],
                       filename: 'images/app_icons/c-learning.png',
                     ),
-                  } else if (i == 8) ...{
+                  } else if (i == 9) ...{
                     Container2(
                       title: 'その他',
                       url: widget.result[i],
@@ -494,16 +467,15 @@ class _RegistInfoState extends State<RegistInfo> {
     }
   }
 
-  Widget Container1({required String text1, required String text2}) {
+  Widget Container1({required String text}) {
     return Container(
-      height: MediaQuery.of(context).size.height * (10 / 100),
-      width: double.infinity,
+      height: MediaQuery.of(context).size.height * (4 / 100),
+      width: MediaQuery.of(context).size.width * (90 / 100),
+      alignment: Alignment.centerLeft,
       color: Colors.transparent,
-      padding: const EdgeInsets.all(10),
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Text('授業名: ' + text1 + '\n' + '担当教員: ' + text2,
-            style: const TextStyle(fontSize: 20)),
+        child: Text(text, style: const TextStyle(fontSize: 20)),
       ),
     );
   }
@@ -512,7 +484,7 @@ class _RegistInfoState extends State<RegistInfo> {
       {required String title, required String url, required String filename}) {
     return Container(
       height: MediaQuery.of(context).size.height * (8 / 100),
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * (90 / 100),
       decoration: const BoxDecoration(color: Colors.transparent),
       child: Material(
         color: Colors.transparent,
@@ -558,6 +530,7 @@ class TimeTableInput2 extends StatefulWidget {
 class _TimeTableInput2State extends State<TimeTableInput2> {
   final subject_value = TextEditingController();
   final teacher_value = TextEditingController();
+  final room_value = TextEditingController();
   int number = 0;
   List<String> selectedColumnValue = ['0', '0'];
   List<String> selectedRawValue = ['0', '0'];
@@ -567,13 +540,24 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
   Widget build(BuildContext context) {
     var box = Hive.box('TT');
     var num = '00';
-    TTable? val = box.get(
-      num,
-      defaultValue: TTable('', '', '未登録', '', '', '', '', '', '', '', ''),
-    );
-    var Ttsubject = val!.tosubject();
-    var Ttteacher = val.toteacher();
-    var Ttresult = val.toresult();
+    TTable? val = box.get(num,
+        defaultValue: TTable(
+            subject: '',
+            teacher: '',
+            room: '',
+            result: '未登録',
+            classroom: '',
+            teams: '',
+            slack: '',
+            outlook: '',
+            portal: '',
+            c_learning: '',
+            other: '',
+            partner: ''));
+    var Ttsubject = val!.toSubject();
+    var Ttteacher = val.toTeacher();
+    var Ttroom = val.toRoom();
+    var Ttresult = val.toResult();
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -608,6 +592,16 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (80 / 100),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: room_value,
+                    decoration: const InputDecoration(
+                      hintText: '教室名を入力してください',
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -637,6 +631,8 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
                             }
                           },
                           icon: const Icon(Icons.add),
+                          splashRadius:
+                              MediaQuery.of(context).size.width * (5 / 100),
                         ),
                       ),
                     } else if (number == 1) ...{
@@ -650,6 +646,8 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
                             }
                           },
                           icon: const Icon(Icons.remove),
+                          splashRadius:
+                              MediaQuery.of(context).size.width * (5 / 100),
                         ),
                       ),
                     }
@@ -717,61 +715,82 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (subject_value.text != '') {
-                        if (teacher_value.text != '') {
-                          Ttsubject = subject_value.text;
-                          Ttteacher = teacher_value.text;
+                        Ttsubject = subject_value.text;
+                        Ttteacher = teacher_value.text;
+                        Ttroom = room_value.text;
+                        if (teacher_value.text != '' && room_value.text != '') {
+                          Ttresult = subject_value.text +
+                              '\n' +
+                              teacher_value.text +
+                              '\n' +
+                              room_value.text;
+                        } else if (teacher_value.text == '' &&
+                            room_value.text == '') {
+                          Ttresult = subject_value.text;
+                        } else if (teacher_value.text == '' &&
+                            room_value.text != '') {
                           Ttresult =
-                              subject_value.text + ' / ' + teacher_value.text;
-                          if (number == 0) {
-                            box.put(
-                              selectedRawValue[0] + selectedColumnValue[0],
-                              TTable(
-                                  Ttsubject,
-                                  Ttteacher,
-                                  Ttresult,
-                                  urlList[0],
-                                  urlList[1],
-                                  urlList[2],
-                                  urlList[3],
-                                  urlList[4],
-                                  urlList[5],
-                                  urlList[6],
-                                  ''),
-                            );
-                          } else if (number == 1) {
-                            box.put(
-                              selectedRawValue[0] + selectedColumnValue[0],
-                              TTable(
-                                  Ttsubject,
-                                  Ttteacher,
-                                  Ttresult,
-                                  urlList[0],
-                                  urlList[1],
-                                  urlList[2],
-                                  urlList[3],
-                                  urlList[4],
-                                  urlList[5],
-                                  urlList[6],
-                                  selectedRawValue[1] + selectedColumnValue[1]),
-                            );
-                            box.put(
-                              selectedRawValue[1] + selectedColumnValue[1],
-                              TTable(
-                                  Ttsubject,
-                                  Ttteacher,
-                                  Ttresult,
-                                  urlList[0],
-                                  urlList[1],
-                                  urlList[2],
-                                  urlList[3],
-                                  urlList[4],
-                                  urlList[5],
-                                  urlList[6],
-                                  selectedRawValue[0] + selectedColumnValue[0]),
-                            );
-                          }
-                          Navigator.of(context).pop();
+                              subject_value.text + '\n' + room_value.text;
+                        } else if (teacher_value.text != '' &&
+                            room_value.text == '') {
+                          Ttresult =
+                              subject_value.text + '\n' + teacher_value.text;
                         }
+                        if (number == 0) {
+                          box.put(
+                            selectedRawValue[0] + selectedColumnValue[0],
+                            TTable(
+                                subject: Ttsubject,
+                                teacher: Ttteacher,
+                                room: Ttroom,
+                                result: Ttresult,
+                                classroom: urlList[0],
+                                teams: urlList[1],
+                                slack: urlList[2],
+                                outlook: urlList[3],
+                                portal: urlList[4],
+                                c_learning: urlList[5],
+                                other: urlList[5],
+                                partner: selectedRawValue[1] +
+                                    selectedColumnValue[1]),
+                          );
+                        } else if (number == 1) {
+                          box.put(
+                            selectedRawValue[0] + selectedColumnValue[0],
+                            TTable(
+                                subject: Ttsubject,
+                                teacher: Ttteacher,
+                                room: Ttroom,
+                                result: Ttresult,
+                                classroom: urlList[0],
+                                teams: urlList[1],
+                                slack: urlList[2],
+                                outlook: urlList[3],
+                                portal: urlList[4],
+                                c_learning: urlList[5],
+                                other: urlList[5],
+                                partner: selectedRawValue[1] +
+                                    selectedColumnValue[1]),
+                          );
+                          box.put(
+                            selectedRawValue[1] + selectedColumnValue[1],
+                            TTable(
+                                subject: Ttsubject,
+                                teacher: Ttteacher,
+                                room: Ttroom,
+                                result: Ttresult,
+                                classroom: urlList[0],
+                                teams: urlList[1],
+                                slack: urlList[2],
+                                outlook: urlList[3],
+                                portal: urlList[4],
+                                c_learning: urlList[5],
+                                other: urlList[5],
+                                partner: selectedRawValue[0] +
+                                    selectedColumnValue[0]),
+                          );
+                        }
+                        Navigator.of(context).pop();
                       }
                     },
                     child: const Text('登録'),
@@ -852,8 +871,8 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
       {required String text, required String filename, required int id}) {
     return Tooltip(
       message: text,
-      verticalOffset: MediaQuery.of(context).size.width * (6 / 100),
-      preferBelow: true,
+      verticalOffset: MediaQuery.of(context).size.width * (8 / 100),
+      preferBelow: false,
       child: Container(
         height: MediaQuery.of(context).size.width * (12 / 100),
         width: MediaQuery.of(context).size.width * (12 / 100),

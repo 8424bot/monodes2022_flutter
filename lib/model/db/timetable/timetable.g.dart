@@ -17,45 +17,48 @@ class TTableAdapter extends TypeAdapter<TTable> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TTable(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as String,
-      fields[3] as String,
-      fields[4] as String,
-      fields[5] as String,
-      fields[6] as String,
-      fields[7] as String,
-      fields[8] as String,
-      fields[9] as String,
-      fields[10] as String,
+      subject: fields[0] as String,
+      teacher: fields[1] as String,
+      room: fields[2] as String,
+      result: fields[3] as String,
+      classroom: fields[4] as String,
+      teams: fields[5] as String,
+      slack: fields[6] as String,
+      outlook: fields[7] as String,
+      portal: fields[8] as String,
+      c_learning: fields[9] as String,
+      other: fields[10] as String,
+      partner: fields[11] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, TTable obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.subject)
       ..writeByte(1)
       ..write(obj.teacher)
       ..writeByte(2)
-      ..write(obj.result)
+      ..write(obj.room)
       ..writeByte(3)
-      ..write(obj.classroom)
+      ..write(obj.result)
       ..writeByte(4)
-      ..write(obj.teams)
+      ..write(obj.classroom)
       ..writeByte(5)
-      ..write(obj.slack)
+      ..write(obj.teams)
       ..writeByte(6)
-      ..write(obj.outlook)
+      ..write(obj.slack)
       ..writeByte(7)
-      ..write(obj.oit)
+      ..write(obj.outlook)
       ..writeByte(8)
-      ..write(obj.c_larning)
+      ..write(obj.portal)
       ..writeByte(9)
-      ..write(obj.other)
+      ..write(obj.c_learning)
       ..writeByte(10)
+      ..write(obj.other)
+      ..writeByte(11)
       ..write(obj.partner);
   }
 
