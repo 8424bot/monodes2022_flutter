@@ -1,6 +1,5 @@
 // ignore_for_file: file_names, deprecated_member_use, non_constant_identifier_names, use_build_context_synchronously, sized_box_for_whitespace
 
-import 'package:app_home_demo/main.dart';
 import 'package:app_home_demo/model/db/timetable/timetable.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';

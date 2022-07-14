@@ -8,7 +8,6 @@ import 'package:app_home_demo/view/bookmark/memo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 
 class MyTheme extends ChangeNotifier {
   ThemeData current = ThemeData.light();
@@ -50,7 +49,7 @@ class _MyStatefulWidgetState extends State<_Root> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
-    home(),
+    const home(),
     const MyTodoApp(),
     const TimeTable(),
     const BookMark(),

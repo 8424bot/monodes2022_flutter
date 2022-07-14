@@ -117,7 +117,6 @@ class _MyHomePageState extends State<MyTodoApp> {
                         .delete();
                   }
 
-                  print(DateTime.now().weekday);
                   if (DateTime.now().isAfter(document["date"]
                       .toDate()
                       .add(const Duration(hours: 3)))) {
