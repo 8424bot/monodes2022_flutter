@@ -20,8 +20,7 @@ class MyHomeExplainPage extends StatelessWidget {
                 child: const Text.rich(
                   TextSpan(children: [
                     TextSpan(
-                      text:
-                          "Homeタブはアプリ起動時のページです。作成者ページやアプリの使い方、自分の所属を確認できます。\n",
+                      text: "Homeタブはアプリ起動時のページです。アプリの使い方、自分の所属を確認できます。\n",
                       style: TextStyle(
                         fontSize: 17,
                       ),
@@ -49,7 +48,7 @@ class MyHomeExplainPage extends StatelessWidget {
                     text: "①",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text: "をタップすると作成者ページへ遷移できます。",
+                  text: "をタップするとアプリの使い方ページへ遷移できます。\n",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -58,7 +57,8 @@ class MyHomeExplainPage extends StatelessWidget {
                     text: "②",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text: "をタップするとアプリの使い方ページへ遷移できます。\n",
+                  text:
+                      "で自分の所属を選びます。”Your Status”を自分の所属に設定することでTodoタブにて対象となっている課題を確認できます。\n",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -67,8 +67,7 @@ class MyHomeExplainPage extends StatelessWidget {
                     text: "③",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text:
-                      "で自分の所属を選びます。”Your Status”を自分の所属に設定することでTodoタブにて対象となっている課題を確認できます。",
+                  text: "で使いたいタブを選択します。タブはHome、Todo、School、Memoの4つあります。",
                   style: TextStyle(
                     fontSize: 17,
                   ),

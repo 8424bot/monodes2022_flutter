@@ -28,14 +28,12 @@ class MySchoolExplainPage extends StatelessWidget {
                   ]),
                 )),
             Container(
-              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
                 width: 3,
               )),
-              //alignment: Alignment.topLeft,
               child: const Image(
                 image: AssetImage(
                   "images/explain/school1.jpg",
@@ -67,14 +65,12 @@ class MySchoolExplainPage extends StatelessWidget {
               ])),
             ),
             Container(
-              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
                 width: 3,
               )),
-              //alignment: Alignment.topLeft,
               child: const Image(
                 image: AssetImage(
                   "images/explain/school2.jpg",
@@ -89,7 +85,7 @@ class MySchoolExplainPage extends StatelessWidget {
                     text: "③",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text: "で登録したい科目名と担当教員を設定できます。\n",
+                  text: "で登録したい科目名と担当教員、教室を設定できます。\n",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -98,13 +94,8 @@ class MySchoolExplainPage extends StatelessWidget {
                     text: "④",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text: "で登録したい科目が何曜日の何時限目にあるのかを設定できます。",
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
-                TextSpan(
-                  text: "\nまた、右にある＋ボタンを活用することで同じ科目を別の曜日、時限に一括設定できます。\n",
+                  text: "で登録したい科目が何曜日の何時限目にあるのかを設定できます。"
+                      "\nまた、右にある＋ボタンを活用することで同じ科目を別の曜日、時限に一括設定できます。\n",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -113,14 +104,10 @@ class MySchoolExplainPage extends StatelessWidget {
                     text: "⑤",
                     style: TextStyle(fontSize: 17, color: Colors.red)),
                 TextSpan(
-                  text:
-                      "で登録する科目に関連するURLを登録することができます。以上の設定が完了したら「登録」ボタンをタップして時間割に反映させることができます。",
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                ),
-                TextSpan(
-                  text: "\n以下は登録した時間割の例です。",
+                  text: "で登録する科目に関連するURLを登録することができます。"
+                      "Googleクラスルーム、Teams、Slack、Outlook、学内ポータルサイト、Cラーニング、その他のURLを登録できます。"
+                      "URLを登録するとアイコンが明るくなります。"
+                      "\n以下は時間割登録の一例です。",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -128,17 +115,39 @@ class MySchoolExplainPage extends StatelessWidget {
               ])),
             ),
             Container(
-              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
                 width: 3,
               )),
-              //alignment: Alignment.topLeft,
               child: const Image(
                 image: AssetImage(
-                  "images/explain/school3.png",
+                  "images/explain/school2.5.png",
+                ),
+                width: 200,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: const Text(
+                "以上の設定が完了したら「登録」ボタンをタップして時間割に反映させることができます。"
+                "\n以下は登録した時間割の一例です。",
+                style: TextStyle(
+                  fontSize: 17,
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.black,
+                width: 3,
+              )),
+              child: const Image(
+                image: AssetImage(
+                  "images/explain/school3.jpg",
                 ),
                 width: 200,
               ),
@@ -157,14 +166,12 @@ class MySchoolExplainPage extends StatelessWidget {
                   ]),
                 )),
             Container(
-              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
               margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: Colors.black,
                 width: 3,
               )),
-              //alignment: Alignment.topLeft,
               child: const Image(
                 image: AssetImage(
                   "images/explain/school4.jpg",
