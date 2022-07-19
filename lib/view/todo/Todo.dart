@@ -22,13 +22,28 @@ List<String> weekdays = [
   "日",
 ];
 
-class MyTodoApp extends StatefulWidget {
+class MyTodoApp extends StatelessWidget {
   const MyTodoApp({Key? key}) : super(key: key);
   @override
-  State<MyTodoApp> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: const MyHomePage(),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyTodoApp> {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
 
   void _delete(String id) {
     var box = Hive.box('SI');
