@@ -352,16 +352,4 @@ class _HomePageState extends State<BookMark> {
       ),
     );
   }
-
-  _launchInBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: false,
-        forceWebView: false,
-      );
-    } else {
-      throw 'このURLにはアクセスできません';
-    }
-  }
 }

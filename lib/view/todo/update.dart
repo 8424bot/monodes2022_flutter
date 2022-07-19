@@ -1,4 +1,5 @@
-import 'package:app_home_demo/view/home/home.dart';
+// ignore_for_file: must_be_immutable, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -31,17 +32,8 @@ class UpdatePage extends StatefulWidget {
 class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
-    print(_time);
     _date = widget.date;
     _time = widget.time;
-    print(_time);
-    // String subject = widget.subject;
-    // String task = widget.task;
-    // DateTime date = widget.date;
-    // TimeOfDay time =
-    //     TimeOfDay(hour: widget.date.hour, minute: widget.date.minute);
-    // String course = widget.course;
-    // int grade = widget.grade;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -202,7 +194,6 @@ class _DatePickerState extends State<DatePicker> {
       setState(() => widget.date = picked);
       setState(() => _date = picked);
     }
-    print(widget.date);
   }
 
   @override
