@@ -21,13 +21,28 @@ List<String> weekdays = [
   "日",
 ];
 
-class MyTodoApp extends StatefulWidget {
+class MyTodoApp extends StatelessWidget {
   const MyTodoApp({Key? key}) : super(key: key);
   @override
-  State<MyTodoApp> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      home: MyHomePage(),
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyTodoApp> {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('CG');
@@ -221,21 +236,21 @@ class _MyHomePageState extends State<MyTodoApp> {
                                     ),
                                     trailing: Container(
                                       decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey)
-                                      ),
+                                          border:
+                                              Border.all(color: Colors.grey)),
                                       child: IconButton(
-                                        icon: const Icon(Icons.notifications, color: Colors.grey),
+                                        icon: const Icon(Icons.notifications,
+                                            color: Colors.grey),
                                         onPressed: () {
-                                          Navigator.push(
-                                            context, 
-                                            MaterialPageRoute(builder: (context) {
-                                              return Setting(
-                                                subject: document["subject"], 
-                                                task: document["task"], 
-                                                date: document["date"].toDate()
-                                              );
-                                            })
-                                          );
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return Setting(
+                                                subject: document["subject"],
+                                                task: document["task"],
+                                                date:
+                                                    document["date"].toDate());
+                                          }));
                                         },
                                       ),
                                     ),
