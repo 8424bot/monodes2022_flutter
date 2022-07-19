@@ -48,7 +48,10 @@ class _MyHomePageState extends State<home> {
                 child: const Text(
                   'Support App',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 55, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 55,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               const Image(
@@ -62,13 +65,16 @@ class _MyHomePageState extends State<home> {
                 child: const Text(
                   'For OIT students',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
+              const Padding(padding: EdgeInsets.all(4)),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  primary: Colors.blue,
-                ),
+                    primary: Colors.blue, side: BorderSide(color: Colors.blue)),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MySecondPage();
@@ -76,28 +82,38 @@ class _MyHomePageState extends State<home> {
                 },
                 child: const Text('アプリの使い方'),
               ),
-              const Text('    '),
+              const Padding(padding: EdgeInsets.all(4)),
               const Text(
                 'Your Status',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   DropdownButton(
+                    iconEnabledColor: Colors.black54,
+                    dropdownColor: Colors.white,
                     items: const [
                       DropdownMenuItem(
                         value: 'R',
-                        child: Text('R科'),
+                        child: Text(
+                          'R科',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       ),
                       DropdownMenuItem(
                         value: 'S',
-                        child: Text('S科'),
+                        child:
+                            Text('S科', style: TextStyle(color: Colors.black)),
                       ),
                       DropdownMenuItem(
                         value: 'W',
-                        child: Text('W科'),
+                        child:
+                            Text('W科', style: TextStyle(color: Colors.black)),
                       ),
                     ],
                     //6
@@ -107,28 +123,31 @@ class _MyHomePageState extends State<home> {
                       });
                       box.put('0', CG(myCourse, myGrade));
                     },
-                    //7
                     value: myCourse,
                   ),
                   DropdownButton(
-                    //4
+                    iconEnabledColor: Colors.black54,
+                    dropdownColor: Colors.white,
                     items: const [
-                      //5
                       DropdownMenuItem(
                         value: 1,
-                        child: Text('１年'),
+                        child:
+                            Text('１年', style: TextStyle(color: Colors.black)),
                       ),
                       DropdownMenuItem(
                         value: 2,
-                        child: Text('２年'),
+                        child:
+                            Text('２年', style: TextStyle(color: Colors.black)),
                       ),
                       DropdownMenuItem(
                         value: 3,
-                        child: Text('３年'),
+                        child:
+                            Text('３年', style: TextStyle(color: Colors.black)),
                       ),
                       DropdownMenuItem(
                         value: 4,
-                        child: Text("４年"),
+                        child:
+                            Text("４年", style: TextStyle(color: Colors.black)),
                       ),
                     ],
                     //6
