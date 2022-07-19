@@ -266,7 +266,9 @@ class _MyHomePageState extends State<MyTodoApp> {
                                                   colorchange = !colorchange;
                                                 })
                                               },
-                                              box.put(document.id.toString(), SetIcon(colorId, colorchange))
+                                              box.put(document.id.toString(), SetIcon(colorId, colorchange)),
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(const SnackBar(content: Text('通知を設定しました')))
                                             }
                                           });
                                         },
