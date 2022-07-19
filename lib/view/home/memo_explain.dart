@@ -97,7 +97,7 @@ class MyMemoExplainPage extends StatelessWidget {
               //alignment: Alignment.topLeft,
               child: const Image(
                 image: AssetImage(
-                  "images/explain/memo3.jpg",
+                  "images/explain/memo3.png",
                 ),
                 width: 200,
               ),
@@ -112,8 +112,30 @@ class MyMemoExplainPage extends StatelessWidget {
                     fontSize: 17,
                   ),
                 ),
+              ])),
+            ),
+            Container(
+              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.black,
+                width: 3,
+              )),
+              //alignment: Alignment.topLeft,
+              child: const Image(
+                image: AssetImage(
+                  "images/explain/memo4.png",
+                ),
+                width: 200,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 30),
+              child: const Text.rich(TextSpan(children: [
                 TextSpan(
-                  text: "また、リストの項目を左にスライドすると削除、右にスライドすると編集が行えます。",
+                  text:
+                      "また、リストの項目を右にスワイプすると編集ボタンが、左にスワイプすると削除ボタンが出現します。\nボタンをタップすると掲示板に投稿されている内容の編集・削除が行えます。",
                   style: TextStyle(
                     fontSize: 17,
                   ),

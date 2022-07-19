@@ -44,146 +44,140 @@ class _TimeTableInputState extends State<TimeTableInput> {
             automaticallyImplyLeading: false,
             title: const Text('授業登録'),
           ),
-          body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (80 / 100),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      controller: subject_value,
-                      decoration: const InputDecoration(
-                        hintText: '授業名を入力してください',
-                      ),
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (8 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (80 / 100),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: subject_value,
+                    decoration: const InputDecoration(
+                      hintText: '授業名を入力してください',
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (80 / 100),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      controller: teacher_value,
-                      decoration: const InputDecoration(
-                        hintText: '担当教員を入力してください',
-                      ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (80 / 100),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: teacher_value,
+                    decoration: const InputDecoration(
+                      hintText: '担当教員を入力してください',
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (80 / 100),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      controller: room_value,
-                      decoration: const InputDecoration(
-                        hintText: '教室名を入力してください',
-                      ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (80 / 100),
+                  child: TextField(
+                    textAlign: TextAlign.center,
+                    controller: room_value,
+                    decoration: const InputDecoration(
+                      hintText: '教室名を入力してください',
                     ),
                   ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * (5 / 100)),
-                  const Text('URL登録'),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * (1 / 100)),
-                  Container(
-                    height: MediaQuery.of(context).size.height * (15 / 100),
-                    width: double.infinity,
-                    decoration: const BoxDecoration(color: Colors.transparent),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        appButton(
-                            filename: 'images/app_icons/classroom_button.png',
-                            id: 0,
-                            text: 'Classroom'),
-                        SizedBox(
-                            width:
-                                MediaQuery.of(context).size.width * (2 / 100)),
-                        appButton(
-                            filename: 'images/app_icons/teams_button.png',
-                            id: 1,
-                            text: 'Teams'),
-                        SizedBox(
-                            width:
-                                MediaQuery.of(context).size.width * (2 / 100)),
-                        appButton(
-                            filename: 'images/app_icons/slack_button.png',
-                            id: 2,
-                            text: 'Slack'),
-                        SizedBox(
-                            width:
-                                MediaQuery.of(context).size.width * (2 / 100)),
-                        appButton(
-                            filename: 'images/app_icons/outlook_button.png',
-                            id: 3,
-                            text: 'Outlook'),
-                        SizedBox(
-                            width:
-                                MediaQuery.of(context).size.width * (2 / 100)),
-                        appButton(
-                            filename: 'images/app_icons/portal_button.png',
-                            id: 4,
-                            text: 'Portal'),
-                        SizedBox(
-                            width:
-                                MediaQuery.of(context).size.width * (2 / 100)),
-                        appButton(
-                            filename: 'images/app_icons/c-learning_button.png',
-                            id: 5,
-                            text: 'C-Learning'),
-                        SizedBox(
-                            width:
-                                MediaQuery.of(context).size.width * (2 / 100)),
-                        appButton(
-                            filename: 'images/app_icons/other_button.png',
-                            id: 6,
-                            text: 'Other'),
-                      ],
-                    ),
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (5 / 100)),
+                const Text('URL登録'),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (1 / 100)),
+                Container(
+                  height: MediaQuery.of(context).size.height * (15 / 100),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(color: Colors.transparent),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      appButton(
+                          filename: 'images/app_icons/classroom_button.png',
+                          id: 0,
+                          text: 'Classroom'),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/teams_button.png',
+                          id: 1,
+                          text: 'Teams'),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/slack_button.png',
+                          id: 2,
+                          text: 'Slack'),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/outlook_button.png',
+                          id: 3,
+                          text: 'Outlook'),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/portal_button.png',
+                          id: 4,
+                          text: 'Portal'),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/c-learning_button.png',
+                          id: 5,
+                          text: 'C-Learning'),
+                      SizedBox(
+                          width: MediaQuery.of(context).size.width * (2 / 100)),
+                      appButton(
+                          filename: 'images/app_icons/other_button.png',
+                          id: 6,
+                          text: 'Other'),
+                    ],
                   ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * (5 / 100)),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (40 / 100),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (subject_value.text != '') {
-                          infoList1 = [
-                            subject_value.text,
-                            teacher_value.text,
-                            room_value.text
-                          ];
-                          infoList1.addAll(infoList2);
-                          Navigator.of(context).pop(infoList1);
-                        }
-                      },
-                      child: const Text('登録'),
-                    ),
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (5 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (subject_value.text != '') {
+                        infoList1 = [
+                          subject_value.text,
+                          teacher_value.text,
+                          room_value.text
+                        ];
+                        infoList1.addAll(infoList2);
+                        Navigator.of(context).pop(infoList1);
+                      }
+                    },
+                    child: const Text('登録'),
                   ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * (1 / 100)),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (40 / 100),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('キャンセル'),
-                    ),
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (1 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('キャンセル'),
                   ),
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * (1 / 100)),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (40 / 100),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop([' ']);
-                      },
-                      style: ElevatedButton.styleFrom(primary: Colors.red),
-                      child: const Text('登録情報削除'),
-                    ),
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (1 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop([' ']);
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.red),
+                    child: const Text('登録情報削除'),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ));
@@ -360,6 +354,12 @@ class RegistInfo extends StatefulWidget {
 class _RegistInfoState extends State<RegistInfo> {
   @override
   Widget build(BuildContext context) {
+    Brightness platformBrightness = MediaQuery.platformBrightnessOf(context);
+    Color bannerColor = const Color.fromARGB(255, 238, 238, 238);
+    if (platformBrightness == Brightness.dark) {
+      bannerColor = const Color.fromARGB(255, 70, 70, 70);
+    }
+
     if ((widget.result[0] == '') && (widget.result[1] == '')) {
       return Scaffold(
         appBar: AppBar(
@@ -402,18 +402,17 @@ class _RegistInfoState extends State<RegistInfo> {
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height * (7 / 100),
                 width: double.infinity,
-                color: Colors.grey[200],
+                color: bannerColor,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Text('登録URL',
-                          style: TextStyle(fontSize: 20, color: Colors.black)),
+                      child: Text('登録URL', style: TextStyle(fontSize: 20)),
                     ),
                     FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Text('タップして詳細確認',
-                          style: TextStyle(fontSize: 12, color: Colors.black)),
+                      child: Text('タップして詳細確認', style: TextStyle(fontSize: 12)),
                     ),
                   ],
                 ),
@@ -547,12 +546,10 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
     var box = Hive.box('TT');
     var num = '00';
     TTable? val = box.get(num,
-        defaultValue:
-            TTable('', '', '', '未登録', '', '', '', '', '', '', '', ''));
+        defaultValue: TTable('', '', '', '', '', '', '', '', '', '', ''));
     var Ttsubject = val!.toSubject();
     var Ttteacher = val.toTeacher();
     var Ttroom = val.toRoom();
-    var Ttresult = val.toResult();
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -562,245 +559,219 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
           automaticallyImplyLeading: false,
           title: const Text('授業登録'),
         ),
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * (80 / 100),
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    controller: subject_value,
-                    decoration: const InputDecoration(
-                      hintText: '授業名を入力してください',
-                    ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * (8 / 100)),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * (80 / 100),
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  controller: subject_value,
+                  decoration: const InputDecoration(
+                    hintText: '授業名を入力してください',
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * (80 / 100),
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    controller: teacher_value,
-                    decoration: const InputDecoration(
-                      hintText: '担当教員を入力してください',
-                    ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * (80 / 100),
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  controller: teacher_value,
+                  decoration: const InputDecoration(
+                    hintText: '担当教員を入力してください',
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * (80 / 100),
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    controller: room_value,
-                    decoration: const InputDecoration(
-                      hintText: '教室名を入力してください',
-                    ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * (80 / 100),
+                child: TextField(
+                  textAlign: TextAlign.center,
+                  controller: room_value,
+                  decoration: const InputDecoration(
+                    hintText: '教室名を入力してください',
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * (50 / 100),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: (number + 1),
+                      itemBuilder: (BuildContext context, index) {
+                        return Container(
+                          child: SelectButton(number: index),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * (5 / 100)),
+                  if (number < 1) ...{
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * (50 / 100),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: (number + 1),
-                        itemBuilder: (BuildContext context, index) {
-                          return Container(
-                            child: SelectButton(number: index),
-                          );
+                      child: IconButton(
+                        onPressed: () {
+                          if (number < 1) {
+                            setState(() {
+                              number++;
+                            });
+                          }
                         },
+                        icon: const Icon(Icons.add),
+                        splashRadius:
+                            MediaQuery.of(context).size.width * (5 / 100),
                       ),
                     ),
+                  } else if (number == 1) ...{
                     SizedBox(
-                        width: MediaQuery.of(context).size.width * (5 / 100)),
-                    if (number < 1) ...{
-                      SizedBox(
-                        child: IconButton(
-                          onPressed: () {
-                            if (number < 1) {
-                              setState(() {
-                                number++;
-                              });
-                            }
-                          },
-                          icon: const Icon(Icons.add),
-                          splashRadius:
-                              MediaQuery.of(context).size.width * (5 / 100),
-                        ),
+                      child: IconButton(
+                        onPressed: () {
+                          if (number == 1) {
+                            setState(() {
+                              number--;
+                            });
+                          }
+                        },
+                        icon: const Icon(Icons.remove),
+                        splashRadius:
+                            MediaQuery.of(context).size.width * (5 / 100),
                       ),
-                    } else if (number == 1) ...{
-                      SizedBox(
-                        child: IconButton(
-                          onPressed: () {
-                            if (number == 1) {
-                              setState(() {
-                                number--;
-                              });
-                            }
-                          },
-                          icon: const Icon(Icons.remove),
-                          splashRadius:
-                              MediaQuery.of(context).size.width * (5 / 100),
-                        ),
-                      ),
-                    }
+                    ),
+                  }
+                ],
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * (5 / 100)),
+              const Text('URL登録'),
+              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
+              Container(
+                height: MediaQuery.of(context).size.height * (15 / 100),
+                width: double.infinity,
+                decoration: const BoxDecoration(color: Colors.transparent),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    appButton(
+                        filename: 'images/app_icons/classroom_button.png',
+                        id: 0,
+                        text: 'Classroom'),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * (2 / 100)),
+                    appButton(
+                        filename: 'images/app_icons/teams_button.png',
+                        id: 1,
+                        text: 'Teams'),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * (2 / 100)),
+                    appButton(
+                        filename: 'images/app_icons/slack_button.png',
+                        id: 2,
+                        text: 'Slack'),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * (2 / 100)),
+                    appButton(
+                        filename: 'images/app_icons/outlook_button.png',
+                        id: 3,
+                        text: 'Outlook'),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * (2 / 100)),
+                    appButton(
+                        filename: 'images/app_icons/portal_button.png',
+                        id: 4,
+                        text: 'Portal'),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * (2 / 100)),
+                    appButton(
+                        filename: 'images/app_icons/c-learning_button.png',
+                        id: 5,
+                        text: 'C-Learning'),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * (2 / 100)),
+                    appButton(
+                        filename: 'images/app_icons/other_button.png',
+                        id: 6,
+                        text: 'Other'),
                   ],
                 ),
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * (5 / 100)),
-                const Text('URL登録'),
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * (1 / 100)),
-                Container(
-                  height: MediaQuery.of(context).size.height * (15 / 100),
-                  width: double.infinity,
-                  decoration: const BoxDecoration(color: Colors.transparent),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      appButton(
-                          filename: 'images/app_icons/classroom_button.png',
-                          id: 0,
-                          text: 'Classroom'),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * (2 / 100)),
-                      appButton(
-                          filename: 'images/app_icons/teams_button.png',
-                          id: 1,
-                          text: 'Teams'),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * (2 / 100)),
-                      appButton(
-                          filename: 'images/app_icons/slack_button.png',
-                          id: 2,
-                          text: 'Slack'),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * (2 / 100)),
-                      appButton(
-                          filename: 'images/app_icons/outlook_button.png',
-                          id: 3,
-                          text: 'Outlook'),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * (2 / 100)),
-                      appButton(
-                          filename: 'images/app_icons/portal_button.png',
-                          id: 4,
-                          text: 'Portal'),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * (2 / 100)),
-                      appButton(
-                          filename: 'images/app_icons/c-learning_button.png',
-                          id: 5,
-                          text: 'C-Learning'),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * (2 / 100)),
-                      appButton(
-                          filename: 'images/app_icons/other_button.png',
-                          id: 6,
-                          text: 'Other'),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * (5 / 100)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * (40 / 100),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (subject_value.text != '') {
-                        Ttsubject = subject_value.text;
-                        Ttteacher = teacher_value.text;
-                        Ttroom = room_value.text;
-                        if (teacher_value.text != '' && room_value.text != '') {
-                          Ttresult = subject_value.text +
-                              '\n' +
-                              teacher_value.text +
-                              '\n' +
-                              room_value.text;
-                        } else if (teacher_value.text == '' &&
-                            room_value.text == '') {
-                          Ttresult = subject_value.text;
-                        } else if (teacher_value.text == '' &&
-                            room_value.text != '') {
-                          Ttresult =
-                              subject_value.text + '\n' + room_value.text;
-                        } else if (teacher_value.text != '' &&
-                            room_value.text == '') {
-                          Ttresult =
-                              subject_value.text + '\n' + teacher_value.text;
-                        }
-                        if (number == 0) {
-                          box.put(
-                            selectedRawValue[0] + selectedColumnValue[0],
-                            TTable(
-                                Ttsubject,
-                                Ttteacher,
-                                Ttroom,
-                                Ttresult,
-                                urlList[0],
-                                urlList[1],
-                                urlList[2],
-                                urlList[3],
-                                urlList[4],
-                                urlList[5],
-                                urlList[5],
-                                selectedRawValue[1] + selectedColumnValue[1]),
-                          );
-                        } else if (number == 1) {
-                          box.put(
-                            selectedRawValue[0] + selectedColumnValue[0],
-                            TTable(
-                                Ttsubject,
-                                Ttteacher,
-                                Ttroom,
-                                Ttresult,
-                                urlList[0],
-                                urlList[1],
-                                urlList[2],
-                                urlList[3],
-                                urlList[4],
-                                urlList[5],
-                                urlList[5],
-                                selectedRawValue[1] + selectedColumnValue[1]),
-                          );
-                          box.put(
-                            selectedRawValue[1] + selectedColumnValue[1],
-                            TTable(
-                                Ttsubject,
-                                Ttteacher,
-                                Ttroom,
-                                Ttresult,
-                                urlList[0],
-                                urlList[1],
-                                urlList[2],
-                                urlList[3],
-                                urlList[4],
-                                urlList[5],
-                                urlList[5],
-                                selectedRawValue[0] + selectedColumnValue[0]),
-                          );
-                        }
-                        Navigator.of(context).pop();
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * (5 / 100)),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * (40 / 100),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (subject_value.text != '') {
+                      Ttsubject = subject_value.text;
+                      Ttteacher = teacher_value.text;
+                      Ttroom = room_value.text;
+                      if (number == 0) {
+                        box.put(
+                          selectedRawValue[0] + selectedColumnValue[0],
+                          TTable(
+                              Ttsubject,
+                              Ttteacher,
+                              Ttroom,
+                              urlList[0],
+                              urlList[1],
+                              urlList[2],
+                              urlList[3],
+                              urlList[4],
+                              urlList[5],
+                              urlList[6],
+                              selectedRawValue[1] + selectedColumnValue[1]),
+                        );
+                      } else if (number == 1) {
+                        box.put(
+                          selectedRawValue[0] + selectedColumnValue[0],
+                          TTable(
+                              Ttsubject,
+                              Ttteacher,
+                              Ttroom,
+                              urlList[0],
+                              urlList[1],
+                              urlList[2],
+                              urlList[3],
+                              urlList[4],
+                              urlList[5],
+                              urlList[6],
+                              selectedRawValue[1] + selectedColumnValue[1]),
+                        );
+                        box.put(
+                          selectedRawValue[1] + selectedColumnValue[1],
+                          TTable(
+                              Ttsubject,
+                              Ttteacher,
+                              Ttroom,
+                              urlList[0],
+                              urlList[1],
+                              urlList[2],
+                              urlList[3],
+                              urlList[4],
+                              urlList[5],
+                              urlList[6],
+                              selectedRawValue[0] + selectedColumnValue[0]),
+                        );
                       }
-                    },
-                    child: const Text('登録'),
-                  ),
-                ),
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * (1 / 100)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * (40 / 100),
-                  child: ElevatedButton(
-                    onPressed: () {
                       Navigator.of(context).pop();
-                    },
-                    child: const Text('キャンセル'),
-                  ),
+                    }
+                  },
+                  child: const Text('登録'),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * (1 / 100)),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * (40 / 100),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('キャンセル'),
+                ),
+              ),
+            ],
           ),
         ),
       ),

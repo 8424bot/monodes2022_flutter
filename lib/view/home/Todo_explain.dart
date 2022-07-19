@@ -136,7 +136,7 @@ class MyTodoExplainPage extends StatelessWidget {
               //alignment: Alignment.topLeft,
               child: const Image(
                 image: AssetImage(
-                  "images/explain/Todo3.png",
+                  "images/explain/Todo3.jpg",
                 ),
                 width: 200,
               ),
@@ -164,7 +164,17 @@ class MyTodoExplainPage extends StatelessWidget {
                         backgroundColor: Colors.black,
                         color: Colors.white)),
                 TextSpan(
-                  text: "になり、期限から３時間以上経過すると自動的に消去されます。",
+                  text: "になり、期限から３時間以上経過すると自動的に消去されます。\nまた、",
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+                TextSpan(
+                    text: "⑥",
+                    style: TextStyle(fontSize: 17, color: Colors.red)),
+                TextSpan(
+                  text: "をタップすると通知設定のページへ遷移します。"
+                      "ここで課題締切の～日前、～時間前に通知を送るかを設定できます。",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -183,6 +193,34 @@ class MyTodoExplainPage extends StatelessWidget {
               child: const Image(
                 image: AssetImage(
                   "images/explain/Todo4.png",
+                ),
+                width: 200,
+              ),
+            ),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: const Text.rich(
+                  TextSpan(children: [
+                    TextSpan(
+                      text: "通知を設定すると上の画像の様に通知のマークが変わります。",
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
+                    ),
+                  ]),
+                )),
+            Container(
+              //padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.black,
+                width: 3,
+              )),
+              //alignment: Alignment.topLeft,
+              child: const Image(
+                image: AssetImage(
+                  "images/explain/Todo5.png",
                 ),
                 width: 200,
               ),
