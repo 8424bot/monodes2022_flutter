@@ -13,29 +13,26 @@ class TTable {
   @HiveField(2)
   String room;
   @HiveField(3)
-  String result;
-  @HiveField(4)
   String classroom;
-  @HiveField(5)
+  @HiveField(4)
   String teams;
-  @HiveField(6)
+  @HiveField(5)
   String slack;
-  @HiveField(7)
+  @HiveField(6)
   String outlook;
-  @HiveField(8)
+  @HiveField(7)
   String portal;
-  @HiveField(9)
+  @HiveField(8)
   String c_learning;
-  @HiveField(10)
+  @HiveField(9)
   String other;
-  @HiveField(11)
+  @HiveField(10)
   String partner;
 
   TTable(
     this.subject,
     this.teacher,
     this.room,
-    this.result,
     this.classroom,
     this.teams,
     this.slack,
@@ -56,10 +53,6 @@ class TTable {
 
   String toRoom() {
     return room;
-  }
-
-  String toResult() {
-    return result;
   }
 
   List toUrlList() {
