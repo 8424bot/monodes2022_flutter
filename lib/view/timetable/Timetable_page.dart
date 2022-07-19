@@ -660,7 +660,11 @@ class _TimeTableState extends State<TimeTable> {
           splashColor: Colors.grey,
           onTap: () async {
             if (await canLaunchUrl(URL)) {
-              await launchUrl(URL);
+              await launch(
+                URL.toString(),
+                forceSafariVC: false,
+                forceWebView: false,
+              );
             } else {
               showDialog(
                   context: context,
