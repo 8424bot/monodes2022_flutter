@@ -309,10 +309,13 @@ class _HomePageState extends State<BookMark> {
                                             child: const Text('Jump to Page'),
                                             onPressed: () async {
                                               Uri URL = Uri.parse(
-                                                  _journals[index]
-                                                      ['description']);
+                                                  _journals[index]['description']);
                                               if (await canLaunchUrl(URL)) {
-                                                await launchUrl(URL);
+                                                await launch(
+                                                  _journals[index]['description'],
+                                                  forceSafariVC: false,
+                                                  forceWebView: false,
+                                                );
                                               } else {
                                                 showDialog(
                                                     context: context,
@@ -348,5 +351,17 @@ class _HomePageState extends State<BookMark> {
         onPressed: () => _showForm(null),
       ),
     );
+  }
+
+  _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'このURLにはアクセスできません';
+    }
   }
 }
