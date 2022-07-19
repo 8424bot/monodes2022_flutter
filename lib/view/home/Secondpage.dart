@@ -31,8 +31,7 @@ class MySecondPage extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  "\nこのアプリはものづくりデザイン思考実践演習で作成したOIT梅田キャンパス生専用学生生活支援アプリです。\n"
-                  "あなたの梅田キャンパスでの学生生活をより便利に！\n",
+                  "\nこのアプリはものづくりデザイン思考実践演習で作成したOIT梅田キャンパス生専用学生生活支援アプリです。",
                   style: TextStyle(fontSize: 15),
                 ),
                 const Text(
@@ -46,6 +45,12 @@ class MySecondPage extends StatelessWidget {
                   "2.機能説明",
                   style: TextStyle(
                     fontSize: 25,
+                  ),
+                ),
+                const Text(
+                  "ライトテーマ、ダークテーマの切り替えは端末の設定に従います。",
+                  style: TextStyle(
+                    fontSize: 15,
                   ),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 10)),
