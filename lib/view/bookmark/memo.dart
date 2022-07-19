@@ -273,9 +273,8 @@ class _HomePageState extends State<BookMark> {
                                 if (_journals[index]['description']
                                     .contains('http')) {
                                   return AlertDialog(
-                                    title: Text(_journals[index]['title']),
-                                    content:
-                                        Text(_journals[index]['description']),
+                                    title: SelectableText(_journals[index]['title']),
+                                    content: SelectableText(_journals[index]['description']),
                                     actions: [
                                       Row(
                                         mainAxisAlignment:
@@ -308,9 +307,8 @@ class _HomePageState extends State<BookMark> {
                                   );
                                 } else {
                                   return AlertDialog(
-                                    title: Text(_journals[index]['title']),
-                                    content:
-                                        Text(_journals[index]['description']),
+                                    title: SelectableText(_journals[index]['title']),
+                                    content: SelectableText(_journals[index]['description']),
                                   );
                                 }
                               });
