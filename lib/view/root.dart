@@ -9,17 +9,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyTheme extends ChangeNotifier {
-  ThemeData current = ThemeData.light();
-  bool _isDark = false;
-
-  toggle() {
-    _isDark = !_isDark;
-    current = _isDark ? ThemeData.dark() : ThemeData.light();
-    notifyListeners();
-  }
-}
-
 class Root extends StatelessWidget {
   const Root({Key? key}) : super(key: key);
 

@@ -7,6 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/view/root.dart';
 import 'package:app_home_demo/model/db/timetable/timetable.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
+import 'package:app_home_demo/model/db/setting/setting_db.dart';
 import 'package:path_provider/path_provider.dart';
 
 List<Box> boxList = [];
@@ -15,8 +16,10 @@ Future<List<Box>> _openBox() async {
   Hive.init(dir.path);
   var TTableBox = await Hive.openBox('TT');
   var CGBox = await Hive.openBox('CG');
+  var SetIconBox = await Hive.openBox('SI');
   boxList.add(TTableBox);
   boxList.add(CGBox);
+  boxList.add(SetIconBox);
   return boxList;
 }
 
@@ -31,6 +34,7 @@ void main() async {
   //(1) タイプアダプタを登録
   Hive.registerAdapter<TTable>(TTableAdapter());
   Hive.registerAdapter<CG>(CGAdapter());
+  Hive.registerAdapter<SetIcon>(SetIconAdapter());
   //(2) 型指定してボックスをオープン
   await _openBox();
 

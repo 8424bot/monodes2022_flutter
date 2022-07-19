@@ -9,6 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
 import 'package:app_home_demo/view/home/Todo_explain.dart';
 import 'package:app_home_demo/view/setting/setting_page.dart';
+import 'package:app_home_demo/model/db/setting/setting_db.dart';
 
 List<String> weekdays = [
   "",
@@ -21,28 +22,19 @@ List<String> weekdays = [
   "日",
 ];
 
-class MyTodoApp extends StatelessWidget {
+class MyTodoApp extends StatefulWidget {
   const MyTodoApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: MyHomePage(),
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-    );
+  State<MyTodoApp> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyTodoApp> {
+
+  void _delete(String id) {
+    var box = Hive.box('SI');
+    box.delete(id);
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('CG');
@@ -141,6 +133,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         .doc(i)
                         .delete();
                   }
+
+                  var box = Hive.box('SI');
+                  SetIcon val = box.get(document.id.toString(), defaultValue: SetIcon(0, false));
+                  int colorId = val.count;
+                  bool colorchange = val.onoff;
+
                   return Visibility(
                       visible: (myGrade == document["grade"] &&
                           document["course"].contains(myCourse)),
@@ -173,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     );
                                   }));
                                 },
-                              )
+                              ),
                             ]),
                         endActionPane: ActionPane(
                             extentRatio: 0.22,
@@ -205,6 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             TextButton(
                                                 child: const Text("はい"),
                                                 onPressed: () {
+                                                  _delete(document.id);
                                                   delete(document.id);
                                                   Navigator.of(context).pop();
                                                 }),
@@ -234,23 +233,42 @@ class _MyHomePageState extends State<MyHomePage> {
                                             " ${document['grade']}年"),
                                       ],
                                     ),
-                                    trailing: Container(
+                                    trailing: (DateTime.now().isAfter(
+                                            (document["date"].toDate())))
+                                            ? null
+                                            : Container(
                                       decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.grey)),
+                                        border: Border.all(color: Colors.grey)
+                                      ),
                                       child: IconButton(
-                                        icon: const Icon(Icons.notifications,
-                                            color: Colors.grey),
+                                        icon: colorchange
+                                            ? const Icon(Icons.notifications_active, color: Colors.orange)
+                                            : const Icon(Icons.notifications_off, color: Colors.grey),
                                         onPressed: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return Setting(
-                                                subject: document["subject"],
-                                                task: document["task"],
-                                                date:
-                                                    document["date"].toDate());
-                                          }));
+                                          Navigator.push(
+                                            context, 
+                                            MaterialPageRoute(builder: (context) => Setting(
+                                                subject: document["subject"], 
+                                                task: document["task"], 
+                                                date: document["date"].toDate(),
+                                                weekday: weekdays[document["date"].toDate().weekday],
+                                              )
+                                            )
+                                          ).then((result) => {
+                                            if (result != null) {
+                                              if (colorId > 0) {
+                                                setState(() {
+                                                  colorId++;
+                                                })
+                                              } else {
+                                                setState(() {
+                                                  colorId++;
+                                                  colorchange = !colorchange;
+                                                })
+                                              },
+                                              box.put(document.id.toString(), SetIcon(colorId, colorchange))
+                                            }
+                                          });
                                         },
                                       ),
                                     ),

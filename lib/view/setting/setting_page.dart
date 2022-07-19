@@ -2,17 +2,17 @@
 
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class Setting extends StatefulWidget {
-  Setting({Key? key, required this.subject, required this.task, required this.date}) : super(key: key);
+  Setting({Key? key, required this.subject, required this.task, required this.date, required this.weekday}) : super(key: key);
 
   String subject;
   String task;
   DateTime date;
+  String weekday;
 
   @override
   State<Setting> createState() => _Setting();
@@ -23,7 +23,7 @@ class _Setting extends State<Setting> {
   final TextEditingController _decreasehour = TextEditingController();
   int _decrease = 0;
   final db = tz.initializeTimeZones();
-  final timezone = tz.setLocalLocation(tz.getLocation("Asia/Tokyo"));
+  final timezone = tz.setLocalLocation(tz.getLocation('Asia/Tokyo'));
   var rand = math.Random();
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,11 @@ class _Setting extends State<Setting> {
             Card(
               child: ListTile(
                 title: Text('${widget.subject} ${widget.task}'),
-                subtitle: Text(DateFormat('yyyy-M-d H:mm').format(widget.date)),
+                subtitle: Text('${widget.date.month}月'
+                                '${widget.date.day}日'
+                                '(${widget.weekday})'
+                                '${widget.date.hour}時'
+                                '${widget.date.minute}分'),
               ),
             ),
             const SizedBox(height: 10,),
@@ -65,9 +69,13 @@ class _Setting extends State<Setting> {
                 ElevatedButton(
                   child: const Text('設定'),
                   onPressed: () {
-                    if (_decreasehour.text != '') {
+                    if (_decreasehour.text != '' || _decreaseday.text != '') {
                       if (_decreaseday.text != '') {
-                        _decrease = int.parse(_decreaseday.text) * 24 + int.parse(_decreasehour.text);
+                        if (_decreasehour.text != '') {
+                          _decrease = int.parse(_decreaseday.text) * 24 + int.parse(_decreasehour.text);
+                        } else {
+                          _decrease = int.parse(_decreaseday.text) * 24;
+                        }
                       } else {
                         _decrease = int.parse(_decreasehour.text);
                       }
@@ -75,9 +83,9 @@ class _Setting extends State<Setting> {
                       if (select == -1) {
                         notify(
                           rand.nextInt(1000), '${widget.subject} ${widget.task}', 
-                          widget.date, _decrease
+                          widget.date, widget.weekday, _decrease
                         );
-                        Navigator.pop(context, 'SET');
+                        Navigator.of(context).pop('set');
                       } else if (select == 0 || select == 1) {
                         showDialog(
                           context: context, 
@@ -103,8 +111,7 @@ class _Setting extends State<Setting> {
     );
   }
   
-  Future<void> notify(int Id, String title, DateTime body, int decrease) {
-    final date = DateFormat('yyyy-M-d H:mm').format(body);
+  Future<void> notify(int Id, String title, DateTime body, String weekday, int decrease) {
     final flnp = FlutterLocalNotificationsPlugin();
     return flnp.initialize(
       const InitializationSettings(
@@ -113,7 +120,8 @@ class _Setting extends State<Setting> {
     ).then((_) => flnp.zonedSchedule(
       Id, 
       title, 
-      '期限　$date', 
+      '期限　''${body.year}年''${body.month}月''${body.day}日'
+       '($weekday)'' ${body.hour}時''${body.minute}分', 
       //tz.TZDateTime.now(tz.UTC).add(Duration(seconds: decrease)),
       tz.TZDateTime.from(body, tz.local).add(Duration(hours: -decrease)),
       const NotificationDetails(

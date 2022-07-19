@@ -74,7 +74,7 @@ class _MyHomePageState extends State<home> {
               const Padding(padding: EdgeInsets.all(4)),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                    primary: Colors.blue, side: BorderSide(color: Colors.blue)),
+                    primary: Colors.blue, side: const BorderSide(color: Colors.blue)),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MySecondPage();
