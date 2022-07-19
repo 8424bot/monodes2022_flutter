@@ -254,7 +254,30 @@ class _HomePageState extends State<BookMark> {
                             backgroundColor: Colors.red,
                             label: '削除',
                             onPressed: (_) {
-                              _deleteItem(_journals[index]['id']);
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text("このメモを削除しますか？"),
+                                    actions: <Widget>[
+                                      // ボタン領域
+                                      Builder(builder: (context) {
+                                        return TextButton(
+                                          child: const Text("いいえ"),
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(),
+                                        );
+                                      }),
+                                      TextButton(
+                                          child: const Text("はい"),
+                                          onPressed: () {
+                                            _deleteItem(_journals[index]['id']);
+                                            Navigator.of(context).pop();
+                                          }),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                           ),
                         ]),
@@ -273,8 +296,10 @@ class _HomePageState extends State<BookMark> {
                                 if (_journals[index]['description']
                                     .contains('http')) {
                                   return AlertDialog(
-                                    title: SelectableText(_journals[index]['title']),
-                                    content: SelectableText(_journals[index]['description']),
+                                    title: SelectableText(
+                                        _journals[index]['title']),
+                                    content: SelectableText(
+                                        _journals[index]['description']),
                                     actions: [
                                       Row(
                                         mainAxisAlignment:
@@ -307,8 +332,10 @@ class _HomePageState extends State<BookMark> {
                                   );
                                 } else {
                                   return AlertDialog(
-                                    title: SelectableText(_journals[index]['title']),
-                                    content: SelectableText(_journals[index]['description']),
+                                    title: SelectableText(
+                                        _journals[index]['title']),
+                                    content: SelectableText(
+                                        _journals[index]['description']),
                                   );
                                 }
                               });
