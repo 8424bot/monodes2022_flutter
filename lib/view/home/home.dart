@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:app_home_demo/model/db/home/CourseGrade.dart';
-//import 'Thirdpage.dart';
+import 'Thirdpage.dart';
 import 'Secondpage.dart';
 //import 'package:provider/provider.dart';
 
@@ -74,7 +74,8 @@ class _MyHomePageState extends State<home> {
               const Padding(padding: EdgeInsets.all(4)),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                    primary: Colors.blue, side: const BorderSide(color: Colors.blue)),
+                    primary: Colors.blue,
+                    side: const BorderSide(color: Colors.blue)),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const MySecondPage();
@@ -161,6 +162,33 @@ class _MyHomePageState extends State<home> {
                     value: myGrade,
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              SizedBox(
+                width: 180,
+                height: 30,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                        primary: Colors.blue,
+                        side: const BorderSide(color: Colors.blue)),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const MyThirdPage();
+                      }));
+                    },
+                    child: const Text(
+                      'プライバシーポリシー',
+                      style: TextStyle(
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ]),
           )),
