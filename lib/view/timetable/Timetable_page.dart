@@ -27,7 +27,7 @@ class _TimeTableState extends State<TimeTable> {
     Color timeColor = const Color.fromARGB(255, 179, 229, 252);
     Color sheetColor = const Color.fromARGB(255, 238, 238, 238);
     if (platformBrightness == Brightness.dark) {
-      borderColor = Colors.grey;
+      borderColor = const Color.fromARGB(255, 100, 100, 100);
       dayColor = const Color.fromARGB(255, 40, 40, 40);
       timeColor = const Color.fromARGB(255, 70, 70, 70);
       sheetColor = const Color.fromARGB(255, 70, 70, 70);

@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:app_home_demo/view/todo/post.dart';
 import 'package:app_home_demo/view/todo/update.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,14 @@ class MyTodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("ja", "JP"),
+      ],
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.light(),
@@ -44,7 +53,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   void _delete(String id) {
     var box = Hive.box('SI');
     box.delete(id);
@@ -150,7 +158,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
 
                   var box = Hive.box('SI');
-                  SetIcon val = box.get(document.id.toString(), defaultValue: SetIcon(0, false));
+                  SetIcon val = box.get(document.id.toString(),
+                      defaultValue: SetIcon(0, false));
                   int colorId = val.count;
                   bool colorchange = val.onoff;
 
@@ -248,47 +257,79 @@ class _MyHomePageState extends State<MyHomePage> {
                                             " ${document['grade']}年"),
                                       ],
                                     ),
-                                    trailing: (DateTime.now().isAfter(
-                                            (document["date"].toDate())))
+                                    trailing:
+                                        (DateTime.now().isAfter(
+                                                (document["date"].toDate())))
                                             ? null
                                             : Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey)
-                                      ),
-                                      child: IconButton(
-                                        icon: colorchange
-                                            ? const Icon(Icons.notifications_active, color: Colors.orange)
-                                            : const Icon(Icons.notifications_off, color: Colors.grey),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context, 
-                                            MaterialPageRoute(builder: (context) => Setting(
-                                                subject: document["subject"], 
-                                                task: document["task"], 
-                                                date: document["date"].toDate(),
-                                                weekday: weekdays[document["date"].toDate().weekday],
-                                              )
-                                            )
-                                          ).then((result) => {
-                                            if (result != null) {
-                                              if (colorId > 0) {
-                                                setState(() {
-                                                  colorId++;
-                                                })
-                                              } else {
-                                                setState(() {
-                                                  colorId++;
-                                                  colorchange = !colorchange;
-                                                })
-                                              },
-                                              box.put(document.id.toString(), SetIcon(colorId, colorchange)),
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(content: Text('通知を設定しました')))
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey)),
+                                                child: IconButton(
+                                                  icon: colorchange
+                                                      ? const Icon(
+                                                          Icons
+                                                              .notifications_active,
+                                                          color: Colors.orange)
+                                                      : const Icon(
+                                                          Icons
+                                                              .notifications_off,
+                                                          color: Colors.grey),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        Setting(
+                                                                          subject:
+                                                                              document["subject"],
+                                                                          task:
+                                                                              document["task"],
+                                                                          date:
+                                                                              document["date"].toDate(),
+                                                                          weekday: weekdays[document["date"]
+                                                                              .toDate()
+                                                                              .weekday],
+                                                                        )))
+                                                        .then((result) => {
+                                                              if (result !=
+                                                                  null)
+                                                                {
+                                                                  if (colorId >
+                                                                      0)
+                                                                    {
+                                                                      setState(
+                                                                          () {
+                                                                        colorId++;
+                                                                      })
+                                                                    }
+                                                                  else
+                                                                    {
+                                                                      setState(
+                                                                          () {
+                                                                        colorId++;
+                                                                        colorchange =
+                                                                            !colorchange;
+                                                                      })
+                                                                    },
+                                                                  box.put(
+                                                                      document
+                                                                          .id
+                                                                          .toString(),
+                                                                      SetIcon(
+                                                                          colorId,
+                                                                          colorchange)),
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(const SnackBar(
+                                                                          content:
+                                                                              Text('通知を設定しました')))
+                                                                }
+                                                            });
+                                                  },
+                                                ),
+                                              ),
                                     tileColor: (DateTime.now().isAfter(
                                             (document["date"].toDate())))
                                         ? Colors.black

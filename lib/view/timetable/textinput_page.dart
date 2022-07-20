@@ -217,8 +217,8 @@ class _TimeTableInputState extends State<TimeTableInput> {
             var url = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => TimeTableUrlInput(
-                      url: infoList2[id], name: name, num: 1)),
+                  builder: (context) =>
+                      TimeTableUrlInput(url: infoList2[id], name: name)),
             );
             setState(() {
               if (url == null) {
@@ -239,8 +239,8 @@ class _TimeTableInputState extends State<TimeTableInput> {
             var url = await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => TimeTableUrlInput(
-                      url: infoList2[id], name: name, num: 1)),
+                  builder: (context) =>
+                      TimeTableUrlInput(url: infoList2[id], name: name)),
             );
             setState(() {
               if (url == null) {
@@ -257,9 +257,7 @@ class _TimeTableInputState extends State<TimeTableInput> {
 
 class TimeTableUrlInput extends StatefulWidget {
   final String url, name;
-  final int num;
-  const TimeTableUrlInput(
-      {Key? key, required this.url, required this.name, required this.num})
+  const TimeTableUrlInput({Key? key, required this.url, required this.name})
       : super(key: key);
 
   @override
@@ -322,20 +320,18 @@ class _TimeTableUrlInputState extends State<TimeTableUrlInput> {
                     child: const Text('キャンセル'),
                   ),
                 ),
-                if (widget.num == 1) ...{
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * (1 / 100)),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * (40 / 100),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop('');
-                      },
-                      style: ElevatedButton.styleFrom(primary: Colors.red),
-                      child: const Text('登録情報削除'),
-                    ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * (1 / 100)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * (40 / 100),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop('');
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.red),
+                    child: const Text('登録情報削除'),
                   ),
-                }
+                ),
               ],
             ),
           ),
@@ -865,7 +861,7 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      TimeTableUrlInput(url: urlList[id], name: name, num: 2)),
+                      TimeTableUrlInput(url: urlList[id], name: name)),
             );
             setState(() {
               if (url == null) {
@@ -887,7 +883,7 @@ class _TimeTableInput2State extends State<TimeTableInput2> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      TimeTableUrlInput(url: urlList[id], name: name, num: 2)),
+                      TimeTableUrlInput(url: urlList[id], name: name)),
             );
             setState(() {
               if (url == null) {
