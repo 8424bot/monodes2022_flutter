@@ -163,9 +163,10 @@ class _MyHomePageState extends State<home> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              const Expanded(child: SizedBox()),
+              // const SizedBox(
+              //   height: 25,
+              // ),
               SizedBox(
                 width: 180,
                 height: 30,
@@ -190,6 +191,7 @@ class _MyHomePageState extends State<home> {
                   ),
                 ),
               ),
+              const Padding(padding: EdgeInsets.all(8))
             ]),
           )),
     ));
