@@ -42,6 +42,7 @@ class _MyHomePageState extends State<home> {
           ),
           child: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              const Expanded(child: SizedBox()),
               Container(
                 margin: const EdgeInsets.only(top: 60),
                 padding: const EdgeInsets.only(bottom: 16),

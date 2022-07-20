@@ -21,7 +21,7 @@ class MyThirdPage extends StatelessWidget {
               child: const Text(
                 "\n当アプリケーションではユーザーデータの収集、使用は一切行っておりません。"
                 "当アプリケーションの機能の一つとしてfirebaseに、データを登録し共有するというものがございますが、登録する際に端末情報、メールアドレス、個人名等個人情報の使用、保存は行っておりません。",
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 20),
               ),
             ),
           ]),
