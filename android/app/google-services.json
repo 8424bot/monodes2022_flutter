@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:12146954925:android:352befc0908ef300a56c24",
         "android_client_info": {
-          "package_name": "com.example.home_test"
+          "package_name": "com.OITUmeda.home_test"
         }
       },
       "oauth_client": [
@@ -39,7 +39,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:12146954925:android:b9744766112f5799a56c24",
         "android_client_info": {
-          "package_name": "com.example.keijiban"
+          "package_name": "com.OITUmeda.keijiban"
         }
       },
       "oauth_client": [

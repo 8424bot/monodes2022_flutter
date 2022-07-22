@@ -1,4 +1,4 @@
-package com.example.home_test
+package com.OITUmeda.home_test
 
 import io.flutter.embedding.android.FlutterActivity
 
